@@ -87,48 +87,6 @@ void Threshold_Demo(int, void*)
 	threshold(frame, frame, threshold_value, max_BINARY_value, threshold_type);
 	showValue(frame);
 
-	// set up the parameters (check the defaults in opencv's code in blobdetector.cpp)
-	cv::SimpleBlobDetector::Params params;
-    params.minThreshold = 0;
-    params.maxThreshold = 255;
-    params.thresholdStep = 5;
-
-    params.minArea = 0; 
-    params.minConvexity = 0.3f;
-    params.minInertiaRatio = 0.01f;
-
-    params.maxArea = 8000;
-    params.maxConvexity = 10;
-
-    params.filterByColor = false;
-    params.filterByCircularity = false;
-	// ... any other params you don't want default value
-
-	// set up and create the detector using the parameters
-	//cv::Ptr<cv::FeatureDetector> blob_detector = new cv::SimpleBlobDetector(params);
-	//blob_detector->create("SimpleBlob");
-
-	SimpleBlobDetector blobDetector(params);
-	blobDetector.create("SimpleBlob");
-
-	// detect!
-
-	vector<cv::KeyPoint> keypoints;
-	blobDetector.detect(frame, keypoints);
-
-	// extract the x y coordinates of the keypoints: 
-
-	//for (int i=0; i<keypoints.size(); i++){
-		//float X=keypoints[i].pt.x; 
-		//float Y=keypoints[i].pt.y;
-
-		//drawKeypoints(frame, keypoints, frame, CV_RGB(0,255,0), DrawMatchesFlags::DEFAULT);
-
-		//cout << "KEYPOINT BITCH" << endl;
-		//cout << X << endl;
-		//cout << Y << endl;
-	//}
-
 	imshow(window_name2, frame);
 }
 

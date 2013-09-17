@@ -1,0 +1,1 @@
+int runBlobTest(int argc, char *argv[]);
