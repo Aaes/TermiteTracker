@@ -1,0 +1,1 @@
+int runVideoCapture2(int argc, char *argv[]);
