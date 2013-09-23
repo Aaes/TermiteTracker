@@ -26,7 +26,7 @@ int runContourExample(int argc, char* argv[])
   blur( src_gray, src_gray, Size(3,3) );
 
   /// Create Window
-  char* source_window = "Source";
+  string source_window = "Source";
   namedWindow( source_window, CV_WINDOW_AUTOSIZE );
   imshow( source_window, src );
 
