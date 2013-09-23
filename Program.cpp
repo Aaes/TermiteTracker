@@ -11,27 +11,23 @@
 using namespace std;
 using namespace cv;
 
-int getBlob(Mat src);
+void getBlob(Mat src);
 
 int runProgram(int argc, char *argv[]) 
 {
-    const char      * wndName = "Source image",
-                            * wndNameGray = "Gray img", 
-                            * wndNameOut = "Out",
-                            * filename = "blob.jpg";
+	const char *filename = "blob.jpg";
+    Mat src = imread(filename, CV_LOAD_IMAGE_GRAYSCALE);
 
-    Mat src, out;
-	src = imread(filename, CV_LOAD_IMAGE_GRAYSCALE);
-	int a = getBlob(src);
-
-	//namedWindow(wndNameOut, CV_GUI_NORMAL);
-	//imshow(wndNameOut, out);
+	getBlob(src);
 
 	return 0;
 }
 
-int getBlob(Mat src)
-{
+void getBlob(Mat src) 
+{	
+	const char * wndNameOut = "Out";
+	Mat out;
+
 	vector<KeyPoint> keyPoints;
 
 	SimpleBlobDetector::Params params;
@@ -46,13 +42,12 @@ int getBlob(Mat src)
 	blobDetector.create("SimpleBlob");
 
 	blobDetector.detect(src, keyPoints);
+	cout << "Keypoints " << keyPoints.size() << endl;
 
-	//Mat out;
-	//drawKeypoints(src, keyPoints, out, CV_RGB(0,255,0), DrawMatchesFlags::DEFAULT);
+	drawKeypoints(src, keyPoints, out, CV_RGB(0,255,0), DrawMatchesFlags::DEFAULT);
 
-	//cout << "Keypoints " << keyPoints.size() << endl;
+	namedWindow(wndNameOut, CV_GUI_NORMAL);
+	imshow(wndNameOut, out);
 
-	//return out;
-
-	return 0;
+	waitKey(0);
 }
