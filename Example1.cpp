@@ -38,7 +38,7 @@ int runExample1(int argc, char** argv)
 	namedWindow(window_name2, CV_WINDOW_AUTOSIZE);
 
     VideoCapture capture;
-
+	
 	// Create Trackbar to choose type of Threshold
 	createTrackbar( trackbar_type,
 					window_name, &threshold_type,
