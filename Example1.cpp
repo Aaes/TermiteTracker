@@ -1,10 +1,10 @@
-#include "opencv2\features2d\features2d.hpp"
-#include "opencv2\objdetect\objdetect.hpp"
-#include "opencv2/imgproc/imgproc.hpp"
-#include "opencv2/highgui/highgui.hpp"
 #include <stdlib.h>
 #include <stdio.h>
 #include <iostream>
+#include "opencv2/features2d/features2d.hpp"
+#include "opencv2/objdetect/objdetect.hpp"
+#include "opencv2/imgproc/imgproc.hpp"
+#include "opencv2/highgui/highgui.hpp"
 
 using namespace std;
 using namespace cv;
@@ -21,11 +21,11 @@ int greenFrom = 0;	int greenTo = 50;
 int blueFrom = 0;	int blueTo = 50;
 
 Mat frame;
-char* window_name = "Demo";
-char* window_name2 = "Thresholded Demo";
+string window_name = "Demo";
+string window_name2 = "Thresholded Demo";
 
-char* trackbar_type = "Type: \n 0: Binary \n 1: Binary Inverted \n 2: Truncate \n 3: To Zero \n 4: To Zero Inverted";
-char* trackbar_value = "Value";
+string trackbar_type = "Type: \n 0: Binary \n 1: Binary Inverted \n 2: Truncate \n 3: To Zero \n 4: To Zero Inverted";
+string trackbar_value = "Value";
 
 ///// Function headers
 void Threshold_Demo(int, void*);
