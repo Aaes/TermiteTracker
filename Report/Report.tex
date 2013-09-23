@@ -1,0 +1,63 @@
+\documentclass[oribibl]{llncs}
+\pagestyle{headings} %page numbers
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc} 
+\usepackage{todonotes}
+
+\title{TERMES: Termite tracking in collaboration with Harvard University}
+\author{Nikolaj Aaes \and Niklas Schalck Johansson \and Hildur Uffe Flemberg\\
+\email{\{rniaa, nsjo, hufl\}@itu.dk}}
+\institute{IT University of Copenhagen, Rued Langgaards Vej 7, 2300 Copenhagen S, Denmark}
+\date{December 2013}
+
+\makeatletter
+\renewcommand*\l@author[2]{}
+\renewcommand*\l@title[2]{}
+\makeatletter
+
+\begin{document}
+	
+\graphicspath{{img/}} %default folder for image
+
+\maketitle
+
+\begin{abstract}
+	\input{Abstract}
+	\label{abstract}
+			\keywords{INSERT,KEYWORDS,HERE}
+\end{abstract}
+
+\setcounter{tocdepth}{2}
+\tableofcontents
+\clearpage
+
+\input{Introduction}
+
+\input{Background}
+
+\input{Tracking}
+
+\input{Integration}
+
+\input{GUI}
+
+\input{Process}
+
+\input{Reflection}
+
+\input{Threats}
+
+\input{RelatedWork}
+
+\input{Conclusion}
+
+\begin{thebibliography}{9}
+		\bibitem{TEST} TestTitle - TestPublisher - 1999
+		
+\end{thebibliography}
+
+\input{Appendix}
+
+\end{document}
