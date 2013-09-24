@@ -43,7 +43,7 @@ int runProgram()
 		params.filterByColor = true;
 		params.blobColor = 0;
         params.minArea = 100;
-        params.maxArea = 10000;
+        params.maxArea = 1000;
 
 		SimpleBlobDetector blobDetector(params);
 		blobDetector.create("SimpleBlob");
@@ -67,6 +67,11 @@ int runProgram()
             
 			blobDetector.detect(thresh, keyPoints);
 			drawKeypoints(original, keyPoints, blob, CV_RGB(0,255,0), DrawMatchesFlags::DEFAULT);
+            
+            for(int i = 0; i<keyPoints.size(); i++){
+                KeyPoint p = keyPoints[i];
+                circle(blob, p.pt, p.size/2, Scalar(0,0,255));
+            }
         
             imshow(windowNormal, original);
             imshow(windowThresh, thresh);
