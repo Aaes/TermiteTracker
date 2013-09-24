@@ -15,39 +15,55 @@ void getBlob(Mat src);
 
 int runProgram(int argc, char *argv[]) 
 {
-	const char *filename = "blob.jpg";
-    Mat src = imread(filename, CV_LOAD_IMAGE_GRAYSCALE);
+	    const char      * windowNormal = "Normal",
+						* windowBlob = "Thresholded blob",
+                            * filename = "C:\\Users\\hfl\\Desktop\\Private\\Harvard Project\\OpenCV_TestProject5\\x64\\Release\\Megamind.avi";
+		
+		namedWindow(windowNormal, CV_WINDOW_AUTOSIZE);
+		namedWindow(windowBlob, CV_WINDOW_AUTOSIZE);
+		moveWindow(windowNormal, 900, 100);
 
-	getBlob(src);
+		VideoCapture capture;
+		capture.open(filename);
 
-	return 0;
-}
+		if (!capture.isOpened()) {
+			cout << "Cannot open file!" << endl;
+			return -1;
+		}
 
-void getBlob(Mat src) 
-{	
-	const char * wndNameOut = "Out";
-	Mat out;
+		SimpleBlobDetector::Params params;
+		params.filterByArea = false;
+		params.filterByCircularity = false;
+		params.filterByConvexity = false;
+		params.filterByInertia = false;
+		params.filterByColor = true;
+		params.blobColor = 0;
 
-	vector<KeyPoint> keyPoints;
+		SimpleBlobDetector blobDetector(params);
+		blobDetector.create("SimpleBlob");
 
-	SimpleBlobDetector::Params params;
-	params.filterByArea = false;
-	params.filterByCircularity = false;
-	params.filterByConvexity = false;
-	params.filterByInertia = false;
-	params.filterByColor = true;
-	params.blobColor = 0;
+		Mat frame;
+		while(true) 
+		{
+			capture >> frame;
+			if (frame.empty())
+				break;
 
-	SimpleBlobDetector blobDetector(params);
-	blobDetector.create("SimpleBlob");
+			imshow(windowNormal, frame);
 
-	blobDetector.detect(src, keyPoints);
-	cout << "Keypoints " << keyPoints.size() << endl;
+			vector<KeyPoint> keyPoints;
 
-	drawKeypoints(src, keyPoints, out, CV_RGB(0,255,0), DrawMatchesFlags::DEFAULT);
+			blobDetector.detect(frame, keyPoints);
+			//drawKeypoints(frame, keyPoints, frame, CV_RGB(0,255,0), DrawMatchesFlags::DEFAULT);
 
-	namedWindow(wndNameOut, CV_GUI_NORMAL);
-	imshow(wndNameOut, out);
+			//cout << "Keypoints " << keyPoints.size() << endl;
+        
+			imshow(windowBlob, frame);
+			waitKey(0);
 
-	waitKey(0);
+			//if (waitKey(0) == 'q')
+			//	break;
+		}
+		
+		return 0;
 }
