@@ -51,7 +51,10 @@ int runExample1(int argc, char** argv)
     if (argc == 2)
         capture.open(argv[1]);  // Open file
     else
-        capture.open(1);        // Open camera device
+        capture.open("/Users/Nikolaj/Developer/TermiteTracker/Media/myrer.mp4");        // Open camera device
+    
+    //"/Users/Nikolaj/Developer/TermiteTracker/Media/myrer.mp4"
+
 
     if (!capture.isOpened())
     {
