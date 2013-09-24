@@ -48,16 +48,22 @@ int runProgram()
 		SimpleBlobDetector blobDetector(params);
 		blobDetector.create("SimpleBlob");
 
+        Mat original;
+        Mat thresh;
+        Mat blob;
+        vector<KeyPoint> trackingPoints;
+    
 		Mat frame;
-		while(true) 
+		while(true)
 		{
 			capture >> frame;
 			if (frame.empty())
 				break;
             
-            Mat original = frame.clone();
-            Mat thresh;
-            Mat blob;
+            original = frame.clone();
+            if(blob.empty()){
+                blob = frame.clone();
+            }
 
 			vector<KeyPoint> keyPoints;
             
@@ -66,12 +72,11 @@ int runProgram()
             threshold(thresh, thresh, 80, 255, 0);
             
 			blobDetector.detect(thresh, keyPoints);
-			drawKeypoints(original, keyPoints, blob, CV_RGB(0,255,0), DrawMatchesFlags::DEFAULT);
             
             for(int i = 0; i<keyPoints.size(); i++){
-                KeyPoint p = keyPoints[i];
-                circle(blob, p.pt, p.size/2, Scalar(0,0,255));
+                trackingPoints.push_back(keyPoints[i]);
             }
+            drawKeypoints(original, trackingPoints, blob, CV_RGB(0,0,255), DrawMatchesFlags::DEFAULT);
         
             imshow(windowNormal, original);
             imshow(windowThresh, thresh);
