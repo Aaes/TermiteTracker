@@ -13,15 +13,19 @@ using namespace cv;
 
 void getBlob(Mat src);
 
-int runProgram(int argc, char *argv[]) 
+int runProgram() 
 {
 	    const char      * windowNormal = "Normal",
-						* windowBlob = "Thresholded blob",
-                            * filename = "C:\\Users\\hfl\\Desktop\\Private\\Harvard Project\\OpenCV_TestProject5\\x64\\Release\\Megamind.avi";
+						* windowBlob = "Blob",
+                        * windowThresh = "Theshold",
+                            * filename = "/Users/Niklas/Developer/TermiteTracker/Media/myrevideo2.mp4";
 		
 		namedWindow(windowNormal, CV_WINDOW_AUTOSIZE);
+        moveWindow(windowNormal, 0, 0);
 		namedWindow(windowBlob, CV_WINDOW_AUTOSIZE);
-		moveWindow(windowNormal, 900, 100);
+        moveWindow(windowThresh, 300, 0);
+        namedWindow(windowThresh, CV_WINDOW_AUTOSIZE);
+        moveWindow(windowBlob, 600, 0);
 
 		VideoCapture capture;
 		capture.open(filename);
@@ -32,12 +36,14 @@ int runProgram(int argc, char *argv[])
 		}
 
 		SimpleBlobDetector::Params params;
-		params.filterByArea = false;
+		params.filterByArea = true;
 		params.filterByCircularity = false;
 		params.filterByConvexity = false;
 		params.filterByInertia = false;
 		params.filterByColor = true;
 		params.blobColor = 0;
+        params.minArea = 100;
+        params.maxArea = 10000;
 
 		SimpleBlobDetector blobDetector(params);
 		blobDetector.create("SimpleBlob");
@@ -48,21 +54,24 @@ int runProgram(int argc, char *argv[])
 			capture >> frame;
 			if (frame.empty())
 				break;
-
-			imshow(windowNormal, frame);
+            
+            Mat original = frame.clone();
+            Mat thresh;
+            Mat blob;
 
 			vector<KeyPoint> keyPoints;
-
-			blobDetector.detect(frame, keyPoints);
-			//drawKeypoints(frame, keyPoints, frame, CV_RGB(0,255,0), DrawMatchesFlags::DEFAULT);
-
-			//cout << "Keypoints " << keyPoints.size() << endl;
+            
+            cvtColor(frame, thresh, CV_RGB2GRAY);
+            
+            threshold(thresh, thresh, 80, 255, 0);
+            
+			blobDetector.detect(thresh, keyPoints);
+			drawKeypoints(original, keyPoints, blob, CV_RGB(0,255,0), DrawMatchesFlags::DEFAULT);
         
-			imshow(windowBlob, frame);
-			waitKey(0);
-
-			//if (waitKey(0) == 'q')
-			//	break;
+            imshow(windowNormal, original);
+            imshow(windowThresh, thresh);
+			imshow(windowBlob, blob);
+			waitKey(50);
 		}
 		
 		return 0;

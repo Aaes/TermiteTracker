@@ -1,1 +1,1 @@
-int runProgram(int argc, char *argv[]);
+int runProgram();
