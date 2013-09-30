@@ -9,7 +9,6 @@
 #include <iostream>
 #include "MasterThesis.h"
 #include "BlobsWorking.h"
-#include "ThresholdTest.h"
 #include "Program.h"
 #include "HSVDetector.h"
 #include "ThresholdHSVExample.h"
