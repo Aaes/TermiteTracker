@@ -25,9 +25,9 @@ int main(int argc, const char * argv[])
     //runMasterThesis();
     //runBlobsWorking();
     //SimpleThreshold();
-    //runProgram();
+    runProgram();
     //runThresholdHSVExample();
-    HSVDetection();
+    //HSVDetection();
     std::cout << "Success!\n";
     return 0;
 }

@@ -18,7 +18,7 @@ int runProgram()
 	    string windowNormal = "Normal",
                 windowBlob = "Blob",
                 windowThresh = "Theshold",
-                filename = "/Users/Niklas/Developer/TermiteTracker/Media/myrevideo2.mp4";
+                filename = "/Users/Nikolaj/Developer/TermiteTracker/Media/myrevideo2.mp4";
 		
 		namedWindow(windowNormal, CV_WINDOW_AUTOSIZE);
         moveWindow(windowNormal, 0, 0);
@@ -67,9 +67,60 @@ int runProgram()
 
 			vector<KeyPoint> keyPoints;
             
-            cvtColor(frame, thresh, CV_BGR2GRAY);
+            cvtColor(frame, thresh, CV_BGR2HSV);
             
-            threshold(thresh, thresh, 80, 255, 0);
+            /* 
+             For myrer - giver sort skærm :(
+            //RGB 82 76 76
+            Scalar colorMin(0,7,32);
+            //RGB 37 37 41
+            Scalar colorMax(240,10,16);
+             */
+            
+            /*
+            //for blå baggrund - giver sort skærm
+            //RGB 16 27 48
+            Scalar colorMin(89,85,11);
+            //RGB 48 58 89
+            Scalar colorMax(225,46,35);
+             */
+            
+            /*
+             For myrer - converter 2 - sort skærm
+             //RGB 82 76 76
+             Scalar colorMin(0,0,0);
+             //RGB 37 37 41
+             Scalar colorMax(240,0,0);
+             */
+            
+             /*
+             //for blå baggrund - converter 2 - sort skærm
+             //RGB 16 27 48
+             Scalar colorMin(219,1,0);
+             //RGB 48 58 89
+             Scalar colorMax(225,0,0);
+            */
+            
+            /*
+             //for blå baggrund - converter 3 - sort skærm
+             //RGB 16 27 48
+             Scalar colorMin(219,67,19);
+             //RGB 48 58 89
+             Scalar colorMax(225,46,35);
+            */
+            
+            /*
+            //Farven rød - converter 3 - sort skærm
+            //RGB 162, 136, 104
+            Scalar colorMin(33,36,63);
+            //RGB 109 76 51
+            Scalar colorMax(26,53,43);
+            */
+            
+            Scalar colorMin(0,0,0);
+            Scalar colorMax(179,256,256);
+            
+            inRange(thresh, colorMin, colorMax, thresh);
             
 			blobDetector.detect(thresh, keyPoints);
             
