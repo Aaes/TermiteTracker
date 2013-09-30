@@ -1,19 +1,27 @@
-#include "Example1.h"
-#include "VideoCapture1.h"
-#include "VideoCapture2.h"
-#include "BlobTest.h"
-#include "ContourExample.h"
-#include "BlobsWorking.h"
-#include "MasterThesis.h"
-#include "Program.h"
+//
+//  main.cpp
+//  TermiteTracker
+//
+//  Created by Niklas on 9/23/13.
+//  Copyright (c) 2013 Niklas Schalck Johansson. All rights reserved.
+//
 
-int main(int argc, char *argv[]) {
-	runExample1(argc, argv);
-	//runVideoCapture1(argc, argv);
-	//runVideoCapture2(argc, argv);
-	//runBlobTest(argc, argv);
-	//runContourExample(argc, argv);
-	//runMasterThesis();
-	//runBlobsWorking();
-	//runProgram(argc, argv);
+#include <iostream>
+#include "MasterThesis.h"
+#include "BlobsWorking.h"
+#include "ThresholdTest.h"
+#include "Program.h"
+#include "HSVDetector.h"
+
+int main(int argc, const char * argv[])
+{
+
+    //runMasterThesis();
+    //runBlobsWorking();
+    //SimpleThreshold();
+    //runProgram();
+    HSVDetection();
+    std::cout << "Success!\n";
+    return 0;
 }
+

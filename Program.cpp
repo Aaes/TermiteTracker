@@ -15,10 +15,10 @@ void getBlob(Mat src);
 
 int runProgram() 
 {
-	    const char      * windowNormal = "Normal",
-						* windowBlob = "Blob",
-                        * windowThresh = "Theshold",
-                            * filename = "/Users/Niklas/Developer/TermiteTracker/Media/myrevideo2.mp4";
+	    string windowNormal = "Normal",
+                windowBlob = "Blob",
+                windowThresh = "Theshold",
+                filename = "/Users/Niklas/Developer/TermiteTracker/Media/myrevideo2.mp4";
 		
 		namedWindow(windowNormal, CV_WINDOW_AUTOSIZE);
         moveWindow(windowNormal, 0, 0);
@@ -42,8 +42,8 @@ int runProgram()
 		params.filterByInertia = false;
 		params.filterByColor = true;
 		params.blobColor = 0;
-        params.minArea = 100;
-        params.maxArea = 1000;
+        params.minArea = 80;
+        params.maxArea = 200;
 
 		SimpleBlobDetector blobDetector(params);
 		blobDetector.create("SimpleBlob");
@@ -66,6 +66,8 @@ int runProgram()
             }
 
 			vector<KeyPoint> keyPoints;
+            
+            //GaussianBlur(frame, frame, Size(3,3), 0);
             
             cvtColor(frame, thresh, CV_RGB2GRAY);
             
