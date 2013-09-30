@@ -67,9 +67,7 @@ int runProgram()
 
 			vector<KeyPoint> keyPoints;
             
-            //GaussianBlur(frame, frame, Size(3,3), 0);
-            
-            cvtColor(frame, thresh, CV_RGB2GRAY);
+            cvtColor(frame, thresh, CV_BGR2GRAY);
             
             threshold(thresh, thresh, 80, 255, 0);
             

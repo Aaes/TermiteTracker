@@ -12,16 +12,23 @@
 #include "ThresholdTest.h"
 #include "Program.h"
 #include "HSVDetector.h"
+#include "ThresholdHSVExample.h"
 
 int main(int argc, const char * argv[])
 {
-
+	//runExample1(argc, argv);
+	//runVideoCapture1(argc, argv);
+	//runVideoCapture2(argc, argv);
+	//runBlobTest(argc, argv);
+	//runContourExample(argc, argv);
+	//runMasterThesis();
+	//runBlobsWorking();
     //runMasterThesis();
     //runBlobsWorking();
     //SimpleThreshold();
     //runProgram();
+    //runThresholdHSVExample();
     HSVDetection();
     std::cout << "Success!\n";
     return 0;
 }
-
