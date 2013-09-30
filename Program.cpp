@@ -18,7 +18,7 @@ int runProgram()
 	    const char      * windowNormal = "Normal",
 						* windowBlob = "Blob",
                         * windowThresh = "Theshold",
-                            * filename = "/Users/Niklas/Developer/TermiteTracker/Media/myrevideo2.mp4";
+                            * filename = "/Users/Nikolaj/Developer/TermiteTracker/Media/myrevideo2.mp4";
 		
 		namedWindow(windowNormal, CV_WINDOW_AUTOSIZE);
         moveWindow(windowNormal, 0, 0);
@@ -67,7 +67,7 @@ int runProgram()
 
 			vector<KeyPoint> keyPoints;
             
-            cvtColor(frame, thresh, CV_RGB2GRAY);
+            cvtColor(frame, thresh, CV_BGR2GRAY);
             
             threshold(thresh, thresh, 80, 255, 0);
             
