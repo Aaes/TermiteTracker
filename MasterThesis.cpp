@@ -13,10 +13,7 @@ using namespace cv;
 
 int runMasterThesis()
 {
-        const char      * wndName = "Source image",
-                                * wndNameGray = "Gray img", 
-                                * wndNameOut = "Out",
-                                * filename = "blob.jpg";
+        const char * wndNameOut = "Out", * filename = "blob.jpg";
         //Path:"/Users/Niklas/Developer/TermiteTracker/Media/blob.jpg"
 
         Mat src, gray, thresh, binary;
