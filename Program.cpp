@@ -42,8 +42,8 @@ int runProgram()
 		params.filterByInertia = false;
 		params.filterByColor = true;
 		params.blobColor = 0;
-        params.minArea = 80;
-        params.maxArea = 200;
+        params.minArea = 10;
+        params.maxArea = 100;
 
 		SimpleBlobDetector blobDetector(params);
 		blobDetector.create("SimpleBlob");
@@ -67,60 +67,12 @@ int runProgram()
 
 			vector<KeyPoint> keyPoints;
             
-            cvtColor(frame, thresh, CV_BGR2HSV);
+            Scalar colorMin(20,20,20);
+            Scalar colorMax(70,70,70);
             
-            /* 
-             For myrer - giver sort skærm :(
-            //RGB 82 76 76
-            Scalar colorMin(0,7,32);
-            //RGB 37 37 41
-            Scalar colorMax(240,10,16);
-             */
+            inRange(frame, colorMin, colorMax, thresh);
             
-            /*
-            //for blå baggrund - giver sort skærm
-            //RGB 16 27 48
-            Scalar colorMin(89,85,11);
-            //RGB 48 58 89
-            Scalar colorMax(225,46,35);
-             */
-            
-            /*
-             For myrer - converter 2 - sort skærm
-             //RGB 82 76 76
-             Scalar colorMin(0,0,0);
-             //RGB 37 37 41
-             Scalar colorMax(240,0,0);
-             */
-            
-             /*
-             //for blå baggrund - converter 2 - sort skærm
-             //RGB 16 27 48
-             Scalar colorMin(219,1,0);
-             //RGB 48 58 89
-             Scalar colorMax(225,0,0);
-            */
-            
-            /*
-             //for blå baggrund - converter 3 - sort skærm
-             //RGB 16 27 48
-             Scalar colorMin(219,67,19);
-             //RGB 48 58 89
-             Scalar colorMax(225,46,35);
-            */
-            
-            /*
-            //Farven rød - converter 3 - sort skærm
-            //RGB 162, 136, 104
-            Scalar colorMin(33,36,63);
-            //RGB 109 76 51
-            Scalar colorMax(26,53,43);
-            */
-            
-            Scalar colorMin(0,0,0);
-            Scalar colorMax(179,256,256);
-            
-            inRange(thresh, colorMin, colorMax, thresh);
+            GaussianBlur(thresh, thresh, Size(3,3), 0);
             
 			blobDetector.detect(thresh, keyPoints);
             

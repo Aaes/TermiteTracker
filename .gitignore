@@ -11,3 +11,15 @@
 *.lai
 *.la
 *.a
+
+*.aux
+
+*.aux
+
+*.log
+
+*.out
+
+*.gz
+
+*.toc

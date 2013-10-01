@@ -1,18 +1,20 @@
 \contentsline {title}{TERMES: Termite tracking in collaboration with Harvard University}{1}{chapter.1}
 \authcount {3}
-\contentsline {author}{Nikolaj Aaes \and Niklas Schalck Johansson \and Hildur Uffe Flemberg\unskip \ \ignorespaces {\tt \{rniaa, nsjo, hufl\}@itu.dk}}{1}{chapter.1}
+\contentsline {author}{Nikolaj Aaes \and Niklas Schalck Johansson \and Hildur Uffe Flemberg\unskip \ \ignorespaces {\tt \{niaa, nsjo, hufl\}@itu.dk}}{1}{chapter.1}
 \contentsline {section}{\numberline {1}Introduction}{3}{section.1.1}
 \contentsline {section}{\numberline {2}Background}{3}{section.1.2}
 \contentsline {subsection}{\numberline {2.1}Scope}{3}{subsection.1.2.1}
 \contentsline {subsection}{\numberline {2.2}Requirements}{3}{subsection.1.2.2}
-\contentsline {section}{\numberline {3}Tracking}{3}{section.1.3}
-\contentsline {section}{\numberline {4}Integration with camera}{3}{section.1.4}
-\contentsline {section}{\numberline {5}Graphical user interface}{3}{section.1.5}
-\contentsline {section}{\numberline {6}Process}{3}{section.1.6}
-\contentsline {subsection}{\numberline {6.1}International collaboration}{3}{subsection.1.6.1}
-\contentsline {subsection}{\numberline {6.2}Tools}{3}{subsection.1.6.2}
-\contentsline {section}{\numberline {7}Reflection/Future work}{3}{section.1.7}
-\contentsline {section}{\numberline {8}Threats to validity}{4}{section.1.8}
-\contentsline {section}{\numberline {9}Related Work}{4}{section.1.9}
-\contentsline {section}{\numberline {10}Conclusion}{4}{section.1.10}
+\contentsline {section}{\numberline {3}Motivation}{3}{section.1.3}
+\contentsline {section}{\numberline {4}Tracking}{3}{section.1.4}
+\contentsline {section}{\numberline {5}Integration with camera}{3}{section.1.5}
+\contentsline {section}{\numberline {6}Graphical user interface}{3}{section.1.6}
+\contentsline {section}{\numberline {7}Process}{3}{section.1.7}
+\contentsline {subsection}{\numberline {7.1}International collaboration}{3}{subsection.1.7.1}
+\contentsline {subsection}{\numberline {7.2}Tools}{3}{subsection.1.7.2}
+\contentsline {section}{\numberline {8}Reflection/Future work}{4}{section.1.8}
+\contentsline {section}{\numberline {9}Threats to validity}{4}{section.1.9}
+\contentsline {section}{\numberline {10}Related Work}{4}{section.1.10}
+\contentsline {section}{\numberline {11}Conclusion}{4}{section.1.11}
+\contentsline {section}{\numberline {12}Defition of terms}{4}{section.1.12}
 \contentsline {section}{\numberline {A}First Appendix}{4}{section.A.1}

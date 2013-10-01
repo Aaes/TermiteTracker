@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  23 SEP 2013 14:24
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  1 OCT 2013 14:59
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -892,27 +892,34 @@ File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 
  [2
 
-] (./Introduction.tex) (./Background.tex) (./Tracking.tex)
-(./Integration.tex) (./GUI.tex) (./Process.tex) (./Reflection.tex)
-(./Threats.tex) (./RelatedWork.tex) (./Conclusion.tex [3
+] (./Introduction.tex) (./Background.tex) (./Motivation.tex)
+(./Tracking.tex) (./Integration.tex) (./GUI.tex) (./Process.tex)
+(./Reflection.tex) (./Threats.tex) (./RelatedWork.tex [3
 
-]) (./Appendix.tex)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 63.
-
-[4]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 63.
+]) (./Conclusion.tex)
+(./Terms.tex) (./Appendix.tex)
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 67.
+ [4]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 67.
  (./Report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 63.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 63.
-Package rerunfilecheck Info: File `Report.out' has not changed.
-(rerunfilecheck)             Checksum: 9A72BA09646411F84820D11E0E31EDE4;1036.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 63.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 67.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 67.
+
+
+Package rerunfilecheck Warning: File `Report.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `Report.out':
+(rerunfilecheck)             Before: F51A80FD5F441E68684176E0E82472F5;1094
+(rerunfilecheck)             After:  4F4A9CC0DDCB93538442369648135C9A;1159.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 67.
  ) 
 Here is how much of TeX's memory you used:
- 14530 strings out of 493488
- 258558 string characters out of 3141326
- 328525 words of memory out of 3000000
- 17521 multiletter control sequences out of 15000+200000
+ 14539 strings out of 493488
+ 258661 string characters out of 3141326
+ 328524 words of memory out of 3000000
+ 17522 multiletter control sequences out of 15000+200000
  10116 words of font info for 23 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
  63i,6n,57p,425b,318s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -924,10 +931,10 @@ local/texlive/2012/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/lo
 cal/texlive/2012/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb></usr/loca
 l/texlive/2012/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/local/
 texlive/2012/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb>
-Output written on Report.pdf (4 pages, 140695 bytes).
+Output written on Report.pdf (4 pages, 141541 bytes).
 PDF statistics:
- 147 PDF objects out of 1000 (max. 8388607)
- 132 compressed objects within 2 object streams
- 25 named destinations out of 1000 (max. 500000)
- 141 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 153 PDF objects out of 1000 (max. 8388607)
+ 138 compressed objects within 2 object streams
+ 27 named destinations out of 1000 (max. 500000)
+ 149 words of extra memory for PDF output out of 10000 (max. 10000000)
 
