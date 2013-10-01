@@ -21,6 +21,8 @@
 using namespace cv;
 using namespace std;
 
+void HSVDetectionWithSplit();
+
 int HSVDetection(){
     //File location
     string filename = "/Users/Niklas/Developer/TermiteTracker/Media/4.jpg";
@@ -73,4 +75,38 @@ int HSVDetection(){
     waitKey(0);
     
     return 0;
+}
+
+void runThrough(Mat mat)
+{
+    for (int i = 0; i < mat.rows; i++) {
+        for (int j = 0; mat.cols; j++) {
+            cout << "(" <<(int)mat.at<Vec3b>(i,j)[0]  << ", "
+            << (int)mat.at<Vec3b>(i,j)[1]  << ", "
+            << (int)mat.at<Vec3b>(i,j)[2] << ") ";
+        }
+        cout << endl;
+    }
+}
+
+void HSVDetectionWithSplit()
+{
+    string filename = "/Users/Nikolaj/Developer/TermiteTracker/Media/redblue.png";
+    
+    Mat img = imread(filename);
+    
+    imshow("Original",img);
+    
+    vector<Mat> splitMats(3);
+    cv::split(img, splitMats);
+    
+    imshow("H", splitMats[0]);
+    imshow("S", splitMats[1]);
+    imshow("V", splitMats[2]);
+    
+    runThrough(splitMats[0]);
+    
+    cout << (img.at<Vec3b>(10,10)[2] == splitMats[2].at<Vec3b>(10,10)[2]) << endl;
+    
+    waitKey(0);
 }

@@ -18,7 +18,7 @@ int runProgram()
 	    string windowNormal = "Normal",
                 windowBlob = "Blob",
                 windowThresh = "Theshold",
-                filename = "/Users/Niklas/Developer/TermiteTracker/Media/myrevideo2.mp4";
+                filename = "/Users/Nikolaj/Developer/TermiteTracker/Media/myrevideo2.mp4";
 		
 		namedWindow(windowNormal, CV_WINDOW_AUTOSIZE);
         moveWindow(windowNormal, 0, 0);
@@ -42,8 +42,8 @@ int runProgram()
 		params.filterByInertia = false;
 		params.filterByColor = true;
 		params.blobColor = 0;
-        params.minArea = 80;
-        params.maxArea = 200;
+        params.minArea = 10;
+        params.maxArea = 100;
 
 		SimpleBlobDetector blobDetector(params);
 		blobDetector.create("SimpleBlob");
@@ -67,9 +67,12 @@ int runProgram()
 
 			vector<KeyPoint> keyPoints;
             
-            cvtColor(frame, thresh, CV_BGR2GRAY);
+            Scalar colorMin(20,20,20);
+            Scalar colorMax(70,70,70);
             
-            threshold(thresh, thresh, 80, 255, 0);
+            inRange(frame, colorMin, colorMax, thresh);
+            
+            GaussianBlur(thresh, thresh, Size(3,3), 0);
             
 			blobDetector.detect(thresh, keyPoints);
             
