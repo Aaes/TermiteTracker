@@ -1,29 +1,19 @@
 //
-//  HSVDetector.cpp
+//  ColorDetector.cpp
 //  TermiteTracker
 //
-//  Created by Niklas on 9/30/13.
+//  Created by Niklas on 10/01/13.
 //  Copyright (c) 2013 Niklas Schalck Johansson. All rights reserved.
 //
 
-#include <iostream>
-#include <fstream>
-#include <vector>
-#include <string>
-#include <algorithm>
-#include <opencv2/objdetect/objdetect.hpp>
-#include <opencv2/highgui/highgui.hpp>
-#include <opencv2/imgproc/imgproc.hpp>
-#include <opencv2/features2d/features2d.hpp>
-#include "HSVDetector.h"
-#include "Contrast.h"
+#include "ColorDetector.h"
 
 using namespace cv;
 using namespace std;
 
 void HSVDetectionWithSplit();
 
-int HSVDetection(){
+int ColorDetection(){
     //File location
     string filename = "/Users/Niklas/Developer/TermiteTracker/Media/4.jpg";
     
@@ -37,7 +27,7 @@ int HSVDetection(){
     //Threshold based on color ranges (Blue/Green/Red scalars)
     inRange(contrast_img, Scalar(100,100,250), Scalar(200,200,255), imgThreshRed); //RGB range
     inRange(contrast_img, Scalar(100,250,100), Scalar(200,255,200), imgThreshGreen); //RGB range
-
+    
     //Apply Blur effect to make blobs much more coherent
     GaussianBlur(imgThreshRed, imgThreshRed, Size(3,3), 0);
     GaussianBlur(imgThreshGreen, imgThreshGreen, Size(3,3), 0);
@@ -75,38 +65,4 @@ int HSVDetection(){
     waitKey(0);
     
     return 0;
-}
-
-void runThrough(Mat mat)
-{
-    for (int i = 0; i < mat.rows; i++) {
-        for (int j = 0; mat.cols; j++) {
-            cout << "(" <<(int)mat.at<Vec3b>(i,j)[0]  << ", "
-            << (int)mat.at<Vec3b>(i,j)[1]  << ", "
-            << (int)mat.at<Vec3b>(i,j)[2] << ") ";
-        }
-        cout << endl;
-    }
-}
-
-void HSVDetectionWithSplit()
-{
-    string filename = "/Users/Nikolaj/Developer/TermiteTracker/Media/redblue.png";
-    
-    Mat img = imread(filename);
-    
-    imshow("Original",img);
-    
-    vector<Mat> splitMats(3);
-    cv::split(img, splitMats);
-    
-    imshow("H", splitMats[0]);
-    imshow("S", splitMats[1]);
-    imshow("V", splitMats[2]);
-    
-    runThrough(splitMats[0]);
-    
-    cout << (img.at<Vec3b>(10,10)[2] == splitMats[2].at<Vec3b>(10,10)[2]) << endl;
-    
-    waitKey(0);
 }
