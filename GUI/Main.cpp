@@ -11,12 +11,12 @@ using namespace cv;
 
 JNIEXPORT jstring JNICALL Java_Main_test  (JNIEnv *env, jclass)
 {
-	return env->NewStringUTF("LOOK MOM, I DID IT!!");
+	return env->NewStringUTF("LOOK MOM, I DID IT!! 2");
 }
 
 JNIEXPORT jdoubleArray JNICALL Java_Main_getKeypoints (JNIEnv *env, jclass, jbyteArray javaArray)
 {
-    std::cout << "HEJ MOR" << std::endl;
+    std::cout << "HEJ MOR 2" << std::endl;
     jdouble arr[] = {env->GetArrayLength(javaArray)};
     
     imshow("LOLWINDOW", imread("/Users/Nikolaj/Developer/TermiteTracker/Media/4.jpg"));
