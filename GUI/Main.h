@@ -15,6 +15,14 @@ extern "C" {
 JNIEXPORT jstring JNICALL Java_Main_test
   (JNIEnv *, jclass);
 
+/*
+ * Class:     Main
+ * Method:    getKeypoints
+ * Signature: ([B)[D
+ */
+JNIEXPORT jdoubleArray JNICALL Java_Main_getKeypoints
+  (JNIEnv *, jclass, jbyteArray);
+
 #ifdef __cplusplus
 }
 #endif

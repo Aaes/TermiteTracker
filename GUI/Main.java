@@ -1,4 +1,3 @@
-
 public class Main {
 	
 	public static void main(String[] args) {
@@ -7,6 +6,8 @@ public class Main {
 	}
 	
 	public static native String test();
+	
+	public static native double[] getKeypoints(byte[] image);
 	
     static {
         System.loadLibrary("Main");
