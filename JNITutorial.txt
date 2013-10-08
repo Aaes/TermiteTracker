@@ -1,0 +1,18 @@
+Compile java with javac HelloWorld.java
+
+Compile header file with javah HelloWorld
+
+Make C++ implementation HelloWorld.cpp
+
+Compile C++ with:
+
+g++ "-I/System/Library/Frameworks/JavaVM.framework/Versions/A/Headers" "-I/Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/JavaVM.framework/Versions/A/Headers" -c Main.cpp
+
+Create shared library with
+g++ -dynamiclib -o HelloWorldLib.jnilib HelloWorld.o
+
+Run java program with java HelloWorld
+
+http://mrjoelkemp.com/2012/01/getting-started-with-jni-and-c-on-osx-lion/
+
+http://www.ntu.edu.sg/home/ehchua/programming/java/JavaNativeInterface.html

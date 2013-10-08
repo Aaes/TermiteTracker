@@ -10,7 +10,6 @@
 #include "MasterThesis.h"
 #include "BlobsWorking.h"
 #include "Program.h"
-#include "HSVDetector.h"
 #include "ThresholdHSVExample.h"
 
 int main(int argc, const char * argv[])

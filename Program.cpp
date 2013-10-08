@@ -28,7 +28,8 @@ int runProgram()
         moveWindow(windowBlob, 600, 0);
 
 		VideoCapture capture;
-		capture.open(filename);
+		capture.open(0);
+        waitKey(0);
 
 		if (!capture.isOpened()) {
 			cout << "Cannot open file!" << endl;
