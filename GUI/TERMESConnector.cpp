@@ -37,11 +37,6 @@ JNIEXPORT jbyteArray JNICALL Java_TERMESConnector_getNextFrame
     if (image.empty())
         return NULL;
     
-    /*
-    //load an image
-    Mat image = imread("/Users/Nikolaj/Developer/TermiteTracker/Media/blob.bmp");
-     */
-    
     //create a uchar vector
     vector<uchar> imageData;
     
@@ -64,11 +59,10 @@ JNIEXPORT void JNICALL Java_TERMESConnector_start (JNIEnv *, jclass)
 {
     string filename = "/Users/Nikolaj/Developer/TermiteTracker/Media/myrevideo2.mp4";
     
-    capture.open(filename);
-    //waitKey(0);
+    capture.open(0);
+    waitKey(5000);
     
     if (!capture.isOpened()) {
-        cout << "Cannot open file!" << endl;
-        return;
+        cout << "Cannot open file/device!" << endl;
     }
 }

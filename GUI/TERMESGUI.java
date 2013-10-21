@@ -1,6 +1,4 @@
 import java.awt.*;
-
-import javax.sound.sampled.ReverbType;
 import javax.swing.*;  
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -42,6 +40,14 @@ public class TERMESGUI extends JFrame
 		{
 			icon = new ImageIcon(TERMESImageProcessing.convertByteArrayToImage(frame));
 			picLabel.setIcon(icon);
+			
+			//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! hvor meget skal vi vente og måske lav et interrupt til while når vinduet lukkes (ellers crasher det)
+			try {
+				Thread.sleep(200);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		
