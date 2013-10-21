@@ -1,4 +1,4 @@
-TERMESConnector.o: TERMESConnector.cpp TERMESConnector.h Main.java TERMESGUI.java TERMESConnector.java
+TERMESConnector.o: TERMESConnector.cpp TERMESConnector.h Main.java TERMESGUI.java TERMESConnector.java TERMESImageProcessing.java 
 	# --- Compile the Java project  --- 
 	javac Main.java
 	# --- Create a header file from the Java file containing the native methods --- 

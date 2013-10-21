@@ -23,6 +23,14 @@ JNIEXPORT jstring JNICALL Java_TERMESConnector_test
 JNIEXPORT jdoubleArray JNICALL Java_TERMESConnector_getKeypoints
   (JNIEnv *, jclass, jbyteArray);
 
+/*
+ * Class:     TERMESConnector
+ * Method:    getFrame
+ * Signature: ()[B
+ */
+JNIEXPORT jbyteArray JNICALL Java_TERMESConnector_getFrame
+  (JNIEnv *, jclass);
+
 #ifdef __cplusplus
 }
 #endif

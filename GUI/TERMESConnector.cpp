@@ -25,3 +25,26 @@ JNIEXPORT jdoubleArray JNICALL Java_TERMESConnector_getKeypoints (JNIEnv *env, j
     env->SetDoubleArrayRegion(newArr, 0, 3, arr);
     return newArr;
 }
+
+JNIEXPORT jbyteArray JNICALL Java_TERMESConnector_getFrame
+(JNIEnv *env, jclass)
+{
+    //load an image
+    Mat image = imread("/Users/Nikolaj/Developer/TermiteTracker/Media/blob.jpg");
+    
+    //create a uchar vector
+    vector<uchar> imageData;
+    
+    //fill it with the image as chars
+    imencode(".jpg",image, imageData);
+    
+    //convert vector<char> to jbyteArray
+    jbyte* result_e = new jbyte[imageData.size()];
+    jbyteArray result = env->NewByteArray(imageData.size());
+    
+    for (int i = 0; i < imageData.size(); i++) {
+        result_e[i] = (jbyte)imageData[i];
+    }
+    env->SetByteArrayRegion(result, 0, imageData.size(), result_e);
+    return result;
+}
