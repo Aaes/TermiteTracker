@@ -3,7 +3,6 @@ import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.IOException;
 import javax.imageio.ImageIO;
 
 @SuppressWarnings("serial")
@@ -21,7 +20,7 @@ public class TERMESGUI extends JFrame
 		Container con = this.getContentPane(); // inherit main frame
 		con.add(pane); // add the panel to frame
 
-		JLabel label = new JLabel(Main.test());
+		JLabel label = new JLabel(TERMESConnector.test());
 		pane.add(label);
 		
 		//display a picture
@@ -40,7 +39,7 @@ public class TERMESGUI extends JFrame
 		
 		//call C++ getKeypoints and print
 		System.out.println("the image byte array cotains " + imageInByte.length + " bytes");
-		double[] keypoints = Main.getKeypoints(imageInByte);
+		double[] keypoints = TERMESConnector.getKeypoints(imageInByte);
 		for (int i=0; i<keypoints.length; i++) {
 			System.out.println(keypoints[i]);
 		}

@@ -1,10 +1,12 @@
 public class Main {
 	
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
-		@SuppressWarnings("unused")
+		TERMESConnector connector = new TERMESConnector();
 		TERMESGUI gui = new TERMESGUI();
 	}
 	
+	/*
 	public static native String test();
 	
 	public static native double[] getKeypoints(byte[] image);
@@ -12,5 +14,6 @@ public class Main {
     static {
         System.loadLibrary("Main");
     }
+    */
 
 }

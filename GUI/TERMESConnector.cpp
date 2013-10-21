@@ -1,4 +1,4 @@
-#include "Main.h"
+#include "TERMESConnector.h"
 #include <stdio.h>
 #include <iostream>
 #include <opencv2/highgui/highgui.hpp>
@@ -9,12 +9,12 @@
 using namespace std;
 using namespace cv;
 
-JNIEXPORT jstring JNICALL Java_Main_test  (JNIEnv *env, jclass)
+JNIEXPORT jstring JNICALL Java_TERMESConnector_test  (JNIEnv *env, jclass)
 {
 	return env->NewStringUTF("LOOK MOM, I DID IT!! 2");
 }
 
-JNIEXPORT jdoubleArray JNICALL Java_Main_getKeypoints (JNIEnv *env, jclass, jbyteArray javaArray)
+JNIEXPORT jdoubleArray JNICALL Java_TERMESConnector_getKeypoints (JNIEnv *env, jclass, jbyteArray javaArray)
 {
     std::cout << "HEJ MOR 2" << std::endl;
     jdouble arr[] = {env->GetArrayLength(javaArray)};
