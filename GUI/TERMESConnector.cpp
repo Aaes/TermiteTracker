@@ -19,7 +19,7 @@ JNIEXPORT jdoubleArray JNICALL Java_TERMESConnector_getKeypoints (JNIEnv *env, j
     std::cout << "HEJ MOR 2" << std::endl;
     jdouble arr[] = {env->GetArrayLength(javaArray)};
     
-    imshow("LOLWINDOW", imread("/Users/Nikolaj/Developer/TermiteTracker/Media/4.jpg"));
+    //imshow("LOLWINDOW", imread("/Users/Nikolaj/Developer/TermiteTracker/Media/4.jpg"));
     
     jdoubleArray newArr = env->NewDoubleArray(3);
     env->SetDoubleArrayRegion(newArr, 0, 3, arr);
