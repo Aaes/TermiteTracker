@@ -17,6 +17,6 @@
 
 using namespace cv;
 
-Mat constrastImage(Mat image);
+Mat constrastImage(Mat image, double alpha, int beta);
 
 #endif /* defined(__TermiteTracker__Contrast__) */

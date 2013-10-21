@@ -10,10 +10,7 @@
 
 using namespace cv;
 
-double alpha = 3.0; /**< Simple contrast control */
-int beta = 100;  /**< Simple brightness control */
-
-Mat constrastImage(Mat image)
+Mat constrastImage(Mat image, double alpha, int beta)
 {
     Mat new_image = Mat::zeros( image.size(), image.type() );
     
