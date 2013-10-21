@@ -1,4 +1,6 @@
 import java.awt.*;
+
+import javax.sound.sampled.ReverbType;
 import javax.swing.*;  
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -14,6 +16,7 @@ public class TERMESGUI extends JFrame
 	SpringLayout layout;
 	
 	JLabel picLabel;
+	ImageIcon icon;
 
 	public TERMESGUI()
 	{
@@ -24,11 +27,22 @@ public class TERMESGUI extends JFrame
 		pane.add(label);
 		
 		//displayPicture();
-		picLabel = new JLabel(new ImageIcon(TERMESImageProcessing.convertByteArrayToImage(TERMESConnector.getFrame())));
+		TERMESConnector.start();
+		
+		icon = new ImageIcon();
+		picLabel = new JLabel(icon);
 		add(picLabel);
 		
 		setLayoutConstraints();
 		setVisible(true); // display this frame
+		
+		
+		byte[] frame;
+		while((frame = TERMESConnector.getNextFrame()) != null)
+		{
+			icon = new ImageIcon(TERMESImageProcessing.convertByteArrayToImage(frame));
+			picLabel.setIcon(icon);
+		}
 		
 		
 	}

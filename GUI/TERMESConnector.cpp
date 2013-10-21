@@ -9,6 +9,8 @@
 using namespace std;
 using namespace cv;
 
+VideoCapture capture;
+
 JNIEXPORT jstring JNICALL Java_TERMESConnector_test  (JNIEnv *env, jclass)
 {
 	return env->NewStringUTF("LOOK MOM, I DID IT!! 2");
@@ -26,11 +28,19 @@ JNIEXPORT jdoubleArray JNICALL Java_TERMESConnector_getKeypoints (JNIEnv *env, j
     return newArr;
 }
 
-JNIEXPORT jbyteArray JNICALL Java_TERMESConnector_getFrame
+JNIEXPORT jbyteArray JNICALL Java_TERMESConnector_getNextFrame
 (JNIEnv *env, jclass)
 {
+    Mat image;
+    
+    capture >> image;
+    if (image.empty())
+        return NULL;
+    
+    /*
     //load an image
-    Mat image = imread("/Users/Nikolaj/Developer/TermiteTracker/Media/blob.jpg");
+    Mat image = imread("/Users/Nikolaj/Developer/TermiteTracker/Media/blob.bmp");
+     */
     
     //create a uchar vector
     vector<uchar> imageData;
@@ -47,4 +57,18 @@ JNIEXPORT jbyteArray JNICALL Java_TERMESConnector_getFrame
     }
     env->SetByteArrayRegion(result, 0, imageData.size(), result_e);
     return result;
+    
+}
+
+JNIEXPORT void JNICALL Java_TERMESConnector_start (JNIEnv *, jclass)
+{
+    string filename = "/Users/Nikolaj/Developer/TermiteTracker/Media/myrevideo2.mp4";
+    
+    capture.open(filename);
+    //waitKey(0);
+    
+    if (!capture.isOpened()) {
+        cout << "Cannot open file!" << endl;
+        return;
+    }
 }

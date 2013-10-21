@@ -25,10 +25,18 @@ JNIEXPORT jdoubleArray JNICALL Java_TERMESConnector_getKeypoints
 
 /*
  * Class:     TERMESConnector
- * Method:    getFrame
+ * Method:    getNextFrame
  * Signature: ()[B
  */
-JNIEXPORT jbyteArray JNICALL Java_TERMESConnector_getFrame
+JNIEXPORT jbyteArray JNICALL Java_TERMESConnector_getNextFrame
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     TERMESConnector
+ * Method:    start
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_TERMESConnector_start
   (JNIEnv *, jclass);
 
 #ifdef __cplusplus

@@ -5,7 +5,8 @@ public class TERMESConnector
 	//Native Methods that calls C++ code
 	public static native String test();
 	public static native double[] getKeypoints(byte[] image);
-	public static native byte[] getFrame();
+	public static native byte[] getNextFrame();
+	public static native void start();
 	
 	//Loading the dynamic library, connecting the Java GUI and C++ code
     static 
