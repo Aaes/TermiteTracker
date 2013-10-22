@@ -1,4 +1,5 @@
 import java.awt.*;
+
 import javax.swing.*;  
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -10,11 +11,16 @@ public class TERMESGUI extends JFrame
 	JPanel pane = new JPanel();
 	SpringLayout layout;
 	
-	JLabel picLabel;
-	ImageIcon icon;
+	JLabel leftPicLabel;
+	ImageIcon leftIcon;
 	
+	JLabel rightPicLabel;
+	ImageIcon rightIcon;
+	
+	//the size of the video feeds
 	int frameHeight;
 	int frameWidth;
+	double scale = 0.7;
 
 	public TERMESGUI()
 	{
@@ -27,10 +33,17 @@ public class TERMESGUI extends JFrame
 		//setup input feed
 		TERMESConnector.start();
 		
-		//initialize the icon and label that will contain the video
-		icon = new ImageIcon();
-		picLabel = new JLabel(icon);
-		add(picLabel);
+		//initialize the left icon and label that will contain the original video
+		leftIcon = new ImageIcon();
+		leftPicLabel = new JLabel(leftIcon);
+		leftPicLabel.setBorder(BorderFactory.createLineBorder(Color.GRAY, 3));
+		add(leftPicLabel);
+		
+		//initialize the right icon and label that will contain the thresholded video
+		rightIcon = new ImageIcon();
+		rightPicLabel = new JLabel(rightIcon);
+		rightPicLabel.setBorder(BorderFactory.createLineBorder(Color.GRAY, 3));
+		add(rightPicLabel);
 		
 		setLayoutConstraints();
 		setVisible(true); // display this frame
@@ -45,15 +58,17 @@ public class TERMESGUI extends JFrame
 			//scale the image if necessary
 			if (frameHeight == 0) //then frameWidth is also 0
 			{
-				frameHeight = determineFrameHeight(img.getWidth(null), img.getHeight(null));
-				frameWidth = determineFrameWidth(img.getWidth(null), img.getHeight(null));
+				frameHeight = (int) determineFrameHeight(img.getWidth(null), img.getHeight(null));
+				frameWidth = (int) determineFrameWidth(img.getWidth(null), img.getHeight(null));
 			}
 			
 			img = img.getScaledInstance(frameWidth, frameHeight ,java.awt.Image.SCALE_SMOOTH );  
 			
-			icon = new ImageIcon(img);
+			leftIcon = new ImageIcon(img);
+			rightIcon = new ImageIcon(img);
 
-			picLabel.setIcon(icon);
+			leftPicLabel.setIcon(leftIcon);
+			rightPicLabel.setIcon(rightIcon);
 			
 			try {
 				Thread.sleep(10);
@@ -89,24 +104,27 @@ public class TERMESGUI extends JFrame
 	
 	public void setLayoutConstraints()
 	{
-		layout.putConstraint(SpringLayout.WEST, picLabel, 50 ,SpringLayout.WEST, pane);
-		layout.putConstraint(SpringLayout.NORTH, picLabel, 50 ,SpringLayout.NORTH, pane);
+		layout.putConstraint(SpringLayout.WEST, leftPicLabel, 50 ,SpringLayout.WEST, pane);
+		layout.putConstraint(SpringLayout.NORTH, leftPicLabel, 50 ,SpringLayout.NORTH, pane);
+		
+		layout.putConstraint(SpringLayout.WEST, rightPicLabel, 50 ,SpringLayout.EAST, leftPicLabel);
+		layout.putConstraint(SpringLayout.NORTH, rightPicLabel, 50 ,SpringLayout.NORTH, pane);
 	}
 	
-	public int determineFrameHeight(double width, double height)
+	public double determineFrameHeight(double width, double height)
 	{	
 		if(width/height == 16.0/9.0) // 16:9
-			return 360;
+			return 360 * scale;
 		else // 4:3
-			return 480;
+			return 480 * scale;
 	}
 	
-	public int determineFrameWidth(double width, double height)
+	public double determineFrameWidth(double width, double height)
 	{
 		if(width/height == 16.0/9.0) // 16:9
-			return 640;
+			return 640 * scale;
 		else // 4:3
-			return 640;
+			return 640 * scale;
 	}
 	
 }
