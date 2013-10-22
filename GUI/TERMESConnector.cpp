@@ -1,5 +1,5 @@
 #include "TERMESConnector.h"
-#include "../ColorDetector.h"
+#include "ColorDetector.h"
 #include <stdio.h>
 #include <iostream>
 #include <opencv2/highgui/highgui.hpp>
