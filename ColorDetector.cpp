@@ -18,9 +18,7 @@ Mat ColorDetection(Mat img, Scalar colorMin, Scalar colorMax, double alpha, int 
     Mat blob;
     
     //Threshold based on color ranges (Blue/Green/Red scalars)
-    //GaussianBlur(contrast_img, contrast_img, Size(5,5), 0);
-    //inRange(contrast_img, colorMin, colorMax, imgThresh); //RGB range
-    inRange(contrast_img, colorMin, colorMax, imgThresh); //RGB range
+    inRange(contrast_img, colorMin, colorMax, imgThresh); //BGR range
     
     //Apply Blur effect to make blobs much more coherent
     GaussianBlur(imgThresh, imgThresh, Size(3,3), 0);
@@ -43,6 +41,7 @@ Mat ColorDetection(Mat img, Scalar colorMin, Scalar colorMax, double alpha, int 
     vector<KeyPoint> keypoints;
     
     //Try blob detection for both thresholded colors
+    threshold(imgThresh, imgThresh, 100, 255,0);
     blobDetector.detect(imgThresh, keypoints);
     
     //Draw resulting keypoints
