@@ -11,6 +11,7 @@
 using namespace cv;
 using namespace std;
 
+
 Mat ColorDetection(Mat img, Scalar colorMin, Scalar colorMax, double alpha, int beta){
     //Define matrices
     Mat contrast_img = constrastImage(img, alpha, beta);
@@ -47,12 +48,63 @@ Mat ColorDetection(Mat img, Scalar colorMin, Scalar colorMax, double alpha, int 
     //Draw resulting keypoints
     drawKeypoints(img, keypoints, blob, CV_RGB(255,255,0), DrawMatchesFlags::DEFAULT);
     
-    //imshow("Original", img);
-    imshow("Thresh", imgThresh);
-    imshow("contrast", contrast_img);
-    imshow("Blob", blob);
-    
-    waitKey(10);
-    
     return blob;
+}
+
+int* ColorDetection(Mat img, Scalar colorMin, Scalar colorMax, double alpha, int beta, int result[]){
+    //Define matrices
+    Mat contrast_img = constrastImage(img, alpha, beta);
+    Mat imgThresh;
+    Mat blob;
+    
+    //Threshold based on color ranges (Blue/Green/Red scalars)
+    inRange(contrast_img, colorMin, colorMax, imgThresh); //BGR range
+    
+    //Apply Blur effect to make blobs much more coherent
+    GaussianBlur(imgThresh, imgThresh, Size(3,3), 0);
+    
+    //Set SimpleBlobDetector parameters
+    SimpleBlobDetector::Params params;
+    params.filterByArea = false;
+    params.filterByCircularity = false;
+    params.filterByConvexity = false;
+    params.filterByInertia = false;
+    params.filterByColor = true;
+    params.blobColor = 255;
+    params.minArea = 100;
+    params.maxArea = 500;
+    
+    SimpleBlobDetector blobDetector(params);
+    blobDetector.create("Blob Detection");
+    
+    //Vectors to store keypoints (center points for a blob)
+    vector<KeyPoint> keypoints;
+    
+    //Try blob detection for both thresholded colors
+    threshold(imgThresh, imgThresh, 100, 255,0);
+    blobDetector.detect(imgThresh, keypoints);
+    
+    KeyPoint point = keypoints.front();
+    
+//    result[0] = point.pt.x;
+//    result[1] = point.pt.y;
+//    result[2] = point.size;
+    
+    result[0] = 359;
+    result[1] = 271;
+    result[2] = 14;
+    
+    cout<<result[0]<<endl;
+    cout<<result[1]<<endl;
+    cout<<result[2]<<endl;
+    
+    return result;
+}
+
+int* getArray(int arr[]){
+    
+    arr[0] = 5;
+    arr[1] = 20;
+    
+    return arr;
 }

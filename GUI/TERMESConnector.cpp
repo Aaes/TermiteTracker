@@ -1,4 +1,5 @@
 #include "TERMESConnector.h"
+#include "../ColorDetector.h"
 #include <stdio.h>
 #include <iostream>
 #include <opencv2/highgui/highgui.hpp>
@@ -10,38 +11,36 @@ using namespace std;
 using namespace cv;
 
 VideoCapture capture;
+Mat latestImage;
 
 JNIEXPORT jstring JNICALL Java_TERMESConnector_test  (JNIEnv *env, jclass)
 {
 	return env->NewStringUTF("LOOK MOM, I DID IT!! 2");
 }
 
-JNIEXPORT jdoubleArray JNICALL Java_TERMESConnector_getKeypoints (JNIEnv *env, jclass, jbyteArray javaArray)
+JNIEXPORT jdoubleArray JNICALL Java_TERMESConnector_getKeypoints (JNIEnv *env, jclass)
 {
-    std::cout << "HEJ MOR 2" << std::endl;
-    jdouble arr[] = {env->GetArrayLength(javaArray)};
+    int input[3];
     
-    //imshow("LOLWINDOW", imread("/Users/Nikolaj/Developer/TermiteTracker/Media/4.jpg"));
+    int *res = ColorDetection(latestImage, Scalar(100,250,100), Scalar(200,255,200), 3.0, 100, input);
     
     jdoubleArray newArr = env->NewDoubleArray(3);
-    env->SetDoubleArrayRegion(newArr, 0, 3, arr);
+    env->SetDoubleArrayRegion(newArr, 0, 3, res);
     return newArr;
 }
 
 JNIEXPORT jbyteArray JNICALL Java_TERMESConnector_getNextFrame
 (JNIEnv *env, jclass)
 {
-    Mat image;
-    
-    capture >> image;
-    if (image.empty())
+    capture >> latestImage;
+    if (latestImage.empty())
         return NULL;
     
     //create a uchar vector
     vector<uchar> imageData;
     
     //fill it with the image as chars
-    imencode(".jpg",image, imageData);
+    imencode(".jpg",latestImage, imageData);
     
     //convert vector<char> to jbyteArray
     jbyte* result_e = new jbyte[imageData.size()];

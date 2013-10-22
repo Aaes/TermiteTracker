@@ -43,7 +43,7 @@ int runProgram()
             Scalar colorMin(10,10,100);
             Scalar colorMax(50,50,170);
             
-            blob = ColorDetection(frame, colorMin, colorMax, 1.0, 50);
+            //blob = ColorDetection(frame, colorMin, colorMax, 1.0, 50);
             
 //            for(int i = 0; i<keyPoints.size(); i++){
 //                trackingPoints.push_back(keyPoints[i]);
