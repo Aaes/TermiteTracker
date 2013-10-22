@@ -4,7 +4,7 @@ public class TERMESConnector
 
 	//Native Methods that calls C++ code
 	public static native String test();
-	public static native double[] getKeypoints(byte[] image);
+	public static native int[] getKeypoints();
 	public static native byte[] getNextFrame();
 	public static native void start();
 	public static native void releaseCamera();
@@ -14,16 +14,4 @@ public class TERMESConnector
     {
         System.loadLibrary("TERMESConnector");
     }
-    /*
-	
-	public static String test() 
-	{
-		return "LOL";
-	}
-	
-	public static double[] getKeypoints(byte[] image) 
-	{
-		return new double[2];
-	}
-    */
 }

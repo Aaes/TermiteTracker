@@ -1,13 +1,8 @@
 import java.awt.*;
-import javax.swing.*;  
 
+import javax.swing.*;  
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.util.Arrays;
-
-import javax.imageio.ImageIO;
 
 @SuppressWarnings("serial")
 public class TERMESGUI extends JFrame
@@ -16,8 +11,16 @@ public class TERMESGUI extends JFrame
 	JPanel pane = new JPanel();
 	SpringLayout layout;
 	
-	JLabel picLabel;
-	ImageIcon icon;
+	JLabel leftPicLabel;
+	ImageIcon leftIcon;
+	
+	JLabel rightPicLabel;
+	ImageIcon rightIcon;
+	
+	//the size of the video feeds
+	int frameHeight;
+	int frameWidth;
+	double scale = 0.7;
 
 	public TERMESGUI()
 	{
@@ -27,29 +30,45 @@ public class TERMESGUI extends JFrame
 		JLabel label = new JLabel(TERMESConnector.test());
 		pane.add(label);
 		
-		//displayPicture();
+		//setup input feed
 		TERMESConnector.start();
 		
-		icon = new ImageIcon();
-		picLabel = new JLabel(icon);
-		add(picLabel);
+		//initialize the left icon and label that will contain the original video
+		leftIcon = new ImageIcon();
+		leftPicLabel = new JLabel(leftIcon);
+		leftPicLabel.setBorder(BorderFactory.createLineBorder(Color.GRAY, 3));
+		add(leftPicLabel);
+		
+		//initialize the right icon and label that will contain the thresholded video
+		rightIcon = new ImageIcon();
+		rightPicLabel = new JLabel(rightIcon);
+		rightPicLabel.setBorder(BorderFactory.createLineBorder(Color.GRAY, 3));
+		add(rightPicLabel);
 		
 		setLayoutConstraints();
 		setVisible(true); // display this frame
 		
-		this.addWindowListener( new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent we) {
-               TERMESConnector.releaseCamera();
-               System.exit(0);
-            }
-        } );
-		
+		//poll for the next frame as long as there is one
 		byte[] frame;
 		while((frame = TERMESConnector.getNextFrame()) != null)
 		{
-			icon = new ImageIcon(TERMESImageProcessing.convertByteArrayToImage(frame));
-			picLabel.setIcon(icon);
+			//get the next frame as an image
+			Image img = TERMESImageProcessing.convertByteArrayToImage(frame); 
+			
+			//scale the image if necessary
+			if (frameHeight == 0) //then frameWidth is also 0
+			{
+				frameHeight = (int) determineFrameHeight(img.getWidth(null), img.getHeight(null));
+				frameWidth = (int) determineFrameWidth(img.getWidth(null), img.getHeight(null));
+			}
+			
+			img = img.getScaledInstance(frameWidth, frameHeight ,java.awt.Image.SCALE_SMOOTH );  
+			
+			leftIcon = new ImageIcon(img);
+			rightIcon = new ImageIcon(img);
+
+			leftPicLabel.setIcon(leftIcon);
+			rightPicLabel.setIcon(rightIcon);
 			
 			try {
 				Thread.sleep(10);
@@ -59,50 +78,53 @@ public class TERMESGUI extends JFrame
 			}
 		}
 		
-		
 	}
 	
 	public void InitializeWindow()
 	{
 		setTitle("TERMES");
 		setBounds(100, 100, 1100, 700);
-		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		Container con = this.getContentPane(); 
 		con.add(pane);
 		
 		layout = new SpringLayout();
 		setLayout(layout);
+		
+		//see to that the camera is released when the window is closed 
+		// (if this isn't done, the application will crash when it is closed)
+		this.addWindowListener( new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent we) {
+               TERMESConnector.releaseCamera();
+               System.exit(0);
+            }
+        } );
 	}
 	
 	public void setLayoutConstraints()
 	{
-		layout.putConstraint(SpringLayout.WEST, picLabel, 50 ,SpringLayout.WEST, pane);
-		layout.putConstraint(SpringLayout.NORTH, picLabel, 50 ,SpringLayout.NORTH, pane);
+		layout.putConstraint(SpringLayout.WEST, leftPicLabel, 50 ,SpringLayout.WEST, pane);
+		layout.putConstraint(SpringLayout.NORTH, leftPicLabel, 50 ,SpringLayout.NORTH, pane);
+		
+		layout.putConstraint(SpringLayout.WEST, rightPicLabel, 50 ,SpringLayout.EAST, leftPicLabel);
+		layout.putConstraint(SpringLayout.NORTH, rightPicLabel, 50 ,SpringLayout.NORTH, pane);
 	}
 	
-	public void displayPicture() {
-		try 
-		{
-			BufferedImage myPicture = ImageIO.read(new File("/Users/Nikolaj/Developer/TermiteTracker/Media/4.jpg"));
-
-			byte[] imageInByte = TERMESImageProcessing.convertImageToByteArray(myPicture);
-			
-			// call C++ getKeypoints and print
-			System.out.println("the image byte array cotains " + imageInByte.length + " bytes");
-			
-			double[] keypoints = TERMESConnector.getKeypoints(imageInByte);
-			for (int i = 0; i < keypoints.length; i++) {
-				System.out.println(keypoints[i]);
-			}
-			
-			picLabel = new JLabel(new ImageIcon(TERMESImageProcessing.convertByteArrayToImage(Arrays.copyOfRange(imageInByte, 0, imageInByte.length/2))));
-			add(picLabel);
-
-		} 
-		catch (Exception e) 
-		{
-			e.printStackTrace();
-		}
+	public double determineFrameHeight(double width, double height)
+	{	
+		if(width/height == 16.0/9.0) // 16:9
+			return 360 * scale;
+		else // 4:3
+			return 480 * scale;
 	}
+	
+	public double determineFrameWidth(double width, double height)
+	{
+		if(width/height == 16.0/9.0) // 16:9
+			return 640 * scale;
+		else // 4:3
+			return 640 * scale;
+	}
+	
 }

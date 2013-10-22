@@ -18,10 +18,10 @@ JNIEXPORT jstring JNICALL Java_TERMESConnector_test
 /*
  * Class:     TERMESConnector
  * Method:    getKeypoints
- * Signature: ([B)[D
+ * Signature: ()[I
  */
-JNIEXPORT jdoubleArray JNICALL Java_TERMESConnector_getKeypoints
-  (JNIEnv *, jclass, jbyteArray);
+JNIEXPORT jintArray JNICALL Java_TERMESConnector_getKeypoints
+  (JNIEnv *, jclass);
 
 /*
  * Class:     TERMESConnector
