@@ -1,13 +1,7 @@
 import java.awt.*;
 import javax.swing.*;  
-
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.util.Arrays;
-
-import javax.imageio.ImageIO;
 
 @SuppressWarnings("serial")
 public class TERMESGUI extends JFrame
@@ -27,7 +21,6 @@ public class TERMESGUI extends JFrame
 		JLabel label = new JLabel(TERMESConnector.test());
 		pane.add(label);
 		
-		//displayPicture();
 		TERMESConnector.start();
 		
 		icon = new ImageIcon();
@@ -81,28 +74,4 @@ public class TERMESGUI extends JFrame
 		layout.putConstraint(SpringLayout.NORTH, picLabel, 50 ,SpringLayout.NORTH, pane);
 	}
 	
-	public void displayPicture() {
-		try 
-		{
-			BufferedImage myPicture = ImageIO.read(new File("/Users/Nikolaj/Developer/TermiteTracker/Media/4.jpg"));
-
-			byte[] imageInByte = TERMESImageProcessing.convertImageToByteArray(myPicture);
-			
-			// call C++ getKeypoints and print
-			System.out.println("the image byte array cotains " + imageInByte.length + " bytes");
-			
-			double[] keypoints = TERMESConnector.getKeypoints(imageInByte);
-			for (int i = 0; i < keypoints.length; i++) {
-				System.out.println(keypoints[i]);
-			}
-			
-			picLabel = new JLabel(new ImageIcon(TERMESImageProcessing.convertByteArrayToImage(Arrays.copyOfRange(imageInByte, 0, imageInByte.length/2))));
-			add(picLabel);
-
-		} 
-		catch (Exception e) 
-		{
-			e.printStackTrace();
-		}
-	}
 }
