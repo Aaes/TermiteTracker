@@ -20,9 +20,9 @@ JNIEXPORT jstring JNICALL Java_TERMESConnector_test  (JNIEnv *env, jclass)
 
 JNIEXPORT jintArray JNICALL Java_TERMESConnector_getKeypoints (JNIEnv *env, jclass)
 {
-    int input[3];
+    jint input[3];
     
-    int *res = ColorDetection(latestImage, Scalar(100,250,100), Scalar(200,255,200), 3.0, 100, input);
+    jint *res = ColorDetection(latestImage, Scalar(100,250,100), Scalar(200,255,200), 3.0, 100, input);
     
     jintArray newArr = env->NewIntArray(3);
     env->SetIntArrayRegion(newArr, 0, 3, res);

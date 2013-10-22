@@ -94,10 +94,6 @@ int* ColorDetection(Mat img, Scalar colorMin, Scalar colorMax, double alpha, int
     result[1] = 271;
     result[2] = 14;
     
-    cout<<result[0]<<endl;
-    cout<<result[1]<<endl;
-    cout<<result[2]<<endl;
-    
     return result;
 }
 
