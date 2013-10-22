@@ -1,5 +1,8 @@
 import java.awt.*;
 import javax.swing.*;  
+
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Arrays;
@@ -34,6 +37,13 @@ public class TERMESGUI extends JFrame
 		setLayoutConstraints();
 		setVisible(true); // display this frame
 		
+		this.addWindowListener( new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent we) {
+               TERMESConnector.releaseCamera();
+               System.exit(0);
+            }
+        } );
 		
 		byte[] frame;
 		while((frame = TERMESConnector.getNextFrame()) != null)
@@ -41,9 +51,8 @@ public class TERMESGUI extends JFrame
 			icon = new ImageIcon(TERMESImageProcessing.convertByteArrayToImage(frame));
 			picLabel.setIcon(icon);
 			
-			//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! hvor meget skal vi vente og måske lav et interrupt til while når vinduet lukkes (ellers crasher det)
 			try {
-				Thread.sleep(200);
+				Thread.sleep(10);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -57,7 +66,7 @@ public class TERMESGUI extends JFrame
 	{
 		setTitle("TERMES");
 		setBounds(100, 100, 1100, 700);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		Container con = this.getContentPane(); 
 		con.add(pane);

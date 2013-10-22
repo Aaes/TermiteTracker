@@ -59,10 +59,16 @@ JNIEXPORT void JNICALL Java_TERMESConnector_start (JNIEnv *, jclass)
 {
     string filename = "/Users/Nikolaj/Developer/TermiteTracker/Media/myrevideo2.mp4";
     
-    capture.open(0);
-    waitKey(5000);
+    capture.open(filename);
+    waitKey(2000);
     
     if (!capture.isOpened()) {
         cout << "Cannot open file/device!" << endl;
     }
+}
+
+JNIEXPORT void JNICALL Java_TERMESConnector_releaseCamera
+(JNIEnv *, jclass)
+{
+    capture.release();
 }

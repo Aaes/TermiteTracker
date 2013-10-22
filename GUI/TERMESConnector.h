@@ -39,6 +39,14 @@ JNIEXPORT jbyteArray JNICALL Java_TERMESConnector_getNextFrame
 JNIEXPORT void JNICALL Java_TERMESConnector_start
   (JNIEnv *, jclass);
 
+/*
+ * Class:     TERMESConnector
+ * Method:    releaseCamera
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_TERMESConnector_releaseCamera
+  (JNIEnv *, jclass);
+
 #ifdef __cplusplus
 }
 #endif
