@@ -22,10 +22,10 @@ JNIEXPORT jintArray JNICALL Java_TERMESConnector_getKeypoints (JNIEnv *env, jcla
 {
     jint input[3];
     
-    jint *res = ColorDetection(latestImage, Scalar(100,250,100), Scalar(200,255,200), 3.0, 100, input);
+    jint res = ColorDetection(latestImage, Scalar(100,250,100), Scalar(200,255,200), 3.0, 100, input);
     
     jintArray newArr = env->NewIntArray(3);
-    env->SetIntArrayRegion(newArr, 0, 3, res);
+    env->SetIntArrayRegion(newArr, 0, 3, input);
     return newArr;
 }
 

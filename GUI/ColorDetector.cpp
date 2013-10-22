@@ -83,8 +83,8 @@ int ColorDetection(Mat img, Scalar colorMin, Scalar colorMax, double alpha, int 
     //Try blob detection for both thresholded colors
     threshold(imgThresh, imgThresh, 100, 255,0);
     blobDetector.detect(imgThresh, keypoints);
-    
-    KeyPoint point = keypoints.front();
+
+//    KeyPoint point = keypoints.front();
     
     //    result[0] = point.pt.x;
     //    result[1] = point.pt.y;

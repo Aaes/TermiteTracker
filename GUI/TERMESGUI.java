@@ -52,7 +52,6 @@ public class TERMESGUI extends JFrame
 		byte[] frame;
 		while((frame = TERMESConnector.getNextFrame()) != null)
 		{
-			System.out.println(TERMESConnector.getKeypoints()[1]);
 			//get the next frame as an image
 			Image img = TERMESImageProcessing.convertByteArrayToImage(frame); 
 			
