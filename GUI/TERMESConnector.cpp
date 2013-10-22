@@ -24,8 +24,8 @@ JNIEXPORT jdoubleArray JNICALL Java_TERMESConnector_getKeypoints (JNIEnv *env, j
     
     int *res = ColorDetection(latestImage, Scalar(100,250,100), Scalar(200,255,200), 3.0, 100, input);
     
-    jdoubleArray newArr = env->NewDoubleArray(3);
-    env->SetDoubleArrayRegion(newArr, 0, 3, res);
+    jintArray newArr = env->NewIntArray(3);
+    env->SetIntArrayRegion(newArr, 0, 3, res);
     return newArr;
 }
 
