@@ -33,17 +33,7 @@ public class TERMESGUI extends JFrame
 		//setup input feed
 		TERMESConnector.start();
 		
-		//initialize the left icon and label that will contain the original video
-		leftIcon = new ImageIcon();
-		leftPicLabel = new JLabel(leftIcon);
-		leftPicLabel.setBorder(BorderFactory.createLineBorder(Color.GRAY, 3));
-		add(leftPicLabel);
 		
-		//initialize the right icon and label that will contain the thresholded video
-		rightIcon = new ImageIcon();
-		rightPicLabel = new JLabel(rightIcon);
-		rightPicLabel.setBorder(BorderFactory.createLineBorder(Color.GRAY, 3));
-		add(rightPicLabel);
 		
 		setLayoutConstraints();
 		setVisible(true); // display this frame
@@ -100,6 +90,18 @@ public class TERMESGUI extends JFrame
                System.exit(0);
             }
         } );
+		
+		//initialize the left icon and label that will contain the original video
+		leftIcon = new ImageIcon();
+		leftPicLabel = new JLabel(leftIcon);
+		leftPicLabel.setBorder(BorderFactory.createLineBorder(Color.GRAY, 3));
+		add(leftPicLabel);
+				
+		//initialize the right icon and label that will contain the thresholded video
+		rightIcon = new ImageIcon();
+		rightPicLabel = new JLabel(rightIcon);
+		rightPicLabel.setBorder(BorderFactory.createLineBorder(Color.GRAY, 3));
+		add(rightPicLabel);
 	}
 	
 	public void setLayoutConstraints()

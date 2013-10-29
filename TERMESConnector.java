@@ -2,7 +2,7 @@
 public class TERMESConnector
 {
 
-	//Native Methods that calls C++ code
+	//Native methods that calls C++ code
 	public static native String test();
 	public static native int[] getKeypoints();
 	public static native byte[] getNextFrame();
