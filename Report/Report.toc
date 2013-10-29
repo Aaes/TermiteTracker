@@ -9,6 +9,7 @@
 \contentsline {section}{\numberline {4}Tracking}{3}{section.1.4}
 \contentsline {section}{\numberline {5}Integration with camera}{3}{section.1.5}
 \contentsline {section}{\numberline {6}Graphical user interface}{3}{section.1.6}
+\contentsline {subsection}{\numberline {6.1}Statistics}{3}{subsection.1.6.1}
 \contentsline {section}{\numberline {7}Process}{3}{section.1.7}
 \contentsline {subsection}{\numberline {7.1}International collaboration}{3}{subsection.1.7.1}
 \contentsline {subsection}{\numberline {7.2}Tools}{3}{subsection.1.7.2}
