@@ -30,10 +30,8 @@ public class TERMESGUI extends JFrame
 		JLabel label = new JLabel(TERMESConnector.test());
 		pane.add(label);
 		
-		//setup input feed
+		//setup input feeds
 		TERMESConnector.start();
-		
-		
 		
 		setLayoutConstraints();
 		setVisible(true); // display this frame
