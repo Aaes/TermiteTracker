@@ -13,10 +13,6 @@ public class TERMESGUI extends JFrame
 	public TERMESGUI()
 	{
 		InitializeWindow(); 
-		
-		//test label
-		JLabel label = new JLabel(TERMESConnector.test());
-		pane.add(label);
 				
 		//setup input feeds
 		TERMESConnector.start();
@@ -37,7 +33,7 @@ public class TERMESGUI extends JFrame
 		con.add(pane);
 		
 		//see to that the camera is released when the window is closed 
-		// (if this isn't done, the application will crash when it is closed)
+		//(if this isn't done, the application will crash when it is closed)
 		this.addWindowListener( new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent we) {

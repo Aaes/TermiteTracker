@@ -13,11 +13,6 @@ using namespace cv;
 VideoCapture capture;
 Mat latestImage;
 
-JNIEXPORT jstring JNICALL Java_TERMESConnector_test  (JNIEnv *env, jclass)
-{
-	return env->NewStringUTF("LOOK MOM, I DID IT!! 2");
-}
-
 JNIEXPORT jintArray JNICALL Java_TERMESConnector_getKeypoints (JNIEnv *env, jclass)
 {
     jint input[3];
