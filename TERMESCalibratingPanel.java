@@ -54,9 +54,9 @@ public class TERMESCalibratingPanel extends JPanel implements ChangeListener
 		add(rightPicLabel);
 		
 		//create title label for the video feeds
-		leftPicTitleLabel = new JLabel("Camera 1");
+		leftPicTitleLabel = new JLabel("Original");
 		add(leftPicTitleLabel);
-		rightPicTitleLabel = new JLabel("Camera 2");
+		rightPicTitleLabel = new JLabel("Threshold");
 		add(rightPicTitleLabel);
 		
 		createSliders();

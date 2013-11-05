@@ -27,7 +27,7 @@ public class TERMESGUI extends JFrame implements ActionListener
 
 		setVisible(true); // display this frame
 		
-		((TERMESCalibratingPanel) pane).startVideo();
+		startVideoFeeds();
 	}
 	
 	public void InitializeWindow()
@@ -71,6 +71,27 @@ public class TERMESGUI extends JFrame implements ActionListener
 		menu.add(trackingmode);
 		
 		setJMenuBar(menuBar);
+	}
+	
+	public void startVideoFeeds()
+	{
+		//video feed for the calibration panel
+		Thread videofeed1 = new Thread(new Runnable() {
+			  @Override
+			  public void run() {
+				  calibrationPanel.startVideo();
+			  }
+			});
+		//video feed for the tracking panel
+		Thread videofeed2 = new Thread(new Runnable() {
+			  @Override
+			  public void run() {
+				  trackingPanel.startVideo();
+			  }
+			});
+		
+		videofeed1.start();
+		videofeed2.start();
 	}
 
 	@Override
