@@ -21,7 +21,12 @@ public class TERMESTrackingPanel extends JPanel
 	JLabel leftPicTitleLabel;
 	JLabel rightPicTitleLabel;
 	
-	JButton saveStats;
+	JButton saveStatsBtn;
+	
+	JLabel averageSpeedLabel;
+	int averageSpeed = 0;
+	
+	JButton showPathWindowBtn;
 	
 	//the size of the video feeds
 	int frameHeight;
@@ -51,8 +56,7 @@ public class TERMESTrackingPanel extends JPanel
 		rightPicTitleLabel = new JLabel("Over Head Camera");
 		add(rightPicTitleLabel);
 		
-		saveStats = new JButton("Save Statistics");
-		add(saveStats);
+		setUpStats();
 
 		setLayoutConstraints();
 	}
@@ -89,6 +93,18 @@ public class TERMESTrackingPanel extends JPanel
 		}
 	}
 	
+	public void setUpStats()
+	{
+		averageSpeedLabel = new JLabel("Average Speed = " + averageSpeed + " px/frame");
+		add(averageSpeedLabel);
+		
+		saveStatsBtn = new JButton("Save Statistics");
+		add(saveStatsBtn);
+		
+		showPathWindowBtn = new JButton("Show Path Window");
+		add(showPathWindowBtn);
+	}
+	
 	public double determineFrameHeight(double width, double height)
 	{	
 		if(width/height == 16.0/9.0) // 16:9
@@ -123,9 +139,17 @@ public class TERMESTrackingPanel extends JPanel
 		layout.putConstraint(SpringLayout.WEST, rightPicTitleLabel, 0 ,SpringLayout.WEST, rightPicLabel);
 		layout.putConstraint(SpringLayout.SOUTH, rightPicTitleLabel, -5 ,SpringLayout.NORTH, rightPicLabel);
 		
+		//Average Speed label
+		layout.putConstraint(SpringLayout.WEST, averageSpeedLabel, 0 ,SpringLayout.WEST, leftPicLabel);
+		layout.putConstraint(SpringLayout.NORTH, averageSpeedLabel, 20 ,SpringLayout.SOUTH, leftPicLabel);
+		
+		//Show path window button
+		layout.putConstraint(SpringLayout.WEST, showPathWindowBtn, 0 ,SpringLayout.WEST, averageSpeedLabel);
+		layout.putConstraint(SpringLayout.NORTH, showPathWindowBtn, 20 ,SpringLayout.SOUTH, averageSpeedLabel);
+		
 		//Save statistics button
-		layout.putConstraint(SpringLayout.EAST, saveStats, -20 ,SpringLayout.EAST, this);
-		layout.putConstraint(SpringLayout.SOUTH, saveStats, -20 ,SpringLayout.SOUTH, this);
+		layout.putConstraint(SpringLayout.EAST, saveStatsBtn, -20 ,SpringLayout.EAST, this);
+		layout.putConstraint(SpringLayout.SOUTH, saveStatsBtn, -20 ,SpringLayout.SOUTH, this);
 	}
 
 }

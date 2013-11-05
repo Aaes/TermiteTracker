@@ -7,7 +7,7 @@ import java.awt.event.WindowEvent;
 @SuppressWarnings("serial")
 public class TERMESGUI extends JFrame implements ActionListener
 {
-	
+	//the time the program waits before polling for a new frame
 	public static int imageRefreshDelay = 5;
 	
 	JPanel pane;
