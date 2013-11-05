@@ -6,7 +6,9 @@ import java.awt.event.WindowEvent;
 
 @SuppressWarnings("serial")
 public class TERMESGUI extends JFrame implements ActionListener
- {
+{
+	
+	public static int imageRefreshDelay = 5;
 	
 	JPanel pane;
 	TERMESCalibratingPanel calibrationPanel;

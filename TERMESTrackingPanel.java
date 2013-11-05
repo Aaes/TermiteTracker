@@ -1,13 +1,11 @@
 import java.awt.Color;
 import java.awt.Image;
-
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
-
 
 @SuppressWarnings("serial")
 public class TERMESTrackingPanel extends JPanel 
@@ -83,7 +81,7 @@ public class TERMESTrackingPanel extends JPanel
 			rightPicLabel.setIcon(rightIcon);
 
 			try {
-				Thread.sleep(10);
+				Thread.sleep(TERMESGUI.imageRefreshDelay);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

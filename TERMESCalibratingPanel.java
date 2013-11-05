@@ -121,7 +121,7 @@ public class TERMESCalibratingPanel extends JPanel implements ChangeListener
 			rightPicLabel.setIcon(rightIcon);
 
 			try {
-				Thread.sleep(10);
+				Thread.sleep(TERMESGUI.imageRefreshDelay);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
