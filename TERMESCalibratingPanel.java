@@ -11,9 +11,11 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SpringLayout;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 @SuppressWarnings("serial")
-public class TERMESCalibratingPanel extends JPanel
+public class TERMESCalibratingPanel extends JPanel implements ChangeListener
 {
 	JLabel leftPicLabel;
 	ImageIcon leftIcon;
@@ -80,6 +82,7 @@ public class TERMESCalibratingPanel extends JPanel
 		thresholdSlider.setMajorTickSpacing(10);
 		thresholdSlider.setPaintLabels(true);
 		thresholdSlider.setPaintTicks(true);
+		thresholdSlider.addChangeListener(this);
 		add(thresholdSlider);
 		
 		//Threshold spinner
@@ -89,6 +92,7 @@ public class TERMESCalibratingPanel extends JPanel
 		                               				1);            	//step
 		
 		thresholdSpinner = new JSpinner(thresholdModel);
+		thresholdSpinner.addChangeListener(this);
 		add(thresholdSpinner);
 
 	}
@@ -167,5 +171,22 @@ public class TERMESCalibratingPanel extends JPanel
 		//Threshold Spinner
 		layout.putConstraint(SpringLayout.WEST, thresholdSpinner, 5 ,SpringLayout.EAST, thresholdSlider);
 		layout.putConstraint(SpringLayout.NORTH, thresholdSpinner, 0 ,SpringLayout.NORTH, thresholdSlider);
+	}
+
+	/**
+	 * Called when a spinner or slider changes value
+	 */
+	@Override
+	public void stateChanged(ChangeEvent e) {
+		if(e.getSource().equals(thresholdSpinner))
+		{
+			Integer currentValue = (Integer)thresholdSpinner.getValue();
+			thresholdSlider.setValue(currentValue);
+		}
+		else if (e.getSource().equals(thresholdSlider))
+		{
+			Integer currentValue = (Integer)thresholdSlider.getValue();
+			thresholdSpinner.setValue(currentValue);
+		}
 	}
 }
