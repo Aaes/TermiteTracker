@@ -3,6 +3,7 @@ import java.awt.Image;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
@@ -21,6 +22,8 @@ public class TERMESTrackingPanel extends JPanel
 	
 	JLabel leftPicTitleLabel;
 	JLabel rightPicTitleLabel;
+	
+	JButton saveStats;
 	
 	//the size of the video feeds
 	int frameHeight;
@@ -49,6 +52,9 @@ public class TERMESTrackingPanel extends JPanel
 		add(leftPicTitleLabel);
 		rightPicTitleLabel = new JLabel("Over Head Camera");
 		add(rightPicTitleLabel);
+		
+		saveStats = new JButton("Save Statistics");
+		add(saveStats);
 
 		setLayoutConstraints();
 	}
@@ -118,6 +124,10 @@ public class TERMESTrackingPanel extends JPanel
 		//right title label
 		layout.putConstraint(SpringLayout.WEST, rightPicTitleLabel, 0 ,SpringLayout.WEST, rightPicLabel);
 		layout.putConstraint(SpringLayout.SOUTH, rightPicTitleLabel, -5 ,SpringLayout.NORTH, rightPicLabel);
+		
+		//Save statistics button
+		layout.putConstraint(SpringLayout.EAST, saveStats, -20 ,SpringLayout.EAST, this);
+		layout.putConstraint(SpringLayout.SOUTH, saveStats, -20 ,SpringLayout.SOUTH, this);
 	}
 
 }
