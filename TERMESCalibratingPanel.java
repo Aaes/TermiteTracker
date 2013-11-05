@@ -7,6 +7,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.SpringLayout;
 
 @SuppressWarnings("serial")
@@ -22,6 +25,7 @@ public class TERMESCalibratingPanel extends JPanel
 	JLabel rightPicTitleLabel;
 	
 	JSlider thresholdSlider;
+	JSpinner thresholdSpinner;
 	
 	SpringLayout layout;
 	
@@ -53,6 +57,13 @@ public class TERMESCalibratingPanel extends JPanel
 		rightPicTitleLabel = new JLabel("Camera 2");
 		add(rightPicTitleLabel);
 		
+		createSliders();
+		
+		setLayoutConstraints();
+	}
+	
+	public void createSliders()
+	{
 		//Threshold slider
 		int thresholdMin = 0;
 		int thresholdMax = 255;
@@ -60,21 +71,26 @@ public class TERMESCalibratingPanel extends JPanel
 
 		thresholdSlider = new JSlider(JSlider.HORIZONTAL, thresholdMin, thresholdMax, thresholdInit);
 
-		//Turn on labels at major tick marks.
-		thresholdSlider.setMajorTickSpacing(10);
-		thresholdSlider.setMinorTickSpacing(10);
-
 		//Create the label table
 		Hashtable<Integer,JLabel> thresholdLabelTable = new Hashtable<Integer,JLabel>();
 		thresholdLabelTable.put(thresholdMin, new JLabel("" + thresholdMin));
 		thresholdLabelTable.put(thresholdMax, new JLabel("" + thresholdMax));
 		thresholdSlider.setLabelTable( thresholdLabelTable );
 		
+		thresholdSlider.setMajorTickSpacing(10);
 		thresholdSlider.setPaintLabels(true);
 		thresholdSlider.setPaintTicks(true);
 		add(thresholdSlider);
 		
-		setLayoutConstraints();
+		//Threshold spinner
+		SpinnerModel thresholdModel = new SpinnerNumberModel(thresholdInit, 	//initial value
+		                               				thresholdMin, 	//min
+		                               				thresholdMax, 	//max
+		                               				1);            	//step
+		
+		thresholdSpinner = new JSpinner(thresholdModel);
+		add(thresholdSpinner);
+
 	}
 	
 	public void startVideo() 
@@ -144,8 +160,12 @@ public class TERMESCalibratingPanel extends JPanel
 		layout.putConstraint(SpringLayout.SOUTH, rightPicTitleLabel, -5 ,SpringLayout.NORTH, rightPicLabel);
 		
 		//Threshold Slider
-		layout.putConstraint(SpringLayout.WEST, thresholdSlider, 0 ,SpringLayout.WEST, rightPicLabel);
+		layout.putConstraint(SpringLayout.WEST, thresholdSlider, -10 ,SpringLayout.WEST, rightPicLabel);
 		layout.putConstraint(SpringLayout.NORTH, thresholdSlider, 15 ,SpringLayout.SOUTH, rightPicLabel);
-		layout.putConstraint(SpringLayout.EAST, thresholdSlider, 0 ,SpringLayout.EAST, rightPicLabel);
+		layout.putConstraint(SpringLayout.EAST, thresholdSlider, -50 ,SpringLayout.EAST, rightPicLabel);
+		
+		//Threshold Spinner
+		layout.putConstraint(SpringLayout.WEST, thresholdSpinner, 5 ,SpringLayout.EAST, thresholdSlider);
+		layout.putConstraint(SpringLayout.NORTH, thresholdSpinner, 0 ,SpringLayout.NORTH, thresholdSlider);
 	}
 }
