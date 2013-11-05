@@ -1,6 +1,6 @@
 MAINFILE = Main.java
 CONNECTORFILE = TERMESConnector
-JAVAFILES = Main.java TERMESConnector.java TERMESGUI.java TERMESImageProcessing.java TERMESCalibratingPanel.java
+JAVAFILES = Main.java TERMESConnector.java TERMESGUI.java TERMESImageProcessing.java TERMESCalibratingPanel.java TERMESTrackingPanel.java
 CPPFILES = ColorDetector.cpp Contrast.cpp TERMESConnector.cpp
 
 OSXVERSIONFLAG = -mmacosx-version-min=10.8
