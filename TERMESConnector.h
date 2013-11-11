@@ -9,14 +9,6 @@ extern "C" {
 #endif
 /*
  * Class:     TERMESConnector
- * Method:    test
- * Signature: ()Ljava/lang/String;
- */
-JNIEXPORT jstring JNICALL Java_TERMESConnector_test
-  (JNIEnv *, jclass);
-
-/*
- * Class:     TERMESConnector
  * Method:    getKeypoints
  * Signature: ()[I
  */

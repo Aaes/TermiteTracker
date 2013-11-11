@@ -2,21 +2,16 @@
 #include "ColorDetector.h"
 #include <stdio.h>
 #include <iostream>
-#include <opencv2/highgui/highgui.hpp>
 #include <opencv2/features2d/features2d.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/objdetect/objdetect.hpp>
+#include <opencv2/highgui/highgui.hpp>
 
 using namespace std;
 using namespace cv;
 
 VideoCapture capture;
 Mat latestImage;
-
-JNIEXPORT jstring JNICALL Java_TERMESConnector_test  (JNIEnv *env, jclass)
-{
-	return env->NewStringUTF("LOOK MOM, I DID IT!! 2");
-}
 
 JNIEXPORT jintArray JNICALL Java_TERMESConnector_getKeypoints (JNIEnv *env, jclass)
 {

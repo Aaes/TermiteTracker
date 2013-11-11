@@ -6,7 +6,11 @@ import javax.imageio.ImageIO;
 
 public class TERMESImageProcessing 
  {
-	
+	/**
+	 * Converts a valid byte array to a buffered image
+	 * @param input the byte array
+	 * @return a buffferedImage
+	 */
 	public static BufferedImage convertByteArrayToImage(byte[] input)
 	{
 		ByteArrayInputStream bis = new ByteArrayInputStream(input);
@@ -27,6 +31,12 @@ public class TERMESImageProcessing
 		return image;
 	}
 	
+	/**
+	 * Converts a BufferedImage a byte array
+	 * Throws an IOExcetion if the resulting byte array is null
+	 * @param input the bufferedImage
+	 * @return a byte array representation of the image
+	 */
 	public static byte[] convertImageToByteArray(BufferedImage input)
 	{
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();

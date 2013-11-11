@@ -1,83 +1,35 @@
-import java.awt.*;
-
 import javax.swing.*;  
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 @SuppressWarnings("serial")
-public class TERMESGUI extends JFrame
- {
-
-	JPanel pane = new JPanel();
-	SpringLayout layout;
+public class TERMESGUI extends JFrame implements ActionListener
+{
+	//the time the program waits before polling for a new frame
+	public static int imageRefreshDelay = 5;
 	
-	JLabel leftPicLabel;
-	ImageIcon leftIcon;
+	JPanel pane;
+	TERMESCalibratingPanel calibrationPanel;
+	TERMESTrackingPanel trackingPanel;
 	
-	JLabel rightPicLabel;
-	ImageIcon rightIcon;
-	
-	//the size of the video feeds
-	int frameHeight;
-	int frameWidth;
-	double scale = 0.7;
+	JMenu menu;
+	JMenuBar menuBar;
+	JMenuItem calibratemode;
+	JMenuItem trackingmode;
 
 	public TERMESGUI()
 	{
 		InitializeWindow(); 
-
-		//test label
-		JLabel label = new JLabel(TERMESConnector.test());
-		pane.add(label);
-		
-		//setup input feed
+		createMenu();
+				
+		//setup input feeds
 		TERMESConnector.start();
-		
-		//initialize the left icon and label that will contain the original video
-		leftIcon = new ImageIcon();
-		leftPicLabel = new JLabel(leftIcon);
-		leftPicLabel.setBorder(BorderFactory.createLineBorder(Color.GRAY, 3));
-		add(leftPicLabel);
-		
-		//initialize the right icon and label that will contain the thresholded video
-		rightIcon = new ImageIcon();
-		rightPicLabel = new JLabel(rightIcon);
-		rightPicLabel.setBorder(BorderFactory.createLineBorder(Color.GRAY, 3));
-		add(rightPicLabel);
-		
-		setLayoutConstraints();
+
 		setVisible(true); // display this frame
 		
-		//poll for the next frame as long as there is one
-		byte[] frame;
-		while((frame = TERMESConnector.getNextFrame()) != null)
-		{
-			//get the next frame as an image
-			Image img = TERMESImageProcessing.convertByteArrayToImage(frame); 
-			
-			//scale the image if necessary
-			if (frameHeight == 0) //then frameWidth is also 0
-			{
-				frameHeight = (int) determineFrameHeight(img.getWidth(null), img.getHeight(null));
-				frameWidth = (int) determineFrameWidth(img.getWidth(null), img.getHeight(null));
-			}
-			
-			img = img.getScaledInstance(frameWidth, frameHeight ,java.awt.Image.SCALE_SMOOTH );  
-			
-			leftIcon = new ImageIcon(img);
-			rightIcon = new ImageIcon(img);
-
-			leftPicLabel.setIcon(leftIcon);
-			rightPicLabel.setIcon(rightIcon);
-			
-			try {
-				Thread.sleep(10);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		
+		startVideoFeeds();
 	}
 	
 	public void InitializeWindow()
@@ -85,14 +37,14 @@ public class TERMESGUI extends JFrame
 		setTitle("TERMES");
 		setBounds(100, 100, 1100, 700);
 		
-		Container con = this.getContentPane(); 
-		con.add(pane);
+		calibrationPanel = new TERMESCalibratingPanel();
+		trackingPanel = new TERMESTrackingPanel();
+		pane = calibrationPanel;
 		
-		layout = new SpringLayout();
-		setLayout(layout);
+		setContentPane(pane);
 		
 		//see to that the camera is released when the window is closed 
-		// (if this isn't done, the application will crash when it is closed)
+		//(if this isn't done, the application will crash when it is closed)
 		this.addWindowListener( new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent we) {
@@ -102,29 +54,67 @@ public class TERMESGUI extends JFrame
         } );
 	}
 	
-	public void setLayoutConstraints()
+	public void createMenu()
 	{
-		layout.putConstraint(SpringLayout.WEST, leftPicLabel, 50 ,SpringLayout.WEST, pane);
-		layout.putConstraint(SpringLayout.NORTH, leftPicLabel, 50 ,SpringLayout.NORTH, pane);
+		//Create the menu bar.
+		menuBar = new JMenuBar();
+
+		//Build the first menu.
+		menu = new JMenu("Change mode");
+		menuBar.add(menu);
+
+		//a group of JMenuItems
+		calibratemode = new JMenuItem("Calibration Mode");
+		calibratemode.addActionListener(this);
+		menu.add(calibratemode);
 		
-		layout.putConstraint(SpringLayout.WEST, rightPicLabel, 50 ,SpringLayout.EAST, leftPicLabel);
-		layout.putConstraint(SpringLayout.NORTH, rightPicLabel, 50 ,SpringLayout.NORTH, pane);
+		trackingmode = new JMenuItem("Tracking Mode");
+		trackingmode.addActionListener(this);
+		menu.add(trackingmode);
+		
+		setJMenuBar(menuBar);
 	}
 	
-	public double determineFrameHeight(double width, double height)
-	{	
-		if(width/height == 16.0/9.0) // 16:9
-			return 360 * scale;
-		else // 4:3
-			return 480 * scale;
-	}
-	
-	public double determineFrameWidth(double width, double height)
+	public void startVideoFeeds()
 	{
-		if(width/height == 16.0/9.0) // 16:9
-			return 640 * scale;
-		else // 4:3
-			return 640 * scale;
+		//video feed for the calibration panel
+		Thread videofeed1 = new Thread(new Runnable() {
+			  @Override
+			  public void run() {
+				  calibrationPanel.startVideo();
+			  }
+			});
+		//video feed for the tracking panel
+		Thread videofeed2 = new Thread(new Runnable() {
+			  @Override
+			  public void run() {
+				  trackingPanel.startVideo();
+			  }
+			});
+		
+		videofeed1.start();
+		videofeed2.start();
 	}
-	
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource().equals(calibratemode))
+		{
+			if(!(pane instanceof TERMESCalibratingPanel))
+			{
+				pane = calibrationPanel;
+				setContentPane(pane);
+				validate();
+			}
+		}
+		else if (e.getSource().equals(trackingmode))
+		{
+			if(!(pane instanceof TERMESTrackingPanel))
+			{
+				pane = trackingPanel;
+				setContentPane(pane);
+				validate();
+			}
+		}
+	}
 }
