@@ -10,7 +10,8 @@
 #define __TermiteTracker__main__
 
 #include <iostream>
-#include "GUI/ColorDetector.h"
+#include "ColorDetector.h"
 #include "Contrast.h"
+#include "PlotterController.h"
 
 #endif /* defined(__TermiteTracker__main__) */
