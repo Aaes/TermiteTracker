@@ -21,5 +21,6 @@
 #include <opencv2/features2d/features2d.hpp>
 
 vector<KeyPoint> ColorDetection(Mat img, Scalar colorMin, Scalar colorMax, double alpha, int beta, int result[]);
+vector<KeyPoint> TestColorDetection(Mat img, Scalar colorMin, Scalar colorMax, double alpha, int beta, int result[]);
 
 #endif /* defined(__TermiteTracker__ColorDetector__) */

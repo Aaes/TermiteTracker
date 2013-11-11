@@ -110,3 +110,64 @@ vector<KeyPoint> ColorDetection(Mat img, Scalar colorMin, Scalar colorMax, doubl
 
     return keypoints;
 }
+
+vector<KeyPoint> TestColorDetection(Mat img, Scalar colorMin, Scalar colorMax, double alpha, int beta, int result[]){
+    //Define matrices
+    Mat imgContrast = constrastImage(img, alpha, beta);
+    Mat imgThresh;
+    Mat imgThreshFinal;
+    Mat imgBlur;
+    Mat blob;
+    
+    imshow("contrast", imgContrast);
+    
+    //Threshold based on color ranges (Blue/Green/Red scalars)
+    //inRange(imgContrast, colorMin, colorMax, imgThresh); //BGR range
+    
+    threshold(imgContrast, imgThresh, 100, 255, 0);
+    
+    imshow("Thresh", imgThresh);
+    
+    //Apply Blur effect to make blobs much more coherent
+    GaussianBlur(imgThresh, imgBlur, Size(9,9), 0);
+    
+    //Set SimpleBlobDetector parameters
+    SimpleBlobDetector::Params params;
+    params.filterByArea = true;
+    params.filterByCircularity = false;
+    params.filterByConvexity = false;
+    params.filterByInertia = false;
+    params.filterByColor = true;
+    params.blobColor = 255;
+    params.minArea = 50;
+    params.maxArea = 300;
+    
+    SimpleBlobDetector blobDetector(params);
+    blobDetector.create("Blob Detection");
+    
+    //Vectors to store keypoints (center points for a blob)
+    vector<KeyPoint> keypoints;
+    
+    //Try blob detection for both thresholded colors
+    threshold(imgBlur, imgThreshFinal, 100, 255,0);
+    blobDetector.detect(imgThreshFinal, keypoints);
+    
+    if(!keypoints.empty()){
+        KeyPoint point = keypoints.front();
+        
+        result[0] = point.pt.x;
+        result[1] = point.pt.y;
+        result[2] = point.size;
+    }
+    else{
+        result[0] = 0;
+        result[1] = 0;
+        result[2] = 0;
+    }
+    
+    //    result[0] = 359;
+    //    result[1] = 271;
+    //    result[2] = 14;
+    
+    return keypoints;
+}
