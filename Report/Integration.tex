@@ -8,9 +8,15 @@ Hvordan er den sat til computeren
 hvad vil vi gerne have den til
 hvordan gør vi dette
 hvilke "services" ender vi med at udstille til resten af programmet (flyt til koordinat, current coordinate?)
+Hvordan er performance? kan videoen køre i real time? hvis nej hvad betyder det for os?
 
 *   0x01 = send coordinate to plotter
  *   0x01 + 2 bytes for x + 2 bytes for y (up to 10 bits) up to 0x03FF (y
 probably only up to 01F0)
  *   0x02 in response = sucesss
  *   0xFE in response = failure
+ 
+\subsection{Moving the camera}
+Now that we know how to move the plotter, how do we move the camera when the ant moves?
+what about the volume of the movement sound?
+what about the speed of the movement?
