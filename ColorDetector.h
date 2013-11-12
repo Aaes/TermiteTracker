@@ -10,6 +10,7 @@
 #define __TermiteTracker__ColorDetector__
 
 #include "Contrast.h"
+#include "ErodeAndDilate.h"
 #include <iostream>
 #include <fstream>
 #include <vector>

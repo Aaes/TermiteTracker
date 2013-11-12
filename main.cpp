@@ -23,13 +23,11 @@ void trackVideo(){
         int input[3];
         Mat blob;
         
-        ColorDetection(frame, Scalar(0,170,120), Scalar(80,210,210), 3.0, 1, input); //Detect green
+        vector<KeyPoint> points = TestColorDetection(frame, Scalar(0,170,140), Scalar(60,210,210), 3.0, 1, input); //Detect green
         
         KeyPoint keypoint = KeyPoint(input[0], input[1], input[2]);
         
-        vector<KeyPoint> points;
-        
-        points.push_back(keypoint);
+        //points.push_back(keypoint);
         
         drawKeypoints(frame, points, blob, CV_RGB(255,0,0));
         
@@ -87,7 +85,7 @@ void testTrackImage(){
     Mat img = frame;
     Mat blob;
     
-    vector<KeyPoint> points = TestColorDetection(img, Scalar(2,100,100), Scalar(10,255,255), 3.0, 1, input); //Detect green
+    vector<KeyPoint> points = TestColorDetection(img, Scalar(0,170,140), Scalar(60,210,210), 3.0, 1, input); //Detect green
     
     KeyPoint keypoint = KeyPoint(input[0], input[1], input[2]);
     
@@ -102,9 +100,9 @@ void testTrackImage(){
 
 int main(int argc, const char * argv[])
 {
-    //trackVideo();
+    trackVideo();
     //testTrackImage();
-    trackImage();
+    //trackImage();
     
     //detectDevices();
     //connectToDevice(1027, 24577);

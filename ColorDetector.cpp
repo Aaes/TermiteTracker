@@ -116,24 +116,27 @@ vector<KeyPoint> TestColorDetection(Mat img, Scalar colorMin, Scalar colorMax, d
     Mat imgContrast = constrastImage(img, alpha, beta);
     Mat imgThresh;
     Mat imgThreshFinal;
+    Mat imgDilate;
+    Mat imgErode;
     Mat imgBlur;
     Mat blob;
     
-    imshow("contrast", imgContrast);
+    //imshow("contrast", imgContrast);
     
     //Threshold based on color ranges (Blue/Green/Red scalars)
-    //inRange(imgContrast, colorMin, colorMax, imgThresh); //BGR range
+    inRange(imgContrast, colorMin, colorMax, imgThresh); //BGR range
     
-    threshold(imgContrast, imgThresh, 100, 255, 0);
+    //imshow("Thresh", imgThresh);
     
-    imshow("Thresh", imgThresh);
+    imgErode = ErodeImage(imgThresh, 0, 0);
+    imgDilate = DilateImage(imgErode, 0, 4);
     
-    //Apply Blur effect to make blobs much more coherent
-    GaussianBlur(imgThresh, imgBlur, Size(9,9), 0);
+    //imshow("Erode", imgErode);
+    imshow("Dilate", imgDilate);
     
     //Set SimpleBlobDetector parameters
     SimpleBlobDetector::Params params;
-    params.filterByArea = true;
+    params.filterByArea = false;
     params.filterByCircularity = false;
     params.filterByConvexity = false;
     params.filterByInertia = false;
@@ -149,8 +152,8 @@ vector<KeyPoint> TestColorDetection(Mat img, Scalar colorMin, Scalar colorMax, d
     vector<KeyPoint> keypoints;
     
     //Try blob detection for both thresholded colors
-    threshold(imgBlur, imgThreshFinal, 100, 255,0);
-    blobDetector.detect(imgThreshFinal, keypoints);
+    //threshold(imgBlur, imgThreshFinal, 100, 255,0);
+    blobDetector.detect(imgThresh, keypoints);
     
     if(!keypoints.empty()){
         KeyPoint point = keypoints.front();
@@ -165,9 +168,9 @@ vector<KeyPoint> TestColorDetection(Mat img, Scalar colorMin, Scalar colorMax, d
         result[2] = 0;
     }
     
-    //    result[0] = 359;
-    //    result[1] = 271;
-    //    result[2] = 14;
+//    result[0] = 359;
+//    result[1] = 271;
+//    result[2] = 14;
     
     return keypoints;
 }
