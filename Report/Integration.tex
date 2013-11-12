@@ -2,4 +2,15 @@
 
 \section{Integration with camera}
 
-TODO
+\subsection{Communication with the plotter}
+Hvilken plotter er det og hvilket udstyr sidder på den
+Hvordan er den sat til computeren
+hvad vil vi gerne have den til
+hvordan gør vi dette
+hvilke "services" ender vi med at udstille til resten af programmet (flyt til koordinat, current coordinate?)
+
+*   0x01 = send coordinate to plotter
+ *   0x01 + 2 bytes for x + 2 bytes for y (up to 10 bits) up to 0x03FF (y
+probably only up to 01F0)
+ *   0x02 in response = sucesss
+ *   0xFE in response = failure

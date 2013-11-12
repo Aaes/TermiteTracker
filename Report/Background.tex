@@ -2,10 +2,97 @@
 
 \section{Background}
 
+Projektet er erstatning for GSD hvad betyder det for os?
+Hvilket udstyr havde vi at arbejde med?
+Umiddlebart ville vi gerne have logic code i C++ og GUI i Java så vidt muligt. Hvilke fordele giver det os? hvorfor?
+Hvad for nogen myrer havde vi og var der nogen udfordringer her? (tænk: hvis jeg skal gøre det igen, hvad skal jeg så huske om myrer)
+Hvordan var det med at male myrerne?
+
+\subsection{Assumptions}
+
 TODO
 
 \subsection{Scope}
 
-TODO
+Kun test i et lab environment
+test på myrer, regner med at det kan generaliseres til termitter (andre størrelser)
+Kun test med de farver maling vi har
+Kun test med denne plotter
+Kontrollerede lysforhold
+Tracker kun een myre ad gangen
 
 \subsection{Requirements}
+
+Maa jeg foreslaa at i laver 2 modes (man kan f.eks. vaelge mode i menuen
+af toppen af programmet).
+1. Den ene er kalibrerings mode hvor man kan se det direkte feed oeverst
+til venstre, samt billedbehandlet billede oeverst til hoejre, og sliders
+nedenfor.
+2. Nummer to er tracking mode hvor man kan see feedet fra kameraet taet
+paa oeverst til venstre, feedet fra overview-kameraet oeverst til hoejre,
+og saa statistik/grafer nederst til venstre, og valgmuligheder mht til
+statistik og hvor filerne skal gemmes mv. nederst til hoejre? + start
+knap.
+3. Hvis i faar tid kan i tilfoeje en bias-mode hvor man kan klikke paa et
+punkt i skaalen som plotteren skal forsoege at traekke myren imod (ved
+hjaelp af mad).
+
+1. Position i skaalen over tid (marker dens rute). + indstilling for hvor
+lang tid tilbage ruten skal vises.
+1. Gennemsnitshastighed/tid (siden start), +indstilling for running average.
+2. Heatmap over hvor myren opholder sig mest i skaalen, (groft firkantet
+grid er fint til at starte med).
+3. Heatmap over hvor myren holder pauser i skaalen, +indstilling for hvor
+lang en 'pause' er, hvor lav den gennemsnitshastighed skal vaere.
+3. Tael andre myrer den moeder/tid. +Indstilling for afstand af et 'moede'.
+4. Hvor lang tid der gaar imellem den moeder andre/tid (siden start).
+5. Hvor meget tid den pauser naer andre myrer/tid. +Indstilling for
+afstand+pause laengde
+6. Hvor meget af skaalen den har undersoegt (Additivt) over tid.
++Indstilling for radius af hovedet, (hvor langt fra center af hovedet den
+kan  undersoege af gangen)
+7. Hvor meget nyt areal den daekker hvert interval over tid. +instilling
+for interval: f.eks. 30s/1min/2min
+8. Mean free path. (maal hvor lang tid der gaar mellem pauser. Pauserne
+defineres af lav gennemsnitshastighed)
+
+Mht gui'en er et mere objekt-orienteret sprog fint med mig. Saa laenge at
+selve data- og billed behandlingen foregaar i C/C++.
+Nedenfor har jeg forsoegt at beskrive projektet lidt mere specifikt. Hvis
+i stadig er interesseret i projektet synes jeg at vi skal tage en
+skype-snak om helt noejagtige instruktioner.
+
+1. UI:
+Brugervenligt, visning af live video, samt statistikker for opsamlet data.
+Bruger input til manuel styring af plotteren, aendring af billed
+behandlings-parametre i tilfaelde af at udstyret skal bruges til andre
+insekter i fremtiden, samt input af punkter i arenaen plotteren skal
+forsoege at styre imod, eller undgaa.
+
+2. Tracking:
+Formentlig den stoerste udfordring. Plotteren skal kunne tracke en termit
+maerket med roed og groen maling ud fra et lav resolutions-kamera monteret
+paa manipulatoren. (Hvis i finder et bedre alternativ til det nuvaerende
+kamera, kan vi sagtens koebe et nyt). Termitten er hvid og brun, og dens
+baggrund roed/brun jord, derudover vil den vaere omgivet af mange andre
+(u-maerkede) termitter. De bevaeger sig op til 2cm/s og manipulatoren skal
+helst bevares indenfor 0.5cm radius af hovedet (uden at ramme den eller
+andre termitter).
+Jeg vil foreslaa at i starter med at tracke myrer (de er nemmest at
+finde), paa hvid baggrund, og derefter paa jord.
+
+3. Styring af manipulator:
+Manipulatorens position skal aendres afhaengigt af outputtet fra
+tracking-softwaret. Hardwaret kan modtage serielle kommandoer om ny
+oensket position. Hvis i oensker adgang til softwaren paa
+microcontrolleren som styrer plotteren kan det ogsaa sagtens arrangeres.
+Det kan blive noedvendigt at indfoere soft-start hvis plotteren skal
+bevaeges langt for at undgaa pludselige ryk i maskinen der kan skraemme
+insekterne.
+
+5. Data behandling: Dette vil involvere mange maader at behandle den
+indsamlede data paa. F.eks. beregning af hastighed/tid,
+mean-free-path/tid, histogram af position i arenaen/tid, maengde af
+interaktion/tid, mm. Jeg sender gerne en laengere liste hvis i er
+interesserede.
+
