@@ -11,7 +11,7 @@ OPENCVINCLUDEPATH = "-I/usr/local/Cellar/opencv/2.4.6.1/include"
 DYNLIBNAME = libTERMESConnector.jnilib
 OFILES = Contrast.o ColorDetector.o TERMESConnector.o ErodeAndDilate.o
 OPENCVLIBPATH = -L/usr/local/Cellar/opencv/2.4.6.1/lib/
-OPENCVLIBS = -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_objdetect -lopencv_features2d
+OPENCVLIBS = -lopencv_core.2.4.6 -lopencv_imgproc.2.4.6 -lopencv_highgui.2.4.6 -lopencv_objdetect.2.4.6 -lopencv_features2d.2.4.6
 
 TERMESConnector.o: $(CPPFILES) TERMESConnector.h $(JAVAFILES)
 	# 	--- Compile the Java project  --- 
