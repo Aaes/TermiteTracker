@@ -10,7 +10,6 @@
 #define __TermiteTracker__ErodeAndDilate__
 
 #include <iostream>
-#include <iostream>
 #include <fstream>
 #include <vector>
 #include <string>

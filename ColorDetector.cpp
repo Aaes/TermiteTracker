@@ -129,7 +129,7 @@ vector<KeyPoint> TestColorDetection(Mat img, Scalar colorMin, Scalar colorMax, d
     //imshow("Thresh", imgThresh);
     
     imgErode = ErodeImage(imgThresh, 0, 0);
-    imgDilate = DilateImage(imgErode, 0, 4);
+    imgDilate = DilateImage(imgErode, 0, 3);
     
     //imshow("Erode", imgErode);
     imshow("Dilate", imgDilate);

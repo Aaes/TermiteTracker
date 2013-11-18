@@ -10,7 +10,6 @@
 #define __TermiteTracker__PlotterController__
 
 #include <iostream>
-#include <libusb.h>
 
 int detectDevices();
 int connectToDevice(int VendorID, int ProductID);
