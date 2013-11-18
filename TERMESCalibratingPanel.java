@@ -344,5 +344,19 @@ public class TERMESCalibratingPanel extends JPanel implements ChangeListener
 			lowerThresholdRSpinner.setValue(currentValue);
 			TERMESConnector.setLowerThresholdR(currentValue);
 		}
+		//Lower Threshold G Slider
+		if(e.getSource().equals(lowerThresholdGSpinner))
+		{
+			Integer currentValue = (Integer)lowerThresholdGSpinner.getValue();
+			lowerThresholdGSlider.setValue(currentValue);
+			TERMESConnector.setLowerThresholdG(currentValue);
+		}
+		//Lower Threshold G Spinner
+		else if (e.getSource().equals(lowerThresholdGSlider))
+		{
+			Integer currentValue = (Integer)lowerThresholdRSlider.getValue();
+			lowerThresholdGSpinner.setValue(currentValue);
+			TERMESConnector.setLowerThresholdG(currentValue);
+		}
 	}
 }
