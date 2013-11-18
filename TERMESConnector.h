@@ -55,6 +55,102 @@ JNIEXPORT void JNICALL Java_TERMESConnector_start
 JNIEXPORT void JNICALL Java_TERMESConnector_releaseCamera
   (JNIEnv *, jclass);
 
+/*
+ * Class:     TERMESConnector
+ * Method:    setLowerThresholdR
+ * Signature: (I)V
+ */
+JNIEXPORT void JNICALL Java_TERMESConnector_setLowerThresholdR
+  (JNIEnv *, jclass, jint);
+
+/*
+ * Class:     TERMESConnector
+ * Method:    setLowerThresholdG
+ * Signature: (I)V
+ */
+JNIEXPORT void JNICALL Java_TERMESConnector_setLowerThresholdG
+  (JNIEnv *, jclass, jint);
+
+/*
+ * Class:     TERMESConnector
+ * Method:    setLowerThresholdB
+ * Signature: (I)V
+ */
+JNIEXPORT void JNICALL Java_TERMESConnector_setLowerThresholdB
+  (JNIEnv *, jclass, jint);
+
+/*
+ * Class:     TERMESConnector
+ * Method:    getLowerThresholdR
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_TERMESConnector_getLowerThresholdR
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     TERMESConnector
+ * Method:    getLowerThresholdG
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_TERMESConnector_getLowerThresholdG
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     TERMESConnector
+ * Method:    getLowerThresholdB
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_TERMESConnector_getLowerThresholdB
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     TERMESConnector
+ * Method:    setUpperThresholdR
+ * Signature: (I)V
+ */
+JNIEXPORT void JNICALL Java_TERMESConnector_setUpperThresholdR
+  (JNIEnv *, jclass, jint);
+
+/*
+ * Class:     TERMESConnector
+ * Method:    setUpperThresholdG
+ * Signature: (I)V
+ */
+JNIEXPORT void JNICALL Java_TERMESConnector_setUpperThresholdG
+  (JNIEnv *, jclass, jint);
+
+/*
+ * Class:     TERMESConnector
+ * Method:    setUpperThresholdB
+ * Signature: (I)V
+ */
+JNIEXPORT void JNICALL Java_TERMESConnector_setUpperThresholdB
+  (JNIEnv *, jclass, jint);
+
+/*
+ * Class:     TERMESConnector
+ * Method:    getUpperThresholdR
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_TERMESConnector_getUpperThresholdR
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     TERMESConnector
+ * Method:    getUpperThresholdG
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_TERMESConnector_getUpperThresholdG
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     TERMESConnector
+ * Method:    getUpperThresholdB
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_TERMESConnector_getUpperThresholdB
+  (JNIEnv *, jclass);
+
 #ifdef __cplusplus
 }
 #endif

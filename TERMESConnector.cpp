@@ -24,8 +24,7 @@ JNIEXPORT jintArray JNICALL Java_TERMESConnector_getKeypoints (JNIEnv *env, jcla
     return newArr;
 }
 
-JNIEXPORT jbyteArray JNICALL Java_TERMESConnector_getNextFrame
-(JNIEnv *env, jclass)
+JNIEXPORT jbyteArray JNICALL Java_TERMESConnector_getNextFrame (JNIEnv *env, jclass)
 {
     capture >> latestImage;
     if (latestImage.empty())
@@ -49,8 +48,7 @@ JNIEXPORT jbyteArray JNICALL Java_TERMESConnector_getNextFrame
     
 }
 
-JNIEXPORT jbyteArray JNICALL Java_TERMESConnector_getNextOverheadFrame
-(JNIEnv *env, jclass)
+JNIEXPORT jbyteArray JNICALL Java_TERMESConnector_getNextOverheadFrame (JNIEnv *env, jclass)
 {
     if (latestImage.empty())
         return NULL;
@@ -72,8 +70,7 @@ JNIEXPORT jbyteArray JNICALL Java_TERMESConnector_getNextOverheadFrame
     return result;
 }
 
-JNIEXPORT jbyteArray JNICALL Java_TERMESConnector_getNextThresholdFrame
-(JNIEnv *env, jclass)
+JNIEXPORT jbyteArray JNICALL Java_TERMESConnector_getNextThresholdFrame (JNIEnv *env, jclass)
 {
     if (latestImage.empty())
         return NULL;
@@ -108,8 +105,68 @@ JNIEXPORT void JNICALL Java_TERMESConnector_start (JNIEnv *, jclass)
     }
 }
 
-JNIEXPORT void JNICALL Java_TERMESConnector_releaseCamera
-(JNIEnv *, jclass)
+JNIEXPORT void JNICALL Java_TERMESConnector_releaseCamera (JNIEnv *, jclass)
 {
     capture.release();
 }
+
+JNIEXPORT void JNICALL Java_TERMESConnector_setLowerThresholdR (JNIEnv *, jclass, jint R)
+{
+    cout << "Lower Threshold R is now set to " << R << endl;
+}
+
+JNIEXPORT void JNICALL Java_TERMESConnector_setLowerThresholdG (JNIEnv *, jclass, jint G)
+{
+    cout << "Lower Threshold G is now set to " << G << endl;
+}
+
+JNIEXPORT void JNICALL Java_TERMESConnector_setLowerThresholdB (JNIEnv *, jclass, jint B)
+{
+    cout << "Lower Threshold B is now set to " << B << endl;
+}
+
+JNIEXPORT jint JNICALL Java_TERMESConnector_getLowerThresholdR (JNIEnv *, jclass)
+{
+    return 1;
+}
+
+JNIEXPORT jint JNICALL Java_TERMESConnector_getLowerThresholdG (JNIEnv *, jclass)
+{
+    return 2;
+}
+
+JNIEXPORT jint JNICALL Java_TERMESConnector_getLowerThresholdB (JNIEnv *, jclass)
+{
+    return 3;
+}
+
+JNIEXPORT void JNICALL Java_TERMESConnector_setUpperThresholdR (JNIEnv *, jclass, jint R)
+{
+    cout << "Upper Threshold R is now set to " << R << endl;
+}
+
+JNIEXPORT void JNICALL Java_TERMESConnector_setUpperThresholdG (JNIEnv *, jclass, jint G)
+{
+    cout << "Upper Threshold G is now set to " << G << endl;
+}
+
+JNIEXPORT void JNICALL Java_TERMESConnector_setUpperThresholdB (JNIEnv *, jclass, jint B)
+{
+    cout << "Upper Threshold B is now set to " << B << endl;
+}
+
+JNIEXPORT jint JNICALL Java_TERMESConnector_getUpperThresholdR (JNIEnv *, jclass)
+{
+    return 4;
+}
+
+JNIEXPORT jint JNICALL Java_TERMESConnector_getUpperThresholdG (JNIEnv *, jclass)
+{
+    return 5;
+}
+
+JNIEXPORT jint JNICALL Java_TERMESConnector_getUpperThresholdB (JNIEnv *, jclass)
+{
+    return 6;
+}
+
