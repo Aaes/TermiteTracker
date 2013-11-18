@@ -52,7 +52,7 @@ using namespace std;
 //    return blob;
 //}
 
-vector<KeyPoint> ColorDetection(Mat img, Scalar colorMin, Scalar colorMax, double alpha, int beta, int result[]){
+int* ColorDetection(Mat img, Scalar colorMin, Scalar colorMax, double alpha, int beta, int result[]){
     //Define matrices
     Mat imgContrast = constrastImage(img, alpha, beta);
     Mat imgThresh;
@@ -108,7 +108,7 @@ vector<KeyPoint> ColorDetection(Mat img, Scalar colorMin, Scalar colorMax, doubl
 //    result[1] = 271;
 //    result[2] = 14;
 
-    return keypoints;
+    return result;
 }
 
 vector<KeyPoint> TestColorDetection(Mat img, Scalar colorMin, Scalar colorMax, double alpha, int beta, int result[]){
