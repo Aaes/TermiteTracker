@@ -66,22 +66,34 @@ public class TERMESTrackingPanel extends JPanel
 		// poll for the next frame as long as there is one
 		byte[] frame;
 		while ((frame = TERMESConnector.getNextFrame()) != null) {
-			// get the next frame as an image
-			Image img = TERMESImageProcessing.convertByteArrayToImage(frame);
+			// get the next original frame as an image
+			Image imgOriginal = TERMESImageProcessing.convertByteArrayToImage(frame);
 
 			// scale the image if necessary
 			if (frameHeight == 0) // then frameWidth is also 0
 			{
-				frameHeight = (int) determineFrameHeight(img.getWidth(null), img.getHeight(null));
-				frameWidth = (int) determineFrameWidth(img.getWidth(null), img.getHeight(null));
+				frameHeight = (int) determineFrameHeight(imgOriginal.getWidth(null), imgOriginal.getHeight(null));
+				frameWidth = (int) determineFrameWidth(imgOriginal.getWidth(null), imgOriginal.getHeight(null));
 			}
 
-			img = img.getScaledInstance(frameWidth, frameHeight, java.awt.Image.SCALE_SMOOTH);
+			imgOriginal = imgOriginal.getScaledInstance(frameWidth, frameHeight, java.awt.Image.SCALE_SMOOTH);
 
-			leftIcon = new ImageIcon(img);
-			rightIcon = new ImageIcon(img);
-
+			leftIcon = new ImageIcon(imgOriginal);
 			leftPicLabel.setIcon(leftIcon);
+			
+			// get the next original frame as an image
+			Image imgOverhead = TERMESImageProcessing.convertByteArrayToImage(frame);
+
+			// scale the image if necessary
+			if (frameHeight == 0) // then frameWidth is also 0
+			{
+				frameHeight = (int) determineFrameHeight(imgOverhead.getWidth(null), imgOverhead.getHeight(null));
+				frameWidth = (int) determineFrameWidth(imgOverhead.getWidth(null), imgOverhead.getHeight(null));
+			}
+
+			imgOverhead = imgOverhead.getScaledInstance(frameWidth, frameHeight, java.awt.Image.SCALE_SMOOTH);
+			
+			rightIcon = new ImageIcon(imgOverhead);
 			rightPicLabel.setIcon(rightIcon);
 
 			try {

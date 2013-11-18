@@ -25,6 +25,14 @@ JNIEXPORT jbyteArray JNICALL Java_TERMESConnector_getNextFrame
 
 /*
  * Class:     TERMESConnector
+ * Method:    getNextOverheadFrame
+ * Signature: ()[B
+ */
+JNIEXPORT jbyteArray JNICALL Java_TERMESConnector_getNextOverheadFrame
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     TERMESConnector
  * Method:    start
  * Signature: ()V
  */

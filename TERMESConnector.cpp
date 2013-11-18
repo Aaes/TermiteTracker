@@ -49,6 +49,30 @@ JNIEXPORT jbyteArray JNICALL Java_TERMESConnector_getNextFrame
     
 }
 
+JNIEXPORT jbyteArray JNICALL Java_TERMESConnector_getNextOverheadFrame
+(JNIEnv *env, jclass)
+{
+    if (latestImage.empty())
+        return NULL;
+    
+    //create a uchar vector
+    vector<uchar> imageData;
+    
+    //fill it with the image as chars
+    imencode(".jpg",latestImage, imageData);
+    
+    //convert vector<char> to jbyteArray
+    jbyte* result_e = new jbyte[imageData.size()];
+    jbyteArray result = env->NewByteArray(imageData.size());
+    
+    for (int i = 0; i < imageData.size(); i++) {
+        result_e[i] = (jbyte)imageData[i];
+    }
+    env->SetByteArrayRegion(result, 0, imageData.size(), result_e);
+    return result;
+}
+
+
 JNIEXPORT void JNICALL Java_TERMESConnector_start (JNIEnv *, jclass)
 {
     string filename = "/Users/Nikolaj/Developer/TermiteTracker/Media/myrevideo2.mp4";
