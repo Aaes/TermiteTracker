@@ -9,7 +9,7 @@
 #ifndef __TermiteTracker__ColorDetector__
 #define __TermiteTracker__ColorDetector__
 
-#include "Contrast.h"
+//#include "Contrast.h"
 #include "ErodeAndDilate.h"
 #include <iostream>
 #include <fstream>
@@ -22,6 +22,6 @@
 #include <opencv2/features2d/features2d.hpp>
 
 int ColorDetection(Mat img, Scalar colorMin, Scalar colorMax, double alpha, int beta, int result[]);
-vector<KeyPoint> TestColorDetection(Mat img, Scalar colorMin, Scalar colorMax, double alpha, int beta, int result[]);
+//vector<KeyPoint> TestColorDetection(Mat img, Scalar colorMin, Scalar colorMax, double alpha, int beta, int result[]);
 
 #endif /* defined(__TermiteTracker__ColorDetector__) */
