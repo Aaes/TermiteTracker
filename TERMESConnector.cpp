@@ -95,7 +95,8 @@ JNIEXPORT jbyteArray JNICALL Java_TERMESConnector_getNextThresholdFrame (JNIEnv 
 
 JNIEXPORT void JNICALL Java_TERMESConnector_start (JNIEnv *, jclass)
 {
-    string filename = "/Users/Nikolaj/Developer/TermiteTracker/Media/myrevideo2.mp4";
+    //string filename = "/Users/Nikolaj/Developer/TermiteTracker/Media/myrevideo2.mp4";
+    string filename = "C:\\Users\\hfl.DELEGATE\\Desktop\\Github\\TermiteTracker\\Media";
     
     capture.open(filename);
     waitKey(2000);
@@ -127,17 +128,17 @@ JNIEXPORT void JNICALL Java_TERMESConnector_setLowerThresholdB (JNIEnv *, jclass
 
 JNIEXPORT jint JNICALL Java_TERMESConnector_getLowerThresholdR (JNIEnv *, jclass)
 {
-    return 1;
+    return 10;
 }
 
 JNIEXPORT jint JNICALL Java_TERMESConnector_getLowerThresholdG (JNIEnv *, jclass)
 {
-    return 2;
+    return 20;
 }
 
 JNIEXPORT jint JNICALL Java_TERMESConnector_getLowerThresholdB (JNIEnv *, jclass)
 {
-    return 3;
+    return 30;
 }
 
 JNIEXPORT void JNICALL Java_TERMESConnector_setUpperThresholdR (JNIEnv *, jclass, jint R)
@@ -157,16 +158,16 @@ JNIEXPORT void JNICALL Java_TERMESConnector_setUpperThresholdB (JNIEnv *, jclass
 
 JNIEXPORT jint JNICALL Java_TERMESConnector_getUpperThresholdR (JNIEnv *, jclass)
 {
-    return 4;
+    return 40;
 }
 
 JNIEXPORT jint JNICALL Java_TERMESConnector_getUpperThresholdG (JNIEnv *, jclass)
 {
-    return 5;
+    return 50;
 }
 
 JNIEXPORT jint JNICALL Java_TERMESConnector_getUpperThresholdB (JNIEnv *, jclass)
 {
-    return 6;
+    return 60;
 }
 

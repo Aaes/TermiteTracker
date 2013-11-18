@@ -1,6 +1,8 @@
 import java.awt.Color;
 import java.awt.Image;
+import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Iterator;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -26,8 +28,32 @@ public class TERMESCalibratingPanel extends JPanel implements ChangeListener
 	JLabel leftPicTitleLabel;
 	JLabel rightPicTitleLabel;
 	
-	JSlider thresholdSlider;
-	JSpinner thresholdSpinner;
+	JLabel leftSlidersTitle;
+	JLabel rightSlidersTitle;
+	
+	JLabel lowerThresholdRlabel;
+	JSlider lowerThresholdRSlider;
+	JSpinner lowerThresholdRSpinner;
+	
+	JLabel lowerThresholdGlabel;
+	JSlider lowerThresholdGSlider;
+	JSpinner lowerThresholdGSpinner;
+	
+	JLabel lowerThresholdBlabel;
+	JSlider lowerThresholdBSlider;
+	JSpinner lowerThresholdBSpinner;
+	
+	JLabel upperThresholdRlabel;
+	JSlider upperThresholdRSlider;
+	JSpinner upperThresholdRSpinner;
+	
+	JLabel upperThresholdGlabel;
+	JSlider upperThresholdGSlider;
+	JSpinner upperThresholdGSpinner;
+	
+	JLabel upperThresholdBlabel;
+	JSlider upperThresholdBSlider;
+	JSpinner upperThresholdBSpinner;
 	
 	SpringLayout layout;
 	
@@ -66,34 +92,91 @@ public class TERMESCalibratingPanel extends JPanel implements ChangeListener
 	
 	public void createSliders()
 	{
-		//Threshold slider
+		//titles
+		leftSlidersTitle = new JLabel("Lower Thresholding Bounds");
+		rightSlidersTitle  = new JLabel("Upper Thresholding Bounds");
+		add(leftSlidersTitle);
+		add(rightSlidersTitle);
+		
+		//RGB labels
+		lowerThresholdRlabel = new JLabel("R:");
+		add(lowerThresholdRlabel);
+		lowerThresholdGlabel = new JLabel("G:");
+		add(lowerThresholdGlabel);
+		lowerThresholdBlabel = new JLabel("B:");
+		add(lowerThresholdBlabel);
+		
+		upperThresholdRlabel = new JLabel("R:");
+		add(upperThresholdRlabel);
+		upperThresholdGlabel = new JLabel("G:");
+		add(upperThresholdGlabel);
+		upperThresholdBlabel = new JLabel("B:");
+		add(upperThresholdBlabel);
+		
+		//Threshold sliders
+		ArrayList<JSlider> thresholdSliders = new ArrayList<JSlider>();
 		int thresholdMin = 0;
 		int thresholdMax = 255;
-		int thresholdInit = 100;
 
-		thresholdSlider = new JSlider(JSlider.HORIZONTAL, thresholdMin, thresholdMax, thresholdInit);
+		lowerThresholdRSlider = new JSlider(JSlider.HORIZONTAL, thresholdMin, thresholdMax, TERMESConnector.getLowerThresholdR());
+		thresholdSliders.add(lowerThresholdRSlider);
+		lowerThresholdGSlider = new JSlider(JSlider.HORIZONTAL, thresholdMin, thresholdMax, TERMESConnector.getLowerThresholdG());
+		thresholdSliders.add(lowerThresholdGSlider);
+		lowerThresholdBSlider = new JSlider(JSlider.HORIZONTAL, thresholdMin, thresholdMax, TERMESConnector.getLowerThresholdB());
+		thresholdSliders.add(lowerThresholdBSlider);
+		
+		upperThresholdRSlider = new JSlider(JSlider.HORIZONTAL, thresholdMin, thresholdMax, TERMESConnector.getUpperThresholdR());
+		thresholdSliders.add(upperThresholdRSlider);
+		upperThresholdGSlider = new JSlider(JSlider.HORIZONTAL, thresholdMin, thresholdMax, TERMESConnector.getUpperThresholdG());
+		thresholdSliders.add(upperThresholdGSlider);
+		upperThresholdBSlider = new JSlider(JSlider.HORIZONTAL, thresholdMin, thresholdMax, TERMESConnector.getUpperThresholdB());
+		thresholdSliders.add(upperThresholdBSlider);
 
 		//Create the label table
 		Hashtable<Integer,JLabel> thresholdLabelTable = new Hashtable<Integer,JLabel>();
 		thresholdLabelTable.put(thresholdMin, new JLabel("" + thresholdMin));
 		thresholdLabelTable.put(thresholdMax, new JLabel("" + thresholdMax));
-		thresholdSlider.setLabelTable( thresholdLabelTable );
 		
-		thresholdSlider.setMajorTickSpacing(10);
-		thresholdSlider.setPaintLabels(true);
-		thresholdSlider.setPaintTicks(true);
-		thresholdSlider.addChangeListener(this);
-		add(thresholdSlider);
+		for (JSlider jSlider : thresholdSliders) {
+			jSlider.setLabelTable(thresholdLabelTable);
+			jSlider.setMajorTickSpacing(10);
+			jSlider.setPaintLabels(true);
+			jSlider.setPaintTicks(true);
+			jSlider.addChangeListener(this);
+			add(jSlider);
+		}
 		
-		//Threshold spinner
-		SpinnerModel thresholdModel = new SpinnerNumberModel(thresholdInit, 	//initial value
-		                               				thresholdMin, 	//min
-		                               				thresholdMax, 	//max
-		                               				1);            	//step
+		//Threshold spinners
+		ArrayList<JSpinner> thresholdSpinners = new ArrayList<JSpinner>();
 		
-		thresholdSpinner = new JSpinner(thresholdModel);
-		thresholdSpinner.addChangeListener(this);
-		add(thresholdSpinner);
+		SpinnerModel lowerThresholdRModel = new SpinnerNumberModel(TERMESConnector.getLowerThresholdR(), thresholdMin, thresholdMax, 1);
+		lowerThresholdRSpinner = new JSpinner(lowerThresholdRModel);
+		thresholdSpinners.add(lowerThresholdRSpinner);
+		
+		SpinnerModel lowerThresholdGModel = new SpinnerNumberModel(TERMESConnector.getLowerThresholdG(), thresholdMin, thresholdMax, 1);
+		lowerThresholdGSpinner = new JSpinner(lowerThresholdGModel);
+		thresholdSpinners.add(lowerThresholdGSpinner);
+		
+		SpinnerModel lowerThresholdBModel = new SpinnerNumberModel(TERMESConnector.getLowerThresholdB(), thresholdMin, thresholdMax, 1);
+		lowerThresholdBSpinner = new JSpinner(lowerThresholdBModel);
+		thresholdSpinners.add(lowerThresholdBSpinner);
+		
+		SpinnerModel upperThresholdRModel = new SpinnerNumberModel(TERMESConnector.getUpperThresholdR(), thresholdMin, thresholdMax, 1);
+		upperThresholdRSpinner = new JSpinner(upperThresholdRModel);
+		thresholdSpinners.add(upperThresholdRSpinner);
+		
+		SpinnerModel upperThresholdGModel = new SpinnerNumberModel(TERMESConnector.getUpperThresholdG(), thresholdMin, thresholdMax, 1);
+		upperThresholdGSpinner = new JSpinner(upperThresholdGModel);
+		thresholdSpinners.add(upperThresholdGSpinner);
+		
+		SpinnerModel upperThresholdBModel = new SpinnerNumberModel(TERMESConnector.getUpperThresholdB(), thresholdMin, thresholdMax, 1);
+		upperThresholdBSpinner = new JSpinner(upperThresholdBModel);
+		thresholdSpinners.add(upperThresholdBSpinner);
+		
+		for (JSpinner jSpinner : thresholdSpinners) {
+			jSpinner.addChangeListener(this);
+			add(jSpinner);
+		}
 
 	}
 	
@@ -174,14 +257,72 @@ public class TERMESCalibratingPanel extends JPanel implements ChangeListener
 		layout.putConstraint(SpringLayout.WEST, rightPicTitleLabel, 0 ,SpringLayout.WEST, rightPicLabel);
 		layout.putConstraint(SpringLayout.SOUTH, rightPicTitleLabel, -5 ,SpringLayout.NORTH, rightPicLabel);
 		
-		//Threshold Slider
-		layout.putConstraint(SpringLayout.WEST, thresholdSlider, -10 ,SpringLayout.WEST, rightPicLabel);
-		layout.putConstraint(SpringLayout.NORTH, thresholdSlider, 15 ,SpringLayout.SOUTH, rightPicLabel);
-		layout.putConstraint(SpringLayout.EAST, thresholdSlider, -50 ,SpringLayout.EAST, rightPicLabel);
+		//Left Sliders Title
+		layout.putConstraint(SpringLayout.WEST, leftSlidersTitle, 0 ,SpringLayout.WEST, leftPicLabel);
+		layout.putConstraint(SpringLayout.NORTH, leftSlidersTitle, 5 ,SpringLayout.SOUTH, leftPicLabel);
 		
-		//Threshold Spinner
-		layout.putConstraint(SpringLayout.WEST, thresholdSpinner, 5 ,SpringLayout.EAST, thresholdSlider);
-		layout.putConstraint(SpringLayout.NORTH, thresholdSpinner, 0 ,SpringLayout.NORTH, thresholdSlider);
+		//Lower Threshold R Slider
+		layout.putConstraint(SpringLayout.WEST, lowerThresholdRSlider, -10 ,SpringLayout.WEST, leftPicLabel);
+		layout.putConstraint(SpringLayout.NORTH,  lowerThresholdRSlider, 25 ,SpringLayout.SOUTH, leftPicLabel);
+		layout.putConstraint(SpringLayout.EAST,  lowerThresholdRSlider, -50 ,SpringLayout.EAST, leftPicLabel);
+		
+		//Lower Threshold R Spinner
+		layout.putConstraint(SpringLayout.WEST, lowerThresholdRSpinner, 5 ,SpringLayout.EAST, lowerThresholdRSlider);
+		layout.putConstraint(SpringLayout.NORTH, lowerThresholdRSpinner, 0 ,SpringLayout.NORTH, lowerThresholdRSlider);
+		
+		//R label
+		layout.putConstraint(SpringLayout.EAST, lowerThresholdRlabel, 5 ,SpringLayout.WEST, lowerThresholdRSlider);
+		layout.putConstraint(SpringLayout.NORTH, lowerThresholdRlabel, 0 ,SpringLayout.NORTH, lowerThresholdRSlider);
+		
+		//Lower Threshold G Slider
+		layout.putConstraint(SpringLayout.WEST, lowerThresholdGSlider, -10 ,SpringLayout.WEST, leftPicLabel);
+		layout.putConstraint(SpringLayout.NORTH,  lowerThresholdGSlider, 15 ,SpringLayout.SOUTH, lowerThresholdRSlider);
+		layout.putConstraint(SpringLayout.EAST,  lowerThresholdGSlider, -50 ,SpringLayout.EAST, leftPicLabel);
+		
+		//Lower Threshold G Spinner
+		layout.putConstraint(SpringLayout.WEST, lowerThresholdGSpinner, 5 ,SpringLayout.EAST, lowerThresholdGSlider);
+		layout.putConstraint(SpringLayout.NORTH, lowerThresholdGSpinner, 0 ,SpringLayout.NORTH, lowerThresholdGSlider);
+		
+		//Lower Threshold B Slider
+		layout.putConstraint(SpringLayout.WEST, lowerThresholdBSlider, -10 ,SpringLayout.WEST, leftPicLabel);
+		layout.putConstraint(SpringLayout.NORTH,  lowerThresholdBSlider, 15 ,SpringLayout.SOUTH, lowerThresholdGSlider);
+		layout.putConstraint(SpringLayout.EAST,  lowerThresholdBSlider, -50 ,SpringLayout.EAST, leftPicLabel);
+		
+		//Lower Threshold B Spinner
+		layout.putConstraint(SpringLayout.WEST, lowerThresholdBSpinner, 5 ,SpringLayout.EAST, lowerThresholdBSlider);
+		layout.putConstraint(SpringLayout.NORTH, lowerThresholdBSpinner, 0 ,SpringLayout.NORTH, lowerThresholdBSlider);
+		
+		//Right Sliders Title
+		layout.putConstraint(SpringLayout.WEST, rightSlidersTitle, 0 ,SpringLayout.WEST, rightPicLabel);
+		layout.putConstraint(SpringLayout.NORTH, rightSlidersTitle, 5 ,SpringLayout.SOUTH, rightPicLabel);
+		
+		//Upper Threshold R Slider
+		layout.putConstraint(SpringLayout.WEST, upperThresholdRSlider, -10 ,SpringLayout.WEST, rightPicLabel);
+		layout.putConstraint(SpringLayout.NORTH,  upperThresholdRSlider, 25 ,SpringLayout.SOUTH, rightPicLabel);
+		layout.putConstraint(SpringLayout.EAST,  upperThresholdRSlider, -50 ,SpringLayout.EAST, rightPicLabel);
+		
+		//Upper Threshold R Spinner
+		layout.putConstraint(SpringLayout.WEST, upperThresholdRSpinner, 5 ,SpringLayout.EAST, upperThresholdRSlider);
+		layout.putConstraint(SpringLayout.NORTH, upperThresholdRSpinner, 0 ,SpringLayout.NORTH, upperThresholdRSlider);
+		
+		//Upper Threshold G Slider
+		layout.putConstraint(SpringLayout.WEST, upperThresholdGSlider, -10 ,SpringLayout.WEST,rightPicLabel);
+		layout.putConstraint(SpringLayout.NORTH,  upperThresholdGSlider, 15 ,SpringLayout.SOUTH, upperThresholdRSlider);
+		layout.putConstraint(SpringLayout.EAST,  upperThresholdGSlider, -50 ,SpringLayout.EAST, rightPicLabel);
+		
+		//Upper Threshold G Spinner
+		layout.putConstraint(SpringLayout.WEST, upperThresholdGSpinner, 5 ,SpringLayout.EAST, upperThresholdGSlider);
+		layout.putConstraint(SpringLayout.NORTH, upperThresholdGSpinner, 0 ,SpringLayout.NORTH, upperThresholdGSlider);
+		
+		//Upper Threshold B Slider
+		layout.putConstraint(SpringLayout.WEST, upperThresholdBSlider, -10 ,SpringLayout.WEST, rightPicLabel);
+		layout.putConstraint(SpringLayout.NORTH,  upperThresholdBSlider, 15 ,SpringLayout.SOUTH, upperThresholdGSlider);
+		layout.putConstraint(SpringLayout.EAST,  upperThresholdBSlider, -50 ,SpringLayout.EAST, rightPicLabel);
+		
+		//Upper Threshold B Spinner
+		layout.putConstraint(SpringLayout.WEST, upperThresholdBSpinner, 5 ,SpringLayout.EAST, upperThresholdBSlider);
+		layout.putConstraint(SpringLayout.NORTH, upperThresholdBSpinner, 0 ,SpringLayout.NORTH, upperThresholdBSlider);
+		
 	}
 
 	/**
@@ -189,15 +330,19 @@ public class TERMESCalibratingPanel extends JPanel implements ChangeListener
 	 */
 	@Override
 	public void stateChanged(ChangeEvent e) {
-		if(e.getSource().equals(thresholdSpinner))
+		//Lower Threshold R Slider
+		if(e.getSource().equals(lowerThresholdRSpinner))
 		{
-			Integer currentValue = (Integer)thresholdSpinner.getValue();
-			thresholdSlider.setValue(currentValue);
+			Integer currentValue = (Integer)lowerThresholdRSpinner.getValue();
+			lowerThresholdRSlider.setValue(currentValue);
+			TERMESConnector.setLowerThresholdR(currentValue);
 		}
-		else if (e.getSource().equals(thresholdSlider))
+		//Lower Threshold R Spinner
+		else if (e.getSource().equals(lowerThresholdRSlider))
 		{
-			Integer currentValue = (Integer)thresholdSlider.getValue();
-			thresholdSpinner.setValue(currentValue);
+			Integer currentValue = (Integer)lowerThresholdRSlider.getValue();
+			lowerThresholdRSpinner.setValue(currentValue);
+			TERMESConnector.setLowerThresholdR(currentValue);
 		}
 	}
 }
