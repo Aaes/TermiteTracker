@@ -6,6 +6,7 @@ public class TERMESConnector
 	public static native int[] getKeypoints();
 	public static native byte[] getNextFrame();
 	public static native byte[] getNextOverheadFrame();
+	public static native byte[] getNextThresholdFrame();
 	public static native void start();
 	public static native void releaseCamera();
 	

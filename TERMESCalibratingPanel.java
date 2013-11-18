@@ -103,21 +103,32 @@ public class TERMESCalibratingPanel extends JPanel implements ChangeListener
 		byte[] frame;
 		while ((frame = TERMESConnector.getNextFrame()) != null) {
 			// get the next frame as an image
-			Image img = TERMESImageProcessing.convertByteArrayToImage(frame);
+			Image imgOriginal = TERMESImageProcessing.convertByteArrayToImage(frame);
 
 			// scale the image if necessary
 			if (frameHeight == 0) // then frameWidth is also 0
 			{
-				frameHeight = (int) determineFrameHeight(img.getWidth(null), img.getHeight(null));
-				frameWidth = (int) determineFrameWidth(img.getWidth(null), img.getHeight(null));
+				frameHeight = (int) determineFrameHeight(imgOriginal.getWidth(null), imgOriginal.getHeight(null));
+				frameWidth = (int) determineFrameWidth(imgOriginal.getWidth(null), imgOriginal.getHeight(null));
 			}
 
-			img = img.getScaledInstance(frameWidth, frameHeight, java.awt.Image.SCALE_SMOOTH);
+			imgOriginal = imgOriginal.getScaledInstance(frameWidth, frameHeight, java.awt.Image.SCALE_SMOOTH);
 
-			leftIcon = new ImageIcon(img);
-			rightIcon = new ImageIcon(img);
-
+			leftIcon = new ImageIcon(imgOriginal);
 			leftPicLabel.setIcon(leftIcon);
+			
+			Image imgThreshold = TERMESImageProcessing.convertByteArrayToImage(frame);
+
+			// scale the image if necessary
+			if (frameHeight == 0) // then frameWidth is also 0
+			{
+				frameHeight = (int) determineFrameHeight(imgThreshold.getWidth(null), imgThreshold.getHeight(null));
+				frameWidth = (int) determineFrameWidth(imgThreshold.getWidth(null), imgThreshold.getHeight(null));
+			}
+
+			imgThreshold = imgThreshold.getScaledInstance(frameWidth, frameHeight, java.awt.Image.SCALE_SMOOTH);
+
+			rightIcon = new ImageIcon(imgThreshold);
 			rightPicLabel.setIcon(rightIcon);
 
 			try {
