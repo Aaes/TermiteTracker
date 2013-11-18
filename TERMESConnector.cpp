@@ -95,8 +95,8 @@ JNIEXPORT jbyteArray JNICALL Java_TERMESConnector_getNextThresholdFrame (JNIEnv 
 
 JNIEXPORT void JNICALL Java_TERMESConnector_start (JNIEnv *, jclass)
 {
-    //string filename = "/Users/Nikolaj/Developer/TermiteTracker/Media/myrevideo2.mp4";
-    string filename = "C:\\Users\\hfl.DELEGATE\\Desktop\\Github\\TermiteTracker\\Media\\myrevideo2.mp4";
+    string filename = "/Users/Nikolaj/Developer/TermiteTracker/Media/myrevideo2.mp4";
+    //string filename = "C:\\Users\\hfl.DELEGATE\\Desktop\\Github\\TermiteTracker\\Media\\myrevideo2.mp4";
     
     capture.open(filename);
     waitKey(2000);

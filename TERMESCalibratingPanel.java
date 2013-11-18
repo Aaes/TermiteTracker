@@ -271,8 +271,8 @@ public class TERMESCalibratingPanel extends JPanel implements ChangeListener
 		layout.putConstraint(SpringLayout.NORTH, lowerThresholdRSpinner, 0 ,SpringLayout.NORTH, lowerThresholdRSlider);
 		
 		//R label
-		layout.putConstraint(SpringLayout.EAST, lowerThresholdRlabel, 5 ,SpringLayout.WEST, lowerThresholdRSlider);
-		layout.putConstraint(SpringLayout.NORTH, lowerThresholdRlabel, 0 ,SpringLayout.NORTH, lowerThresholdRSlider);
+		layout.putConstraint(SpringLayout.EAST, lowerThresholdRlabel, 3 ,SpringLayout.WEST, lowerThresholdRSlider);
+		layout.putConstraint(SpringLayout.NORTH, lowerThresholdRlabel, 6 ,SpringLayout.NORTH, lowerThresholdRSlider);
 		
 		//Lower Threshold G Slider
 		layout.putConstraint(SpringLayout.WEST, lowerThresholdGSlider, -10 ,SpringLayout.WEST, leftPicLabel);
@@ -283,6 +283,10 @@ public class TERMESCalibratingPanel extends JPanel implements ChangeListener
 		layout.putConstraint(SpringLayout.WEST, lowerThresholdGSpinner, 5 ,SpringLayout.EAST, lowerThresholdGSlider);
 		layout.putConstraint(SpringLayout.NORTH, lowerThresholdGSpinner, 0 ,SpringLayout.NORTH, lowerThresholdGSlider);
 		
+		//G label
+		layout.putConstraint(SpringLayout.EAST, lowerThresholdGlabel, 3 ,SpringLayout.WEST, lowerThresholdGSlider);
+		layout.putConstraint(SpringLayout.NORTH, lowerThresholdGlabel, 6 ,SpringLayout.NORTH, lowerThresholdGSlider);
+		
 		//Lower Threshold B Slider
 		layout.putConstraint(SpringLayout.WEST, lowerThresholdBSlider, -10 ,SpringLayout.WEST, leftPicLabel);
 		layout.putConstraint(SpringLayout.NORTH,  lowerThresholdBSlider, 15 ,SpringLayout.SOUTH, lowerThresholdGSlider);
@@ -291,6 +295,10 @@ public class TERMESCalibratingPanel extends JPanel implements ChangeListener
 		//Lower Threshold B Spinner
 		layout.putConstraint(SpringLayout.WEST, lowerThresholdBSpinner, 5 ,SpringLayout.EAST, lowerThresholdBSlider);
 		layout.putConstraint(SpringLayout.NORTH, lowerThresholdBSpinner, 0 ,SpringLayout.NORTH, lowerThresholdBSlider);
+		
+		//B label
+		layout.putConstraint(SpringLayout.EAST, lowerThresholdBlabel, 3 ,SpringLayout.WEST, lowerThresholdBSlider);
+		layout.putConstraint(SpringLayout.NORTH, lowerThresholdBlabel, 6 ,SpringLayout.NORTH, lowerThresholdBSlider);
 		
 		//Right Sliders Title
 		layout.putConstraint(SpringLayout.WEST, rightSlidersTitle, 0 ,SpringLayout.WEST, rightPicLabel);
@@ -305,6 +313,10 @@ public class TERMESCalibratingPanel extends JPanel implements ChangeListener
 		layout.putConstraint(SpringLayout.WEST, upperThresholdRSpinner, 5 ,SpringLayout.EAST, upperThresholdRSlider);
 		layout.putConstraint(SpringLayout.NORTH, upperThresholdRSpinner, 0 ,SpringLayout.NORTH, upperThresholdRSlider);
 		
+		//R label
+		layout.putConstraint(SpringLayout.EAST, upperThresholdRlabel, 3 ,SpringLayout.WEST, upperThresholdRSlider);
+		layout.putConstraint(SpringLayout.NORTH, upperThresholdRlabel, 6 ,SpringLayout.NORTH, upperThresholdRSlider);
+		
 		//Upper Threshold G Slider
 		layout.putConstraint(SpringLayout.WEST, upperThresholdGSlider, -10 ,SpringLayout.WEST,rightPicLabel);
 		layout.putConstraint(SpringLayout.NORTH,  upperThresholdGSlider, 15 ,SpringLayout.SOUTH, upperThresholdRSlider);
@@ -313,6 +325,10 @@ public class TERMESCalibratingPanel extends JPanel implements ChangeListener
 		//Upper Threshold G Spinner
 		layout.putConstraint(SpringLayout.WEST, upperThresholdGSpinner, 5 ,SpringLayout.EAST, upperThresholdGSlider);
 		layout.putConstraint(SpringLayout.NORTH, upperThresholdGSpinner, 0 ,SpringLayout.NORTH, upperThresholdGSlider);
+		
+		//G label
+		layout.putConstraint(SpringLayout.EAST, upperThresholdGlabel, 3 ,SpringLayout.WEST, upperThresholdGSlider);
+		layout.putConstraint(SpringLayout.NORTH, upperThresholdGlabel, 6 ,SpringLayout.NORTH, upperThresholdGSlider);
 		
 		//Upper Threshold B Slider
 		layout.putConstraint(SpringLayout.WEST, upperThresholdBSlider, -10 ,SpringLayout.WEST, rightPicLabel);
@@ -323,6 +339,9 @@ public class TERMESCalibratingPanel extends JPanel implements ChangeListener
 		layout.putConstraint(SpringLayout.WEST, upperThresholdBSpinner, 5 ,SpringLayout.EAST, upperThresholdBSlider);
 		layout.putConstraint(SpringLayout.NORTH, upperThresholdBSpinner, 0 ,SpringLayout.NORTH, upperThresholdBSlider);
 		
+		//B label
+		layout.putConstraint(SpringLayout.EAST, upperThresholdBlabel, 3 ,SpringLayout.WEST, upperThresholdBSlider);
+		layout.putConstraint(SpringLayout.NORTH, upperThresholdBlabel, 6 ,SpringLayout.NORTH, upperThresholdBSlider);
 	}
 
 	/**
@@ -354,9 +373,65 @@ public class TERMESCalibratingPanel extends JPanel implements ChangeListener
 		//Lower Threshold G Spinner
 		else if (e.getSource().equals(lowerThresholdGSlider))
 		{
-			Integer currentValue = (Integer)lowerThresholdRSlider.getValue();
+			Integer currentValue = (Integer)lowerThresholdGSlider.getValue();
 			lowerThresholdGSpinner.setValue(currentValue);
 			TERMESConnector.setLowerThresholdG(currentValue);
+		}
+		//Lower Threshold B Slider
+		if(e.getSource().equals(lowerThresholdBSpinner))
+		{
+			Integer currentValue = (Integer)lowerThresholdBSpinner.getValue();
+			lowerThresholdBSlider.setValue(currentValue);
+			TERMESConnector.setLowerThresholdB(currentValue);
+		}
+		//Lower Threshold B Spinner
+		else if (e.getSource().equals(lowerThresholdBSlider))
+		{
+			Integer currentValue = (Integer)lowerThresholdBSlider.getValue();
+			lowerThresholdBSpinner.setValue(currentValue);
+			TERMESConnector.setLowerThresholdB(currentValue);
+		}
+		//Upper Threshold R Slider
+		if(e.getSource().equals(upperThresholdRSpinner))
+		{
+			Integer currentValue = (Integer)upperThresholdRSpinner.getValue();
+			upperThresholdRSlider.setValue(currentValue);
+			TERMESConnector.setUpperThresholdR(currentValue);
+		}
+		//Upper Threshold R Spinner
+		else if (e.getSource().equals(upperThresholdRSlider))
+		{
+			Integer currentValue = (Integer)upperThresholdRSlider.getValue();
+			upperThresholdRSpinner.setValue(currentValue);
+			TERMESConnector.setUpperThresholdR(currentValue);
+		}
+		//Upper Threshold G Slider
+		if(e.getSource().equals(upperThresholdGSpinner))
+		{
+			Integer currentValue = (Integer)upperThresholdGSpinner.getValue();
+			upperThresholdGSlider.setValue(currentValue);
+			TERMESConnector.setUpperThresholdG(currentValue);
+		}
+		//Upper Threshold G Spinner
+		else if (e.getSource().equals(upperThresholdGSlider))
+		{
+			Integer currentValue = (Integer)upperThresholdGSlider.getValue();
+			upperThresholdGSpinner.setValue(currentValue);
+			TERMESConnector.setUpperThresholdG(currentValue);
+		}
+		//Upper Threshold B Slider
+		if(e.getSource().equals(upperThresholdBSpinner))
+		{
+			Integer currentValue = (Integer)upperThresholdBSpinner.getValue();
+			upperThresholdBSlider.setValue(currentValue);
+			TERMESConnector.setUpperThresholdB(currentValue);
+		}
+		//Upper Threshold B Spinner
+		else if (e.getSource().equals(upperThresholdBSlider))
+		{
+			Integer currentValue = (Integer)upperThresholdBSlider.getValue();
+			upperThresholdBSpinner.setValue(currentValue);
+			TERMESConnector.setUpperThresholdB(currentValue);
 		}
 	}
 }
