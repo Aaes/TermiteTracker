@@ -13,5 +13,6 @@
 #include "ColorDetector.h"
 #include "Contrast.h"
 #include "PlotterController.h"
+#include "ErodeAndDilate.h"
 
 #endif /* defined(__TermiteTracker__main__) */

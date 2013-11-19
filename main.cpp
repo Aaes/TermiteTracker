@@ -72,16 +72,19 @@ using namespace std;
 
 int main(int argc, const char * argv[])
 {
-//    Mat img = imread("/Users/Niklas/Desktop/RGB.png");
-//    Mat grayscale;
-//    Mat thr;
-//    inRange(img, Scalar(0,100,0), Scalar(255,255,255), thr);
-//    //cvtColor(img, grayscale, CV_RGB2GRAY);
+//    Mat img = imread("/Users/Niklas/Developer/TermiteTracker/Report/img/globe.png");
+//    Mat gray;
+//    cvtColor(img, gray, 0);
+//    Mat imgErode = ErodeImage(gray, 0, 7);
+//    Mat imgDilate = DilateImage(gray, 0, 7);
+//    
+//    //inRange(img, Scalar(0,100,0), Scalar(1,150,10), thr);
 //    //threshold(grayscale, thr, 200, 255, 0);
 //    
-//    imshow("original", img);
+//    imshow("original", gray);
 //    //imshow("gray", grayscale);
-//    imshow("threshold", thr);
+//    imshow("erode", imgErode);
+//    imshow("dilate", imgDilate);
 //    waitKey(0);
     
     return 0;
