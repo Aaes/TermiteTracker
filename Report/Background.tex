@@ -41,26 +41,25 @@ Because actual termites were out our reach and that our councillor at Harvard re
 
 Painting the ants in different colors can have some impact in the quality of the tracking. As a rule of thumb it is easier to track colors that contrast the background the most. In this project we chose to paint the ants white and bright green. We did not try any other colors because we found these to have a high degree of contrast which were sufficient. \\
 
-As the HP INDSÆT MODEL plotter was the only hardware available to us we have restricted the project to only include this type of plotter. One could potentially gain better results with a plotter with a finer granularity in coordinates and smoother movement. \\
+As the HP INDSÆT MODEL plotter was the only hardware available to us we have restricted the project to only include this type of plotter. One could potentially gain better results with a plotter with a finer granularity in coordinates and smoother movement. The cameras supplied with the plotter was also the only cameras available to us and we have therefore also restricted the project to only include these cameras. While one could use higher resolution cameras to obtain a better result, the weight of the camera is also important for the smoothness of the movement of the plotter and must be carefully considered.\\
 
 While it could be intereseting to track several ants we have chosen to focus on tracking a single ant in this project due to time restrictions. However, we do not believe that there are any technical barriers against this and would simply require more time to implement.
 
 \subsection{Requirements}
 
-Maa jeg foreslaa at i laver 2 modes (man kan f.eks. vaelge mode i menuen
-af toppen af programmet).
-1. Den ene er kalibrerings mode hvor man kan se det direkte feed oeverst
-til venstre, samt billedbehandlet billede oeverst til hoejre, og sliders
-nedenfor.
-2. Nummer to er tracking mode hvor man kan see feedet fra kameraet taet
-paa oeverst til venstre, feedet fra overview-kameraet oeverst til hoejre,
-og saa statistik/grafer nederst til venstre, og valgmuligheder mht til
-statistik og hvor filerne skal gemmes mv. nederst til hoejre? + start
-knap.
-3. Hvis i faar tid kan i tilfoeje en bias-mode hvor man kan klikke paa et
-punkt i skaalen som plotteren skal forsoege at traekke myren imod (ved
-hjaelp af mad).
+2 modes: 
+kalibrerings mode, direkte feed and behandlet feed og slidesr
+Tracking mode, direkte feed, feed fra overview camera, statestik/grafer
+(Bias mode, klikke på punkt i skålen som plotteren til trække myren mode)
 
+Gemme statestik
+Data + billedbehandling + tracking i c/c++
+Ændring af tracking params
+(punkter plotteren skal styre imod eller undgå)
+tracking termit/myre markeret med farver (mellem andre termitter)
+flytte plotteren sammen med tracking
+
+Statestik:
 1. Position i skaalen over tid (marker dens rute). + indstilling for hvor
 lang tid tilbage ruten skal vises.
 1. Gennemsnitshastighed/tid (siden start), +indstilling for running average.
@@ -79,44 +78,3 @@ kan  undersoege af gangen)
 for interval: f.eks. 30s/1min/2min
 8. Mean free path. (maal hvor lang tid der gaar mellem pauser. Pauserne
 defineres af lav gennemsnitshastighed)
-
-Mht gui'en er et mere objekt-orienteret sprog fint med mig. Saa laenge at
-selve data- og billed behandlingen foregaar i C/C++.
-Nedenfor har jeg forsoegt at beskrive projektet lidt mere specifikt. Hvis
-i stadig er interesseret i projektet synes jeg at vi skal tage en
-skype-snak om helt noejagtige instruktioner.
-
-1. UI:
-Brugervenligt, visning af live video, samt statistikker for opsamlet data.
-Bruger input til manuel styring af plotteren, aendring af billed
-behandlings-parametre i tilfaelde af at udstyret skal bruges til andre
-insekter i fremtiden, samt input af punkter i arenaen plotteren skal
-forsoege at styre imod, eller undgaa.
-
-2. Tracking:
-Formentlig den stoerste udfordring. Plotteren skal kunne tracke en termit
-maerket med roed og groen maling ud fra et lav resolutions-kamera monteret
-paa manipulatoren. (Hvis i finder et bedre alternativ til det nuvaerende
-kamera, kan vi sagtens koebe et nyt). Termitten er hvid og brun, og dens
-baggrund roed/brun jord, derudover vil den vaere omgivet af mange andre
-(u-maerkede) termitter. De bevaeger sig op til 2cm/s og manipulatoren skal
-helst bevares indenfor 0.5cm radius af hovedet (uden at ramme den eller
-andre termitter).
-Jeg vil foreslaa at i starter med at tracke myrer (de er nemmest at
-finde), paa hvid baggrund, og derefter paa jord.
-
-3. Styring af manipulator:
-Manipulatorens position skal aendres afhaengigt af outputtet fra
-tracking-softwaret. Hardwaret kan modtage serielle kommandoer om ny
-oensket position. Hvis i oensker adgang til softwaren paa
-microcontrolleren som styrer plotteren kan det ogsaa sagtens arrangeres.
-Det kan blive noedvendigt at indfoere soft-start hvis plotteren skal
-bevaeges langt for at undgaa pludselige ryk i maskinen der kan skraemme
-insekterne.
-
-5. Data behandling: Dette vil involvere mange maader at behandle den
-indsamlede data paa. F.eks. beregning af hastighed/tid,
-mean-free-path/tid, histogram af position i arenaen/tid, maengde af
-interaktion/tid, mm. Jeg sender gerne en laengere liste hvis i er
-interesserede.
-
