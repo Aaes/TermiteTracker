@@ -7,6 +7,8 @@
 \contentsline {subsection}{\numberline {3.1}Assumptions}{5}{subsection.1.3.1}
 \contentsline {subsection}{\numberline {3.2}Scope}{5}{subsection.1.3.2}
 \contentsline {subsection}{\numberline {3.3}Requirements}{6}{subsection.1.3.3}
+\contentsline {subsubsection}{Mandatory requirements}{6}{section*.3}
+\contentsline {subsubsection}{Optional requirements}{6}{section*.4}
 \contentsline {section}{\numberline {4}Tracking}{7}{section.1.4}
 \contentsline {subsection}{\numberline {4.1}Theory}{7}{subsection.1.4.1}
 \contentsline {subsection}{\numberline {4.2}Framework}{11}{subsection.1.4.2}

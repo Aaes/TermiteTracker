@@ -43,19 +43,33 @@ Painting the ants in different colors can have some impact in the quality of the
 
 As the HP INDSÆT MODEL plotter was the only hardware available to us we have restricted the project to only include this type of plotter. One could potentially gain better results with a plotter with a finer granularity in coordinates and smoother movement. The cameras supplied with the plotter was also the only cameras available to us and we have therefore also restricted the project to only include these cameras. While one could use higher resolution cameras to obtain a better result, the weight of the camera is also important for the smoothness of the movement of the plotter and must be carefully considered.\\
 
-While it could be intereseting to track several ants we have chosen to focus on tracking a single ant in this project due to time restrictions. However, we do not believe that there are any technical barriers against this and would simply require more time to implement.
+While it could be intereseting to track several ants we have chosen to focus on tracking a single ant in this project due to time restrictions. However, we do not believe that there are any technical barriers against this and would simply require more time to implement.\\
+
+TODO: \\
+fortæl om hvordan vi IKKE tester
 
 \subsection{Requirements}
 
-2 modes: 
-kalibrerings mode, direkte feed and behandlet feed og slidesr
-Tracking mode, direkte feed, feed fra overview camera, statestik/grafer
-(Bias mode, klikke på punkt i skålen som plotteren til trække myren mode)
+\subsubsection{Mandatory requirements}
+The mandatory requirements of the project are listed below and must be fulfilled for the project to be considered a success.
 
-Gemme statestik
+\begin{enumerate}
+	\item A graphical user interface containing two modes:
+    \item - Calibration mode. Must contain a direct feed from the lower camera, a proccessed feed and sliders to adjust the processing.
+    \item - Tracking mode. Must contain a direct feed from the lower camera, a direct feed from the overhead camera and statistics.
+    \item The ability to save the collected statistics.
+    \item Teh ability to adjust the tracking parameteres before and during the tracking.
+\end{enumerate}
+
+\subsubsection{Optional requirements}
+The optional requirements are the so called "nice-to-have requirements". They are not mandatory for the project but features that could be desirable to implement if the time and resources permits it.
+
+\begin{enumerate}
+	\item An additional third mode in the graphical user interface Bias mode: adds the ability to select a certain point which the plotter will try to lure the termites towards using food or pheromones.
+    \item The ability to choose certain areas which should be avoided during the tracking.
+\end{enumerate}
+
 Data + billedbehandling + tracking i c/c++
-Ændring af tracking params
-(punkter plotteren skal styre imod eller undgå)
 tracking termit/myre markeret med farver (mellem andre termitter)
 flytte plotteren sammen med tracking
 
