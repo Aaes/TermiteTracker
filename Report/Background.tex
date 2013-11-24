@@ -54,11 +54,23 @@ fortæl om hvordan vi IKKE tester
 The mandatory requirements of the project are listed below and must be fulfilled for the project to be considered a success.
 
 \begin{enumerate}
+    \item Tracking of ants and/or termites using a low resolution camera using C/C++.
+    \item The ability to adjust the tracking parameteres before and during the tracking.
+    \item Moving the tracking hardware in corresponding to the tracking.
 	\item A graphical user interface containing two modes:
     \item - Calibration mode. Must contain a direct feed from the lower camera, a proccessed feed and sliders to adjust the processing.
     \item - Tracking mode. Must contain a direct feed from the lower camera, a direct feed from the overhead camera and statistics.
+    \item The ability to collect the following statistics:
+    \item - The route of the ant/termite over time. 
+    \item - Average speed of the ant/termite.
+    \item - Heatmap of where in the petri dish the ant stay.
+    \item - The amount of ants/termites meet during the tracking.
+    \item - The amount of time between each meeting.
+    \item - The duration of each meeting
+    \item - The area of the petri dish covered by the ant/termite.
+    \item - How much area is covered over time.
+    \item - Mean free path (the amount of time between each "stay").
     \item The ability to save the collected statistics.
-    \item Teh ability to adjust the tracking parameteres before and during the tracking.
 \end{enumerate}
 
 \subsubsection{Optional requirements}
@@ -69,26 +81,8 @@ The optional requirements are the so called "nice-to-have requirements". They ar
     \item The ability to choose certain areas which should be avoided during the tracking.
 \end{enumerate}
 
-Data + billedbehandling + tracking i c/c++
-tracking termit/myre markeret med farver (mellem andre termitter)
-flytte plotteren sammen med tracking
+TODO: \\
+Ryk de rigtige reqs ned til optional \\
+tilføj indstillinger for hovedstørrelse, tid for hvert stay, hastighed for stay osv.
 
-Statestik:
-1. Position i skaalen over tid (marker dens rute). + indstilling for hvor
-lang tid tilbage ruten skal vises.
-1. Gennemsnitshastighed/tid (siden start), +indstilling for running average.
-2. Heatmap over hvor myren opholder sig mest i skaalen, (groft firkantet
-grid er fint til at starte med).
-3. Heatmap over hvor myren holder pauser i skaalen, +indstilling for hvor
-lang en 'pause' er, hvor lav den gennemsnitshastighed skal vaere.
-3. Tael andre myrer den moeder/tid. +Indstilling for afstand af et 'moede'.
-4. Hvor lang tid der gaar imellem den moeder andre/tid (siden start).
-5. Hvor meget tid den pauser naer andre myrer/tid. +Indstilling for
-afstand+pause laengde
-6. Hvor meget af skaalen den har undersoegt (Additivt) over tid.
-+Indstilling for radius af hovedet, (hvor langt fra center af hovedet den
-kan  undersoege af gangen)
-7. Hvor meget nyt areal den daekker hvert interval over tid. +instilling
-for interval: f.eks. 30s/1min/2min
-8. Mean free path. (maal hvor lang tid der gaar mellem pauser. Pauserne
-defineres af lav gennemsnitshastighed)
+
