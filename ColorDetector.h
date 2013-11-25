@@ -22,5 +22,6 @@
 #include <opencv2/features2d/features2d.hpp>
 
 int ColorDetection(Mat img, Scalar colorMin, Scalar colorMax, double alpha, int beta, int result[]);
+Mat getThresholdImage();
 
 #endif /* defined(__TermiteTracker__ColorDetector__) */

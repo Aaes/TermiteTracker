@@ -11,6 +11,14 @@
 using namespace cv;
 using namespace std;
 
+Mat imgContrast;
+Mat imgDilate;
+Mat imgErode;
+Mat imgThresh;
+Mat imgThreshFinal;
+Mat imgBlur;
+Mat blob;
+
 KeyPoint getLargestBlob(vector<KeyPoint> input){
     
     KeyPoint largest = input.back();
@@ -32,13 +40,7 @@ KeyPoint getLargestBlob(vector<KeyPoint> input){
 
 int ColorDetection(Mat img, Scalar colorMin, Scalar colorMax, double alpha, int beta, int result[]){
     //Define matrices
-    Mat imgContrast = constrastImage(img, alpha, beta);
-    Mat imgDilate;
-    Mat imgErode;
-    Mat imgThresh;
-    Mat imgThreshFinal;
-    Mat imgBlur;
-    Mat blob;
+    imgContrast = constrastImage(img, alpha, beta);
     
     imshow("contrast", imgContrast);
     
@@ -93,4 +95,6 @@ int ColorDetection(Mat img, Scalar colorMin, Scalar colorMax, double alpha, int 
     return 1;
 }
 
-
+Mat getThresholdImage(){
+    return imgThreshFinal;
+}
