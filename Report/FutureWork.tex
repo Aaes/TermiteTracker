@@ -1,10 +1,22 @@
 %!TEX root = Report.tex
 
 \section{Future Work}
+%More statistics
+%Bias mode
+%Support for multiple plotters
+%Plotter control as a library
+%Tests with real termites
+%Developer terminal/log (print was is sent to the plotter and the answer + the hard tracking coordinate data)
+%Color pickers i GUI
 
-More statistics
-Bias mode
-Support for multiple plotters
-Plotter control as a library
-Tests with real termites
-Developer terminal/log (print was is sent to the plotter and the answer + the hard tracking coordinate data)
+Because time was a limitid resource for our team there were features wi did not implement and ideas for additional functionality that could have been included. This section describes a short list of the possible extensions to the project we might have worked towrads given more time. \\
+
+The first task would be to implement the optional requirements listed in section XX Requirements. ER DER NOGEN VANSKELIGEHEDER VED DET ELLER ER DET LIGE UD AF LANDEVEJEN? \\
+
+When all these requirements were fulfilled it could be beneficial to support multi types of XY-plotters. The plotter we used was a little dated and to be able to switch to any XY plotter could be very practical. Of course this would also imply testing with an array of different plotters to see whether or not the same result could be obtained. To support mulitple plotters one could implement plotter control as a service library to make it easy for other applications to control the plotter. This could expose an communication interface so it would be easy to switch the both the hardware and software of the plotter. \\
+
+One of things we really wanted to do, but did not have the oppertunity to, was to test with real termites. The solution was design to easily be able to switch between different insects of different sizes and to test with real termites would be a strong indicator of how well this switch would work. \\
+
+To help future development the implementation fo a developer console or log could be helpful. Developers could be able to manipulate the movement of the plotter through the terminal or interact with the tracking parameter. The log could save all the raw tracking coordinates to expose what data is recorded by the tracking and how the statistical data was created. \\
+
+The graphical user interface could be enhanced by adding a color picker in addition to the RGB sliders that are currently present. Addtionally a third "Bias" mode could be added where an incentive (either food or pheromones) were attached to the camera, a specific point was selected via the GUI and the ant/termite would be led towards that point. This would open the possibility for even more statistics to be collected.
