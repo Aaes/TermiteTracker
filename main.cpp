@@ -12,34 +12,38 @@
 char key;
 using namespace std;
 
-//void trackVideo(){
-//    
-//    CvCapture *video = cvCreateFileCapture("/Users/Niklas/Developer/TermiteTracker/Media/MyreTrack.mov");
-//    
-//    Mat frame;
-//    frame = cvQueryFrame(video);
-//    
-//    while(true){
-//        
-////        int input[3];
-////        Mat blob;
-////        
-////        vector<KeyPoint> points = ColorDetection(frame, Scalar(0,170,140), Scalar(60,210,210), 3.0, 1, input); //Detect green
-////        
-////        //KeyPoint keypoint = KeyPoint(input[0], input[1], input[2]);
-////        
-////        //points.push_back(keypoint);
-////        
-////        drawKeypoints(frame, points, blob, CV_RGB(255,0,0));
-////        
-////        imshow("Green color detection", blob);
-////        
-////        frame = cvQueryFrame(video);
-////        
-////        waitKey(1);
-//    }
-//    
-//}
+void trackVideo(){
+    
+    CvCapture *video = cvCreateFileCapture("/Users/Niklas/Desktop/myretrack10.mov");
+    
+    Mat frame;
+    frame = cvQueryFrame(video);
+    
+    while(true){
+        
+        int input[3];
+        Mat blob;
+        
+        int success = ColorDetection(frame, Scalar(220,220,220), Scalar(256,256,256), 2.0, 1, input); //Detect green
+        
+        if(!success) cout<<"Failed to run ColorDetection"<<endl;
+        
+        KeyPoint keypoint = KeyPoint(input[0], input[1], input[2]);
+        
+        vector<KeyPoint> points = vector<KeyPoint>();
+        
+        points.push_back(keypoint);
+        
+        drawKeypoints(frame, points, blob, CV_RGB(255,0,0));
+        
+        imshow("Green color detection", blob);
+        
+        frame = cvQueryFrame(video);
+        
+        waitKey(1);
+    }
+    
+}
 //
 //void trackImage(){
 //    
@@ -72,6 +76,8 @@ using namespace std;
 
 int main(int argc, const char * argv[])
 {
+    
+    trackVideo();
 //    Mat img = imread("/Users/Niklas/Developer/TermiteTracker/Report/img/globe.png");
 //    Mat gray;
 //    cvtColor(img, gray, 0);
