@@ -40,14 +40,22 @@ KeyPoint getLargestBlob(vector<KeyPoint> input){
 
 int ColorDetection(Mat img, Scalar colorMin, Scalar colorMax, double alpha, int beta, int result[]){
     //Define matrices
-    imgContrast = constrastImage(img, alpha, beta);
     
-    imshow("contrast", imgContrast);
+    clock_t start = clock();
+    
+    //imgContrast = constrastImage(img, alpha, beta);
+    
+    GaussianBlur(img, imgContrast, Size(0, 0), 3);
+    addWeighted(img, 1.5, imgContrast, -0.5, 0, imgContrast);
+    
+    Mat imgH = imgContrast * alpha;
+    
+    //imshow("contrast", imgH);
     
     //Threshold based on color ranges (Blue/Green/Red scalars)
-    inRange(imgContrast, colorMin, colorMax, imgThresh); //BGR range
+    inRange(imgH, colorMin, colorMax, imgThresh); //BGR range
     
-    imshow("Thresh", imgThresh);
+    //imshow("Thresh", imgThresh);
     
     //imgErode = ErodeImage(imgThresh, 0, 0);
     //imgDilate = DilateImage(imgThresh, 0, 0);
@@ -56,7 +64,7 @@ int ColorDetection(Mat img, Scalar colorMin, Scalar colorMax, double alpha, int 
     //imshow("Dilate", imgDilate);
     
     //Apply Blur effect to make blobs much more coherent
-    GaussianBlur(imgThresh, imgBlur, Size(9,9), 0);
+    //GaussianBlur(imgThresh, imgBlur, Size(9,9), 0);
     
     //Set SimpleBlobDetector parameters
     SimpleBlobDetector::Params params;
@@ -75,9 +83,9 @@ int ColorDetection(Mat img, Scalar colorMin, Scalar colorMax, double alpha, int 
     //Vectors to store keypoints (center points for a blob)
     vector<KeyPoint> keypoints;
     
-    //Try blob detection for both thresholded colors
-    threshold(imgBlur, imgThreshFinal, 100, 255,0);
-    blobDetector.detect(imgThreshFinal, keypoints);
+    //Try blob detection for threholded colors
+    //threshold(imgBlur, imgThreshFinal, 100, 255,0);
+    blobDetector.detect(imgThresh, keypoints);
 
     if(!keypoints.empty()){
         KeyPoint point = getLargestBlob(keypoints);
@@ -92,6 +100,10 @@ int ColorDetection(Mat img, Scalar colorMin, Scalar colorMax, double alpha, int 
         result[2] = 0;
     }
 
+    double duration = ( std::clock() - start ) / (double) CLOCKS_PER_SEC;
+    
+    cout << duration << " seconds" << endl;
+    
     return 1;
 }
 
