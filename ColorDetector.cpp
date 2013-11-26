@@ -11,21 +11,19 @@
 using namespace cv;
 using namespace std;
 
+//Define matrices
 Mat imgContrast;
+Mat imgH;
 Mat imgDilate;
 Mat imgErode;
 Mat imgThresh;
-Mat imgThreshFinal;
-Mat imgBlur;
 Mat blob;
 
 KeyPoint getLargestBlob(vector<KeyPoint> input){
     
     KeyPoint largest = input.back();
     input.pop_back();
-    
-    
-    
+
     while (!input.empty()) {
         KeyPoint nPoint = input.back();
         input.pop_back();
@@ -39,32 +37,26 @@ KeyPoint getLargestBlob(vector<KeyPoint> input){
 }
 
 int ColorDetection(Mat img, Scalar colorMin, Scalar colorMax, double alpha, int beta, int result[]){
-    //Define matrices
+    
+    //Deallocate memory before continueing
+    imgContrast.release();
+    imgH.release();
+    imgDilate.release();
+    imgErode.release();
+    imgThresh.release();
+    blob.release();
     
     clock_t start = clock();
-    
-    //imgContrast = constrastImage(img, alpha, beta);
     
     GaussianBlur(img, imgContrast, Size(0, 0), 3);
     addWeighted(img, 1.5, imgContrast, -0.5, 0, imgContrast);
     
-    Mat imgH = imgContrast * alpha;
+    imgH = imgContrast * alpha;
     
     //imshow("contrast", imgH);
     
     //Threshold based on color ranges (Blue/Green/Red scalars)
     inRange(imgH, colorMin, colorMax, imgThresh); //BGR range
-    
-    //imshow("Thresh", imgThresh);
-    
-    //imgErode = ErodeImage(imgThresh, 0, 0);
-    //imgDilate = DilateImage(imgThresh, 0, 0);
-    
-    //imshow("Erode", imgErode);
-    //imshow("Dilate", imgDilate);
-    
-    //Apply Blur effect to make blobs much more coherent
-    //GaussianBlur(imgThresh, imgBlur, Size(9,9), 0);
     
     //Set SimpleBlobDetector parameters
     SimpleBlobDetector::Params params;
@@ -108,5 +100,9 @@ int ColorDetection(Mat img, Scalar colorMin, Scalar colorMax, double alpha, int 
 }
 
 Mat getThresholdImage(){
-    return imgThreshFinal;
+    return imgThresh;
+}
+
+Mat getContrastedImage(){
+    return imgH;
 }
