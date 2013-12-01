@@ -2,17 +2,51 @@
 
 \section{Threats to validity}
 
-Høj lyd / hastighed kan skræmme myrerne til at flytte sig hurtigere/mere.
-Lav resolution
-Myrer =/= termitter
-myrer bevæger sig ikke som i naturen
-temperatur + luftfugtighed + vind + lys osv.
-Masser af genskær (lysforhold)
-Very sensitive / unstable
-TODO
+% Høj lyd / hastighed kan skræmme myrerne til at flytte sig hurtigere/mere.
+% Lav resolution
+% Myrer =/= termitter
+% myrer bevæger sig ikke som i naturen
+% temperatur + luftfugtighed + vind + lys osv.
+% Masser af genskær (lysforhold)
+% Very sensitive / unstable
+% højere kamera
+% at holde myren i skålen
 
 \subsection{Threats to internal validity}
-Internal Validity is concerned with confirming that the correlation between the treatment and the outcome is indeed casual, and not accidental, or caused by some third variable that has not been observed. For example we may discover that all programmers in C were faster than programmers in Java, but forget that all the programmers in Java took the experiment very late at night, when they were tired.
+%Internal Validity is concerned with confirming that the correlation between the treatment and the outcome is indeed casual, and not accidental, or caused by some third variable that has not been observed. For example we may discover that all programmers in C were faster than programmers in Java, but forget that all the programmers in Java took the experiment very late at night, when they were tired.
+
+While we believe our results to be purely causal there are always some threats to the internal validity that questions which factor could have an impact on the results. We describe the important ones here:
+
+\begin{description}
+\item[Behavior of the ants] This project had a development period spanning over half a year. In this time the season changed and so did the temperature. The ants could have altered behavioral patterns, movement patterns and speed during the project essentially making the ants we tested on at the last part of the project, completely different from the ants we started out with. \\
+
+\item[Painting] We painted our first ant relatively early in the development process and the ants could have had some reaction to the paint. We did use acryllic paint as recommended by our councillor, and we did not observe any noticeable changes but it could still be present. \\
+
+\item[Hardware] Getting the camera in the same position every time is not something that can be done with 100\% accuray every time. The small margin of error during positioning might have had a miniscule impact on the each tracking session. \\
+
+\item[Lights] While we did try to do our testing at the same time of day with the same types of light each time it is very hard to keep completely controlled. Since light does have a significant impact on the tracking this threat to validity might the greatest but it is also something that can be hard to control. \\    
+\end{description}
 
 \subsection{Threats to external validity}
-External validity discusses how far the results are generalizable, or in other words how representative the sample of subjects and the circumstances of the experiment were, to be able to draw general conclusion. Do you expect the same results to be confirmed in somewhat modified conditions?
+%External validity discusses how far the results are generalizable, or in other words how representative the sample of subjects and the circumstances of the experiment were, to be able to draw general conclusion. Do you expect the same results to be confirmed in somewhat modified conditions?
+
+The outcome of this project is highly dependant on the environment around the hardware and the ants/termites. This makes it very hard to replicate the results even with slight changes in things like light or camera resolution. This if course has the reprocussion that while the software works in theory and in a controlled environment it is unlikely to work in the natural habitat of any ants or termites. The following list contains the environment factors we consider to be important for the results:
+
+\begin{description}
+\item[Light] Different intensities of light may affect where the ants/termites wants to move towards. Additionally the tracking relies on thresholded images which can be distorted by different levels of light which makes the tracking more inaccurate and more likely not to find the ant/termite. \\
+
+\item[Reflections] Keeping a lid on the petri dish or filling the outer rim of the petri dish with water, like described in section \ref{background} Background, generates a lot of reflections. This is somewhat tied to the light factor and if the lights are positioned in such a way that the camera catches the reflections it can distort the thresholded image used for tracking. \\
+
+\item[Camera resolution] The camera used had a faily low resolution of 640 times 480. While it could be nice to have a larger resolution, the low resolution enables us to process each frame fairly quickly. The threat to validity is mostly a performance one. If a better camera is chosen one might need to skip more frames or upgrade the connected PC since each frame will have a longer processing time. \\
+
+\item[Camera weight] The camera attached to the plotter during our development and testing was very light. This made the plotter stutte less when it moves thereby generate less sound. Both sudden movements and loud noises can have an effect on the movements of the ants and if the camera is exchanged for a heavier camera it could impact the movement of the ants/termites. \\
+
+\item[Movement of the ants] In our testing phase we observed that whenever we placed an ant in our petri dish the first thing it would do would be trying to escape. It would immediatly seek the edges of the dish regardsless of whether we had the rim filled with water or not. If the plotter was bigger or if the species of ants was different this might not have been the case. \\
+
+\item[Temperature, wind and humidity] Ants, like any other animals, react to temperature, wind and humidity. If any of these factors are changed it could impact how the ants move and how they behave which in turn can impact the tracking. \\  
+
+\item[Ants and termites] Ants are not termites. This fact is something of a gap in the testing of the project. We did not have the opportuniy to test the software with real african termites and therefore settled for ants. While our councillor assured us that they behave in a very similar way we do not have any data supporting that this project will work with real termites, only a strong indication that it should.
+
+\end{description}
+
+All in all we are quite certain that the outcome of this project can be quite hard to replicate. This makes the project more useful as a theoretic base for further development than an actual tool to take into the field in its current state. 
