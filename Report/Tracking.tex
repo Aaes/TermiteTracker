@@ -167,10 +167,30 @@ Using a range to specify a color instead will yield a much more satisfactory res
 		\label{fig:green_final}
 \end{figure}
 
-\noindent \textbf{Dilating and Eroding} \par
-Forklar at vi har en kernel, B, med størrelsen s, der bliver anvendt på hver pixel, p, i et billede A.
-Angiv at dilating finder local optima, og at eroding finder local minima.
-Angiv at de her metoder bliver brugt EFTER thresholding for at "rense" billedet. \\
+\noindent \textbf{Dilation and Erosion} \par
+% Forklar at vi har en kernel, B, med størrelsen s, der bliver anvendt på hver pixel, p, i et billede A.
+% Angiv at dilating finder local optima, og at eroding finder local minima.
+% Angiv at de her metoder bliver brugt EFTER thresholding for at "rense" billedet. \\
+
+The basic concepts of \textit{morphological transformations} are \textit{dilation} and \textit{erosion}. These concepts are mostly used to remove noice, isolating individual elements or joining disparate elements in an image. These transformations are applied to either grayscale or binary image, and are often used to clean up an image after thresholding to make analysing the image easier. The way both erosion and dilation are applied to an image is by defining a kernel, denoted \textit{B}, that will be applied to an image (or part of an image), denoted \textit{A}. The kernel can be any shape or size, however it is often a square where the sides are uneven, e.g. 3x3, 5x5, 7x7 and so on. A kernel has an \textit{anchorpoint}, which is the pixel in A that erosion or dilation are applied on, and the result is stored in the corresponding point in the destination image, \textit{dst(i.j)}. Figure \ref{fig:kernel_ed} shows an example of a kernel and its anchorpoint in the center. \\
+
+\begin{figure}[ht!]
+  \centering
+    \includegraphics[scale=0.50]{img/Kernel_ED.pdf}
+  \caption{Given a pixel, src(i.j) the kernel covers the neighbouring pixels. Shown here is a 3x3 kernel.}
+  \label{fig:kernel_ed}
+\end{figure}
+
+When transforming an image using dilation, whenever the kernel is applied to a new anchorpoint, the \textit{local optima} is used. When eroding an image the \textit{local minima} is used. Naturally, compared to the original image, bright areas a expanded when dilating, and dark areas are expanded when eroding. However one can't say that e.g. eroding removes noice and dilating doesn't. It depends on the image which the transformation is applied on. Figure \ref{fig:sample_kernel} shows an example of pixels used to determine the outcome of the anchorpoint in the destination image. \\
+
+\begin{figure}[ht!]
+  \centering
+    \includegraphics[scale=0.50]{img/sample_kernel.pdf}
+  \caption{An example of a kernel within a source image, src. The value assigned to the destination image, dst(i,j), is 10 if erosion is chosen, else 150 if dilation is chosen. This is done for each pixel in the src image.}
+  \label{fig:sample_kernel}
+\end{figure}
+
+An example of how this applies to a real image is shown in Figure \ref{fig:erodedilate}. It is clear from this example how differently erosion and dilation affects an image.\\
 
 \begin{figure}[!ht]
         \centering
@@ -192,7 +212,7 @@ Angiv at de her metoder bliver brugt EFTER thresholding for at "rense" billedet.
 		\label{fig:erodedilate}
 \end{figure}
 
-\newpage
+Unlike thresholding we cannot apply erosion or dilation to RGB images due to the nature of \textit{RGB} values. Imagine the clear colors, red (255,0,0), green (0,255,0) and blue(0,0,255) - how can we argue which color is \textit{greater} or \textit{smaller} than the other? We cannot. We can with grayscale and binary images since we can safely say that the pixel value 150 is smaller than 255, and 0 is smaller than 1. We cannot for color images. $5 \times 5$
 
 \noindent \textbf{Contrast} \par
 Describe how $\alpha$ and $\beta$ is applied to each pixel in an image. \\
