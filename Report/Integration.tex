@@ -1,6 +1,6 @@
 %!TEX root = Report.tex
 
-\section{Integration with camera}
+\subsection{Integration with camera}
 
 To track the ants present in the petri dish, the plotter is equipped with two low resolution standard web cameras connected directly to the computer using USB. One of the cameras are strapped on a piece of hard plastic holding the lens face-down, thus monitoring the entire scene from a height of approximately XX cm. This camera is referred to as the overhead camera and is supposed to provide the user with the big overview, as well as a canvas to draw statistical overlays on, like heatmaps etc. The second camera is mounted directly on the plotter arm and follows the ant as it moves around in the arena. We will refer to this camera as the mobile camera.
 
@@ -10,9 +10,9 @@ Another performance indicator for the mobile camera is the amount of frames it i
 
 On a side note, it should be noted that the plotter is not new; the internal mechanics are sensitive and will some times cause the arm to do a fast wiggle. We experienced during testing that this blurs the camera input and may introduce small blobs similar to the one representing the ant. Thus, the plotter is in danger of being biased in a wrong direction and loose track of the ant. This problem is also likely to be reduced by using a camera with a larger FPS rate.
 
-\subsection{Practical information}
+\subsubsection{Practical information}
 
-\subsection{Communication with Plotter}
+\subsubsection{Communication with Plotter}
 Just like the two cameras, the plotter is connected to the PC through USB. The plotter provides an old-fashioned LPT parallel port interface which is connected to a printed circuit board (PCB) converting from USB to LPT. The board has a diode that will light up when signals arrive at the USB side of the board. The diode will give a constant blue light in case of an error, but will otherwise flash green. Together with a PC and an RS232 terminal like e.g. Termite, this diode is useful for troubleshooting in case something is not working when running the TERMES software. In order to establish a connection to the plotter for debugging purposes, use the connection parameters listed in table \ref{table:connparam}
 
 \begin{table}[h]
@@ -53,7 +53,7 @@ Hvordan er performance? kan videoen køre i real time? hvis nej hvad betyder det
  *   0x02 in response = sucesss
  *   0xFE in response = failure
  
-\subsection{Moving the camera}
+\subsubsection{Moving the camera}
 Now that we know how to move the plotter, how do we move the camera when the ant moves?
 what about the volume of the movement sound?
 what about the speed of the movement?
