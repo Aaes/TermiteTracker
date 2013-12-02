@@ -1,6 +1,6 @@
 %!TEX root = Report.tex
 
-\section{Tracking}
+\subsection{Tracking}
 This chapter is divided into three subparts. First we will introduce the reader to different image processesing techniques, and their uses. Following this we will introduce the reader to a framework that supports these techniques, and finish off describing the implemented solution and design choices.
 
 % Gå ud fra at dette afsnit ikke har noget video input fra et kamera. Integration med kameraet kommer senere.
@@ -16,7 +16,7 @@ This chapter is divided into three subparts. First we will introduce the reader 
 % Background detection and why we can't use it
 % Alternatives and why we don't use them
 
-\subsection{Theory}
+\subsubsection{Theory}
 This section will provide information about five common image processing techniques; thresholding, dilating and eroding, contrast, image segmentation and background filtering. The description of each technique will be backed up by examples. We will also use the \textit{ternary if} statement notation in this section which looks like the one shown in Equation \ref{eq:notation}.
 
 \begin{equation}
@@ -346,11 +346,11 @@ Background substraction (also known as foreground detection) is a process often 
 
 \newpage
 
-\subsection{Framework}
+\subsubsection{Framework}
 \label{framework}
 Describe OpenCV. Explain why it is preferable over other frameworks. \\
 
-\subsection{Realization}
+\subsubsection{Realization}
 Describe the solution and design choices. E.g. why do we use thresholding but not Background Filtering. Something about blob detection?\\
 Nævn Vi har modtaget video først for at kunne starte før vi fik plotteren. \\
 
