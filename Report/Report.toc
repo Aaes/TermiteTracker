@@ -5,29 +5,29 @@
 \contentsline {subsection}{\numberline {1.1}Project Proposal}{3}{subsection.1.1.1}
 \contentsline {section}{\numberline {2}Vision based insect tracking}{4}{section.1.2}
 \contentsline {subsection}{\numberline {2.1}Background}{4}{subsection.1.2.1}
-\contentsline {subsubsection}{Assumptions}{5}{section*.3}
-\contentsline {subsubsection}{Scope}{5}{section*.4}
-\contentsline {subsubsection}{Requirements}{6}{section*.5}
+\contentsline {subsubsection}{Assumptions}{5}{section*.4}
+\contentsline {subsubsection}{Scope}{5}{section*.5}
+\contentsline {subsubsection}{Requirements}{6}{section*.7}
 \contentsline {subsection}{\numberline {2.2}Tracking}{7}{subsection.1.2.2}
-\contentsline {subsubsection}{Theory}{7}{section*.6}
-\contentsline {subsubsection}{Framework}{15}{section*.18}
-\contentsline {subsubsection}{Realization}{15}{section*.19}
+\contentsline {subsubsection}{Theory}{7}{section*.9}
+\contentsline {subsubsection}{Framework}{15}{section*.21}
+\contentsline {subsubsection}{Realization}{15}{section*.22}
 \contentsline {section}{\numberline {3}Camera feedback and robot control}{15}{section.1.3}
 \contentsline {subsection}{\numberline {3.1}Integration with camera}{15}{subsection.1.3.1}
-\contentsline {subsubsection}{Practical information}{16}{section*.20}
-\contentsline {subsubsection}{Communication with Plotter}{16}{section*.21}
-\contentsline {subsubsection}{Moving the camera}{16}{section*.23}
-\contentsline {subsection}{\numberline {3.2}Graphical user interface}{16}{subsection.1.3.2}
-\contentsline {subsubsection}{Statistics}{17}{section*.25}
+\contentsline {subsubsection}{Practical information}{16}{section*.23}
+\contentsline {subsubsection}{Communication with Plotter}{16}{section*.24}
+\contentsline {subsubsection}{Moving the camera}{17}{section*.26}
+\contentsline {subsection}{\numberline {3.2}Graphical user interface}{17}{subsection.1.3.2}
+\contentsline {subsubsection}{Statistics}{17}{section*.28}
 \contentsline {section}{\numberline {4}Testing, evaluation and conclusion}{17}{section.1.4}
 \contentsline {subsection}{\numberline {4.1}Process}{17}{subsection.1.4.1}
-\contentsline {subsection}{\numberline {4.2}Reflection}{18}{subsection.1.4.2}
-\contentsline {subsection}{\numberline {4.3}Evaluation}{18}{subsection.1.4.3}
+\contentsline {subsection}{\numberline {4.2}Reflection}{19}{subsection.1.4.2}
+\contentsline {subsection}{\numberline {4.3}Evaluation}{19}{subsection.1.4.3}
 \contentsline {subsection}{\numberline {4.4}Threats to validity}{19}{subsection.1.4.4}
-\contentsline {subsubsection}{Threats to internal validity}{19}{section*.26}
-\contentsline {subsubsection}{Threats to external validity}{19}{section*.27}
-\contentsline {subsection}{\numberline {4.5}Related Work}{20}{subsection.1.4.5}
-\contentsline {subsection}{\numberline {4.6}Future Work}{20}{subsection.1.4.6}
-\contentsline {subsection}{\numberline {4.7}Conclusion}{21}{subsection.1.4.7}
-\contentsline {section}{\numberline {5}Defition of terms}{21}{section.1.5}
+\contentsline {subsubsection}{Threats to internal validity}{19}{section*.29}
+\contentsline {subsubsection}{Threats to external validity}{20}{section*.30}
+\contentsline {subsection}{\numberline {4.5}Related Work}{21}{subsection.1.4.5}
+\contentsline {subsection}{\numberline {4.6}Future Work}{21}{subsection.1.4.6}
+\contentsline {subsection}{\numberline {4.7}Conclusion}{22}{subsection.1.4.7}
+\contentsline {section}{\numberline {5}Defition of terms}{22}{section.1.5}
 \contentsline {section}{\numberline {A}First Appendix}{22}{section.A.1}
