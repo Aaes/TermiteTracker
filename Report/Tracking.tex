@@ -1,7 +1,7 @@
 %!TEX root = Report.tex
 
 \section{Tracking}
-This chapter is divided into three subparts. First we will introduce the reader to different image processesing techniques, and their uses. Following this we will introduce the reader to a framework that supports these techniques, and finish off by describing the implemened solution and the design choices.
+This chapter is divided into three subparts. First we will introduce the reader to different image processesing techniques, and their uses. Following this we will introduce the reader to a framework that supports these techniques, and finish off describing the implemented solution and design choices.
 
 % Gå ud fra at dette afsnit ikke har noget video input fra et kamera. Integration med kameraet kommer senere.
 % 
@@ -167,10 +167,30 @@ Using a range to specify a color instead will yield a much more satisfactory res
 		\label{fig:green_final}
 \end{figure}
 
-\noindent \textbf{Dilating and Eroding} \par
-Forklar at vi har en kernel, B, med størrelsen s, der bliver anvendt på hver pixel, p, i et billede A.
-Angiv at dilating finder local optima, og at eroding finder local minima.
-Angiv at de her metoder bliver brugt EFTER thresholding for at "rense" billedet. \\
+\noindent \textbf{Dilation and Erosion} \par
+% Forklar at vi har en kernel, B, med størrelsen s, der bliver anvendt på hver pixel, p, i et billede A.
+% Angiv at dilating finder local optima, og at eroding finder local minima.
+% Angiv at de her metoder bliver brugt EFTER thresholding for at "rense" billedet. \\
+
+The basic concepts of \textit{morphological transformations} are \textit{dilation} and \textit{erosion}. These concepts are mostly used to remove noice, isolating individual elements or joining disparate elements in an image. These transformations are applied to either grayscale or binary image, and are often used to clean up an image after thresholding to make analysing the image easier. The way both erosion and dilation are applied to an image is by defining a kernel, denoted \textit{B}, that will be applied to an image (or part of an image), denoted \textit{A}. The kernel can be any shape or size, however it is often a square where the sides are uneven, e.g. 3x3, 5x5, 7x7 and so on. A kernel has an \textit{anchorpoint}, which is the pixel in A that erosion or dilation are applied on, and the result is stored in the corresponding point in the destination image, \textit{dst(i.j)}. Figure \ref{fig:kernel_ed} shows an example of a kernel and its anchorpoint in the center. \\
+
+\begin{figure}[ht!]
+  \centering
+    \includegraphics[scale=0.50]{img/Kernel_ED.pdf}
+  \caption{Given a pixel, src(i.j) the kernel covers the neighbouring pixels. Shown here is a 3x3 kernel.}
+  \label{fig:kernel_ed}
+\end{figure}
+
+When transforming an image using dilation, whenever the kernel is applied to a new anchorpoint, the \textit{local optima} is used. When eroding an image the \textit{local minima} is used. Naturally, compared to the original image, bright areas are expanded when dilating, and dark areas are expanded when eroding. However one cannot say that e.g. eroding removes noice and dilating does not. It depends on the image which the transformation is applied on. Figure \ref{fig:sample_kernel} shows an example of pixels used to determine the outcome of the anchorpoint in the destination image. \\
+
+\begin{figure}[ht!]
+  \centering
+    \includegraphics[scale=0.50]{img/sample_kernel.pdf}
+  \caption{An example of a kernel within a source image, src. The value assigned to the destination image, dst(i,j), is 10 if erosion is chosen, else 150 if dilation is chosen.}
+  \label{fig:sample_kernel}
+\end{figure}
+
+An example of how this applies to a real image is shown in Figure \ref{fig:erodedilate}. It is clear from this example how differently erosion and dilation affects an image.\\
 
 \begin{figure}[!ht]
         \centering
@@ -192,16 +212,139 @@ Angiv at de her metoder bliver brugt EFTER thresholding for at "rense" billedet.
 		\label{fig:erodedilate}
 \end{figure}
 
+Unlike thresholding we cannot apply erosion or dilation to RGB images due to the nature of \textit{RGB} values. Imagine the clear colors, red (255,0,0), green (0,255,0) and blue(0,0,255) - how can we argue which color is \textit{greater} or \textit{smaller} than the other? We cannot. We can with grayscale and binary images since we can safely say that the pixel value 150 is smaller than 255, and 0 is smaller than 1. We cannot for color images.
+
 \newpage
 
-\noindent \textbf{Contrast} \par
-Describe how $\alpha$ and $\beta$ is applied to each pixel in an image. \\
+\noindent \textbf{Contrast and Brightness} \par
+Where dilation and erosion sought to expand either dark or bright areas, contrast and brightness seek to increase the overall brightness or darkness of an image or the absolute difference difference between dark and bright pixels. To increase the absolute difference difference between two pixels, or \textit{increasing the contrast of the image}, each pixel in an image is multiplied with the same scalar, denoted $\alpha$. Since images are basically matrices this method is equal to \textit{scalar multiplication} shown in Equation \ref{eq:matrix_mul}.
+
+\begin{equation}
+\alpha \times 
+\setlength{\arraycolsep}{5pt}
+ \begin{bmatrix}
+  a & b & c \\
+  d & e & f \\
+  g & h & i \\
+ \end{bmatrix} =
+ \setlength{\arraycolsep}{5pt} 
+ \begin{bmatrix}
+  \alpha \times a & \alpha \times b & \alpha \times c \\
+  \alpha \times d & \alpha \times e & \alpha \times f \\
+  \alpha \times g & \alpha \times h & \alpha \times i \\
+ \end{bmatrix}
+ \label{eq:matrix_mul}
+\end{equation}
+
+To increase the brightness each pixel is added with a scalar, denoted $\beta$ instead. This way the absolute difference between each pixel is kept, however all pixels get darker or brighter depending on the scalar. Similar to contrast this operation is equal to \textit{scalar addition} as shown in Equation \ref{eq:matrix_add}. To make the pixels brighter a positive scalar is used, to make it darker a negative scalar is used. Figure \ref{fig:bright_contrast} shows the result of contrasting and increasing the brightness of an image. Contrast and brightness are used to make dark, bright and diffuse images easier to analyse. \\
+
+\begin{equation}
+\beta + 
+\setlength{\arraycolsep}{5pt}
+ \begin{bmatrix}
+  a & b & c \\
+  d & e & f \\
+  g & h & i \\
+ \end{bmatrix} =
+ \setlength{\arraycolsep}{5pt} 
+ \begin{bmatrix}
+  \beta + a & \beta + b & \beta + c \\
+  \beta + d & \beta + e & \beta + f \\
+  \beta + g & \beta + h & \beta + i \\
+ \end{bmatrix}
+ \label{eq:matrix_add}
+\end{equation}
+
+\begin{figure}
+        \centering
+        \begin{subfigure}[b]{0.3\textwidth}
+                \includegraphics[scale = 0.2]{img/colorGlobe}
+                \caption{Source image}
+        \end{subfigure}
+		\quad
+        \begin{subfigure}[b]{0.3\textwidth}
+                \includegraphics[scale = 0.2]{img/globeBright}
+                \caption{Brightened image}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.3\textwidth}
+                \includegraphics[scale = 0.2]{img/globeContrast}
+                \caption{Contrasted image}
+        \end{subfigure}
+		\caption{Example of increasing the contrast and brigtness of an image. For this example $\alpha = 5$ and $\beta = 100$}
+		\label{fig:bright_contrast}
+\end{figure}
 
 \noindent \textbf{Image Segmentation} \par
-Describe how clustering algorithms is applied to create "pixel" blobs. \\
+Image segmentation is the processing of partitioning all the pixels in an image into \textit{S} segments (or superpixels). The goal is to simplify an or change the representation of an image such that it is easier to analyse. It is mostly used to locate objects that consist of a range of similar colors, that is combined into a single colored object after segmentation, thus making it easier to find. Image segmentation is therefore the process of assigning a label to a pixel, such that such that pixels with the same label share certain visual characteristics. The result of image segmentation is a set of segments that covers the entire image. Thresholding, as described earlier, is the simplest method of segmenting an image.
 
-\noindent \textbf{Background Filtering} \par
-Describe how computing the absolute difference in pixel values between two image filters out the background. \\
+One of the most common algorithms to segment images is the \textit{k-means} algorithm. K-means is a \textit{clustering algorithm} often used in \textit{datamining} in the \textit{unsupervised learning} category. What k-means basically does it to take a set of unclassified data, and classify it. It does so by assigning all the data to \textit{K} different clusters, and iteratively assign data to the clusters it is most similar to after new \textit{centroids} have been assigned. The algorithm terminates when data no longers changes clusters or a number of iterations have completed. Even though more robust classification algorithms exists, \textit{k-means} is often used simply because each iteration is relatively fast. The algorithm works as follows:
+
+\begin{enumerate}
+  \item Randomly selects \textit{k} objects in the dataset \textit{D}, which initially represents the centroid for each cluster.
+  \item Each object in \textit{D}, is then assigned to the centroid it is most similar to.
+  \item For each cluster, it computes a new centroid from the previously assigned object and repeats (2).
+  \item If all clusters are unchanged between two iterations, the algorithm terminates.
+\end{enumerate}
+
+An example of using k-means to cluster an image is shown in Figure \ref{fig:segmentation}. \\
+
+\begin{figure}
+        \centering
+        \begin{subfigure}[b]{0.3\textwidth}
+                \includegraphics[scale = 0.5]{img/earth}
+                \caption{Source image}
+        \end{subfigure}
+		\quad
+        \begin{subfigure}[b]{0.3\textwidth}
+                \includegraphics[scale = 0.5]{img/earth_segment}
+                \caption{Segmented image}
+        \end{subfigure}
+		\caption{Example of segmenting an image. In this example the number of clusters specified is 3.}
+		\label{fig:segmentation}
+\end{figure}
+
+\noindent \textbf{Background subtraction} \par
+Background substraction (also known as foreground detection) is a process often used to detect moving objects with a static camera. The idea is that the background remains roughly the same in every image in a video stream, while moving objects enter and leaves the stream shortly after, or become part of the background after some time have passed. The rationale is to have a background image (or reference point) and then substract the image with the new object in it. Computing the difference will result in an image with only the moving object in it, that can be used for analysis. The absolute difference is computed almost like a standard \textit{matrix substraction} as shown in Equation \ref{eq:matrix_sub}. An example of background subtraction is shown in Figure \ref{fig:background_filtering}\\
+
+\begin{equation}
+\setlength{\arraycolsep}{5pt}
+ \begin{bmatrix}
+  a & b \\
+  c & d \\
+ \end{bmatrix} - 
+ \setlength{\arraycolsep}{5pt} 
+ \begin{bmatrix}
+  e & f \\
+  g & h \\
+ \end{bmatrix} =
+ \setlength{\arraycolsep}{5pt} 
+ \begin{bmatrix}
+  abs(a-e) & abs(b-f) \\
+  abs(c-g) & abs(d-h) \\
+ \end{bmatrix}
+ \label{eq:matrix_sub}
+\end{equation}
+
+\begin{figure}
+        \centering
+        \begin{subfigure}[b]{0.3\textwidth}
+                \includegraphics[scale = 0.35]{img/pyramid}
+                \caption{Background image}
+        \end{subfigure}
+		\quad
+        \begin{subfigure}[b]{0.3\textwidth}
+                \includegraphics[scale = 0.35]{img/pyramid_new}
+                \caption{Foreground image}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.3\textwidth}
+                \includegraphics[scale = 0.35]{img/pyramid_object}
+                \caption{Object detection}
+        \end{subfigure}
+		\caption{Example of detecting a new object on a static background. In this example all differences greater than zero is set to 255.}
+		\label{fig:background_filtering}
+\end{figure}
+
+\newpage
 
 \subsection{Framework}
 \label{framework}

@@ -2,11 +2,45 @@
 
 \section{Integration with camera}
 
-NOTE: Husk at nævn det ikke er super hensigtsmæssigt at maskineriet hakker så meget som det gør.
+To track the ants present in the petri dish, the plotter is equipped with two low resolution standard web cameras connected directly to the computer using USB. One of the cameras are strapped on a piece of hard plastic holding the lens face-down, thus monitoring the entire scene from a height of approximately XX cm. This camera is referred to as the overhead camera and is supposed to provide the user with the big overview, as well as a canvas to draw statistical overlays on, like heatmaps etc. The second camera is mounted directly on the plotter arm and follows the ant as it moves around in the arena. We will refer to this camera as the mobile camera.
+
+Choosing relatively low resolution cameras has been a deliberate decision, as processing is done on a per-frame basis, meaning there is good reason to believe that a higher pixel-density would increase processing time and thus prevent the camera from keeping up with the ant. On the other hand, the resolution should be high enough for the software to be able to identify the ant and/or the painted marker on its body. Fortunately, tests have shown that the mobile camera used in this project has been close to optimal with regards to image quality.
+
+Another performance indicator for the mobile camera is the amount of frames it is able to record per second (FPS). To be able to maintain a stable tracking process, it is a key property that the ant is present in any two consecutive frames recorded by the camera. If this property is not held, it means that the ant is ahead of the camera, and the plotter will need to initiate a special procedure to relocate the ant. The camera needs at least as many FPS as needed for this to hold. On the other hand, more frames means more processing, which is also not good, but as long as the image quality is modest, this should not be a problem. The specific camera that was used in this project has a suitable quality, but could use a higher FPS value.
+
+On a side note, it should be noted that the plotter is not new; the internal mechanics are sensitive and will some times cause the arm to do a fast wiggle. We experienced during testing that this blurs the camera input and may introduce small blobs similar to the one representing the ant. Thus, the plotter is in danger of being biased in a wrong direction and loose track of the ant. This problem is also likely to be reduced by using a camera with a larger FPS rate.
 
 \subsection{Practical information}
 
-\subsection{Communication with the plotter}
+\subsection{Communication with Plotter}
+Just like the two cameras, the plotter is connected to the PC through USB. The plotter provides an old-fashioned LPT parallel port interface which is connected to a printed circuit board (PCB) converting from USB to LPT. The board has a diode that will light up when signals arrive at the USB side of the board. The diode will give a constant blue light in case of an error, but will otherwise flash green. Together with a PC and an RS232 terminal like e.g. Termite, this diode is useful for troubleshooting in case something is not working when running the TERMES software. In order to establish a connection to the plotter for debugging purposes, use the connection parameters listed in table \ref{table:connparam}
+
+\begin{table}[h]
+\centering
+\renewcommand{\arraystretch}{1.1}
+\setlength{\tabcolsep}{8pt}
+	\begin{tabular}{ |l|l| }
+  	\hline
+  	\multicolumn{2}{|c|}{Connection Parameters} \\
+  	\hline
+  	Baud Rate & 38400 bps \\
+  	Data Bits & 8 \\
+  	Stop Bits & 1 \\
+  	Parity & none \\
+  	Flow Control & none \\
+  	\hline
+	\end{tabular}
+	\caption{Connection Parameters}
+	\label{table:connparam}
+\end{table}
+
+
+
+
+
+
+
+
 Hvilken plotter er det og hvilket udstyr sidder på den
 Hvordan er den sat til computeren
 hvad vil vi gerne have den til (nævn at det ville have været nice at have det cross platform)
