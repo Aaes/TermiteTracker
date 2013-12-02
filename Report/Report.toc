@@ -27,7 +27,7 @@
 \contentsline {subsubsection}{\numberline {4.4.1}Threats to internal validity}{20}{subsubsection.1.4.4.1}
 \contentsline {subsubsection}{\numberline {4.4.2}Threats to external validity}{21}{subsubsection.1.4.4.2}
 \contentsline {subsection}{\numberline {4.5}Related Work}{22}{subsection.1.4.5}
-\contentsline {subsection}{\numberline {4.6}Future Work}{22}{subsection.1.4.6}
-\contentsline {subsection}{\numberline {4.7}Conclusion}{23}{subsection.1.4.7}
-\contentsline {section}{\numberline {5}Defition of terms}{23}{section.1.5}
+\contentsline {subsection}{\numberline {4.6}Future Work}{23}{subsection.1.4.6}
+\contentsline {subsection}{\numberline {4.7}Conclusion}{24}{subsection.1.4.7}
+\contentsline {section}{\numberline {5}Defition of terms}{24}{section.1.5}
 \contentsline {section}{\numberline {A}First Appendix}{24}{section.A.1}
