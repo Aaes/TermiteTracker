@@ -1,33 +1,6 @@
 %!TEX root = Report.tex
 
-\subsection{Background}
-\label{background}
-
-\todo{This section is a bit low level for the introduciton maybe move relevant paragrahs to the more detailed part of the report. Here I guess you just need an overview.}
-
-%Projektet er erstatning for GSD hvad betyder det for os? (ved ikke om det skal med)
-%Hvilket udstyr havde vi at arbejde med?
-%Umiddlebart ville vi gerne have logic code i C++ og GUI i Java så vidt muligt. Hvilke fordele giver det os? hvorfor?
-%Hvad for nogen myrer havde vi og var der nogen udfordringer her? (tænk: hvis jeg skal gøre det igen, hvad skal jeg så huske om myrer)
-%Hvordan var det med at male myrerne?
-
-This project was undertaken as a substitute for the "Global Software Development" course at ITU and therefore has additional emphasis on the international collaboration and developement process. Section \ref{process} Process will describe the tools used as well as evaluate the overall process. \\ 
-
-Our councillor at Harvard wanted the tracking and the interfacing with the tracking device to be implemented in C++ to make it easier for further developement. The graphical user interface was not restricted when choosing programming langauge and we ended up using C\# and Windows Forms to implement it.
-
-As mentioned in the project proposal the project was divided into three parts. The first part of the project was to be able to track termites. Since african termites are hard to come by and transport we settled for giant ants (Camponotus Ligniperdus), which are the largest ants found in Denmark \cite{fogn}, instead. While these are not as big as the termites, they behave in a similar way and the solution should be able to easily adapt to the termites. In the first part we started by implementing the tracking on a video. We received a video from Harvard of a single ant running around in a petri dish with a white background. The ant itself was painted red and green to make tracking easier. This was the simplest setup we could think of and acted as a good starting point. By recommendation we decided to use the OpenCV \cite{opencv} framework to implement our tracking. We will return to this framework in Section \ref{framework} Framework. \\
-
-The second part of the project interacting with our tracking device and conform the tracking code to work with the device. We received a Hewlett-Packard 7046a XY-plotter by mail from our councillor at Harvard. Additionally we received a small ant farm, containing one queen and seven worker ants (no soldier ants), via mail and we bought some brushes and acryllic paint for the ants. The ants did not proliferate during the project. While we discussed using infrared paint or fluorescend paint, both these ideas were discarded because both types of paint contains compounds that the termites and ants really like which makes them eat the painted ant. Along with the plotter we also received a small circuit board that plugged into the serial port of the plotter and had a USB cabel for us to communicate with it. Lastly the package contained a collection of petri dishes for us to use. \\
-
-In this part we had to paint the ants with the paint we bought and we want to give some friendly advice to anyone who wants to do any projects involving ants. If you put them 2-4 minutes in the freezer they become very docile and much easier to paint without harming the ants. When they are taken out they act completely normal after 2-3 minutes. The ants also had a tendency to crawl up the sides of the petri dish. We were recommended to try putting teflon tape (should be really slippery) on the sides without any luck. We were also recommended to try mineral oil but we were unable to get any. Our solution was to place a small petri dish in a bigger petri dish and fill the gap with water. The ants would quickly discover that there was water surronding them which prevented them from escaping the small petri dish. \\
-
-The third part of the project involved constructing the graphical user interface, hooking it up to the tracking code and extracting statistics.  \\
-
-TODO: beskriv third part. Skriv at myrer godt kan svømme! plus de problemer vi havde med at holde myrene inden for petri skålen.  
-
-\subsubsection{Assumptions} \mbox{}\par
-
-TODO
+%\subsubsection{Assumptions} \mbox{}\par
 
 \subsubsection{Scope} \mbox{}\par
 
@@ -50,6 +23,8 @@ maybe this is how you felt, but you could have gotten a 3d printer platform and 
 As the HP 7046a plotter was the only hardware available to us we have restricted the project to only include this type of plotter. One could potentially gain better results with a plotter with a finer granularity in coordinates and smoother movement. The cameras supplied with the plotter was also the only cameras available to us and we have therefore also restricted the project to only include these cameras. While one could use higher resolution cameras to obtain a better result, the weight of the camera is also important for the smoothness of the movement of the plotter and must be carefully considered.\\
 
 While it could be intereseting to track several ants we have chosen to focus on tracking a single ant in this project due to time restrictions. Tracking several ants can prove more difficult since one has to account for ants crossing each others paths and would require more time to implement.\\
+
+Our councillor at Harvard wanted the tracking and the interfacing with the tracking device to be implemented in C++ to make it easier for further developement. The graphical user interface was not restricted when choosing programming langauge and we ended up using C\# and Windows Forms to implement it.
 
 TODO: \\
 fortæl om hvordan vi IKKE tester
