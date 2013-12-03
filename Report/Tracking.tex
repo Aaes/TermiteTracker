@@ -168,6 +168,8 @@ Using a range to specify a color instead will yield a much more satisfactory res
 		\label{fig:green_final}
 \end{figure}
 
+\newpage
+
 \noindent \textbf{Dilation and Erosion} \par
 % Forklar at vi har en kernel, B, med størrelsen s, der bliver anvendt på hver pixel, p, i et billede A.
 % Angiv at dilating finder local optima, og at eroding finder local minima.
@@ -213,9 +215,7 @@ An example of how this applies to a real image is shown in Figure \ref{fig:erode
 		\label{fig:erodedilate}
 \end{figure}
 
-Unlike thresholding we cannot apply erosion or dilation to RGB images due to the nature of \textit{RGB} values. Imagine the clear colors, red (255,0,0), green (0,255,0) and blue(0,0,255) - how can we argue which color is \textit{greater} or \textit{smaller} than the other? We cannot. We can with grayscale and binary images since we can safely say that the pixel value 150 is smaller than 255, and 0 is smaller than 1. We cannot for color images.
-
-\newpage
+Unlike thresholding we cannot apply erosion or dilation to RGB images due to the nature of \textit{RGB} values. Imagine the clear colors, red (255,0,0), green (0,255,0) and blue(0,0,255) - how can we argue which color is \textit{greater} or \textit{smaller} than the other? We cannot. We can with grayscale and binary images since we can safely say that the pixel value 150 is smaller than 255, and 0 is smaller than 1. We cannot for color images. \\
 
 \noindent \textbf{Contrast and Brightness} \par
 Where dilation and erosion sought to expand either dark or bright areas, contrast and brightness seek to increase the overall brightness or darkness of an image or the absolute difference between dark and bright pixels. To increase the absolute difference difference between two pixels, or \textit{increasing the contrast of the image}, each pixel in an image is multiplied with the same scalar, denoted $\alpha$. Since images are basically matrices this method is equal to \textit{scalar multiplication} shown in Equation \ref{eq:matrix_mul}.
@@ -356,7 +356,15 @@ OpenCV is the shorthand for Open Computer Vision, and is an open source project 
 Other computer vision frameworks exists but come short on several parameters. As stated in the requirements, tracking had to be done in \texttt{C}/\texttt{C++} which leaves out frameworks for higher level languages such as PyCVF for Python, imageJ for Java and OpenClooVision for C\#. Furthermore several frameworks exist that extends OpenCV or creates a simpler abstraction layer such as SimpleCV and other frameworks offers a very limited amount of features such as VisionBlocks. As a result OpenCV was chosen to be the framework of choice, both because of maturity and effeciency, but also because of the amount of computer vision features offered to its users.
 
 \subsubsection{Realization} \mbox{}\par
-Describe the solution and design choices. E.g. why do we use thresholding but not Background Filtering. Something about blob detection?\\
-Nævn Vi har modtaget video først for at kunne starte før vi fik plotteren. \\
+Having presented several computer vision techniques and the framework used, this section will focus on applying these techniques in a real world scenario to find an actual ant within an image from a webcam. To be able to track the ant of interest and make it distinguishable from other ants, we will paint it with a color that is easier to detect than the ant itself. We want to track the ants on real ground material, and not just a static colored uniform background, and the ants available to us are either dark brown or black closely resembling the ground material found throughout Europe. It is therefore important to choose a color that is easy to detect on such material. For this reason we have chosen a white paint for testing purposes.\\
+
+The image in Figure \ref{fig:ant} will be used as a reference point when showing how a certain computer vision technique performs.
+
+\begin{figure}[ht!]
+  \centering
+    \includegraphics[scale=0.25]{img/ant.png}
+  \caption{}
+  \label{fig:ant}
+\end{figure}
 
 
