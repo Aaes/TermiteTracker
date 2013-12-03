@@ -6,7 +6,7 @@
 \contentsline {section}{\numberline {2}Vision based insect tracking}{4}{section.1.2}
 \contentsline {subsubsection}{\numberline {2.0.1}Scope}{4}{subsubsection.1.2.0.1}
 \contentsline {subsubsection}{\numberline {2.0.2}Requirements}{5}{subsubsection.1.2.0.2}
-\contentsline {subsection}{\numberline {2.1}Something with ants?}{6}{subsection.1.2.1}
+\contentsline {subsection}{\numberline {2.1}Handling ants}{6}{subsection.1.2.1}
 \contentsline {subsection}{\numberline {2.2}Tracking}{6}{subsection.1.2.2}
 \contentsline {subsubsection}{\numberline {2.2.1}Theory}{7}{subsubsection.1.2.2.1}
 \contentsline {subsubsection}{\numberline {2.2.2}Framework}{15}{subsubsection.1.2.2.2}
