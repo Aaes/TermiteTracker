@@ -218,7 +218,7 @@ An example of how this applies to a real image is shown in Figure \ref{fig:erode
 		\label{fig:erodedilate}
 \end{figure}
 
-Unlike thresholding we cannot apply erosion or dilation to RGB images due to the nature of \textit{RGB} values. Imagine the clear colors, red (255,0,0), green (0,255,0) and blue(0,0,255) - how can we argue which color is \textit{greater} or \textit{smaller} than the other? We cannot. We can with grayscale and binary images since we can safely say that the pixel value 150 is smaller than 255, and 0 is smaller than 1. We cannot for color images. \\
+Unlike thresholding we cannot apply erosion or dilation to RGB images due to the nature of \textit{RGB} values. Imagine the clear colors, red (255,0,0), green (0,255,0) and blue(0,0,255) - how can we argue which color is \textit{greater} or \textit{smaller} than the other? We cannot. We can with grayscale and binary images since we can safely say that the pixel value 150 is smaller than 255, and 0 is smaller than 1. We cannot say that for color images. \\
 
 \noindent \textbf{Contrast and Brightness} \par
 Where dilation and erosion sought to expand either dark or bright areas, contrast and brightness seek to increase the overall brightness or darkness of an image or the absolute difference between dark and bright pixels. To increase the absolute difference difference between two pixels, or \textit{increasing the contrast of the image}, each pixel in an image is multiplied with the same scalar, denoted $\alpha$. Since images are basically matrices this method is equal to \textit{scalar multiplication} shown in Equation \ref{eq:matrix_mul}.
@@ -354,20 +354,110 @@ Background substraction (also known as foreground detection) is a process often 
 \label{framework}
 The theory behind computer vision techniques is solid. However to track an ant in an image solid theory and implementation is not enough. We have to keep in mind that this will have to be done on several consecutive images, without delaying the entire process, allowing the ant to escape the camera. Therefore effeciency is a key aspect as well. Chosing an effecient framework to help us track ants is therefore of outmost importance. OpenCV provides such a framework.\\
 
-OpenCV is the shorthand for Open Computer Vision, and is an open source project started in 1999 and since maintained by Intel. It is written in C and C++ and runs on Linux, Windows and Mac OS X. OpenCV was designed from to beginning to be computationally efficient with a string focus on real-time applications. Another goal is to provide a simple-to-use computer vision infrastructure. Since its initial creation OpenCV has matured gradually, and along with it computer vision as well. Today OpenCV and computer vision is used in a broad context from web applications to survailance and aerial street maps.\\
+OpenCV is the shorthand for Open Computer Vision, and is an open source project started in 1999 and since maintained by Intel. It is written in C and C++ and runs on Linux, Windows and Mac OS X. OpenCV was designed from the beginning to be computationally efficient with a string focus on real-time applications. Another goal is to provide a simple-to-use computer vision infrastructure. Since its initial creation OpenCV has matured gradually, and along with it computer vision as well. Today OpenCV and computer vision is used in a broad context from web applications to survailance and aerial street maps.\\
 
 Other computer vision frameworks exists but come short on several parameters. As stated in the requirements, tracking had to be done in \texttt{C}/\texttt{C++} which leaves out frameworks for higher level languages such as PyCVF for Python, imageJ for Java and OpenClooVision for C\#. Furthermore several frameworks exist that extends OpenCV or creates a simpler abstraction layer such as SimpleCV and other frameworks offers a very limited amount of features such as VisionBlocks. As a result OpenCV was chosen to be the framework of choice, both because of maturity and effeciency, but also because of the amount of computer vision features offered to its users.
 
 \subsubsection{Realization} \mbox{}\par
-Having presented several computer vision techniques and the framework used, this section will focus on applying these techniques in a real world scenario to find an actual ant within an image from a webcam. To be able to track the ant of interest and make it distinguishable from other ants, we will paint it with a color that is easier to detect than the ant itself. We want to track the ants on real ground material, and not just a static colored uniform background, and the ants available to us are either dark brown or black closely resembling the ground material found throughout Europe. It is therefore important to choose a color that is easy to detect on such material. For this reason we have chosen a white paint for testing purposes.\\
+Having presented several computer vision techniques and the framework, this section will focus on applying these techniques in a real world scenario to find an actual ant within an image from a webcam. To be able to track the ant of interest and make it distinguishable from other ants, we will paint it with a color that is easier to detect than the ant itself. We want to track the ants on real ground material, and not just a static colored uniform background, and the ants available to us are either dark brown or black closely resembling the ground material found throughout Europe. It is therefore important to choose a color that is easy to detect on such material. For this reason we have chosen a white paint for testing purposes.\\
 
-The image in Figure \ref{fig:ant} will be used as a reference point when showing how a certain computer vision technique performs in tracking the ant.
+The image in Figure \ref{fig:ant} will be used as a reference point when showing how a certain computer vision technique performs in tracking the ant. The overall goal of tracking the ant is to find an \emph{object} in the image, that we are completely sure is the ant. Ideally the best possible result of processing the image, is a binary image where we can easily see the object we know is the ant, and nothing else or very little beside this object. The approach to this problem is then to find a way to prepare this image for easy blob detection \todo{skriv at blob detection vil blive beskrevet senere i afsnittet - evt en kort intro til blob detection}.
 
 \begin{figure}[ht!]
   \centering
     \includegraphics[scale=0.25]{img/ant.png}
-  \caption{}
+  \caption{An image of one of our ants running around in our petridish. Gives an idea of how the images from the webcam will look that we need to process.}
   \label{fig:ant}
 \end{figure}
+
+It is evident from the image in Figure \ref{fig:ant}, that the overall image is very dark. The ant itself is very hard to see, and even the white areas are dark. A way to improve this is to use the theory of \emph{Contrast and Brightness} to improve the lighting condition of the image. Figure \ref{fig:contrast_ant} shows the result of applying contrast or brightness to Figure \ref{fig:ant}. \\
+
+\begin{figure}
+        \centering
+        \begin{subfigure}[b]{0.4\textwidth}
+                \includegraphics[scale = 0.2]{img/contrast2times}
+                \caption{$\alpha = 2$}
+        \end{subfigure}
+		\quad
+        \begin{subfigure}[b]{0.4\textwidth}
+                \includegraphics[scale = 0.2]{img/contrast3times}
+                \caption{$\alpha = 3$}
+        \end{subfigure} \hfill \\ \mbox{}\\
+        \begin{subfigure}[b]{0.4\textwidth}
+                \includegraphics[scale = 0.2]{img/bright50}
+                \caption{$\beta = 50$}
+        \end{subfigure}
+		\quad
+        \begin{subfigure}[b]{0.4\textwidth}
+                \includegraphics[scale = 0.2]{img/bright150}
+                \caption{$\beta = 150$}
+        \end{subfigure}
+		\caption{Applying brightness or contrast to the ant image.}
+		\label{fig:contrast_ant}
+\end{figure}
+
+It is clear from Figure \ref{fig:contrast_ant} that image \emph{c} and \emph{d} does not provide a proper result. Even though the image is indeed brightened, differentiating between the ant and the background has not become much easier. Small changes to the lightning condition would probably also make image \emph{d} much harder to analyse. Whether image \emph{a} or \emph{b} provides the best result comes down to what we want the most - that the object we look for is as close to clear white as possible, or that it is the most distinguishable object in the image. For colors in general, it is better for it to be distinguishable than trying to make it hit a specific color intensity. The result of image \emph{a} is therefore preferable. \\
+
+Now that we have improved the overall quality of the image, the next task is to isolate the ant in the improved image. For this task we have three techniques available; \emph{thresholding}, \emph{image segmentation} and \emph{background subtraction}. Background subtraction have a major flaw in our case - the camera in question is in no way static. Furthermore, the area covered by the camera involves different color intensities of ground material, petri-dish edge and water. To create a background filter that would map to all these different materials, and at the same time take into consideration that they will never appear in the same part of the image, makes it almost impossible to do. In most situations there will be so many new objects in the image, that the ant might be the least changable object for every frame. This leaves us with image segmentation and thresholding.\\
+
+Figure \ref{fig:segment_ant} shows examples of running image segmentation with different numbers of segments, \textit{K}, defined on image \emph{a} from Figure \ref{fig:contrast_ant}. It is clear from these tests that a certain number of segments are neccessary for a satisfactory result. $K=8$ and $K=10$ clearly gives the best results, however it comes at a cost; segmenting these images simply takes too much time. Even with only óne segmentation attemp for each image, it takes around one second or more to produce a result. Considering this needs to be done \emph{multiple} times within a second when using a camera, this solution is simply not feasible or possible for tracking. An ant can easily move out of a frame without the camera ever knowing, simply because it is too slow or the ant is too fast.\\
+
+\begin{figure}
+        \centering
+        \begin{subfigure}[b]{0.4\textwidth}
+                \includegraphics[scale = 0.2]{img/segment4}
+                \caption{K = 4}
+        \end{subfigure}
+		\quad
+        \begin{subfigure}[b]{0.4\textwidth}
+                \includegraphics[scale = 0.2]{img/segment6}
+                \caption{K = 6}
+        \end{subfigure} \hfill \\ \mbox{}\\
+        \begin{subfigure}[b]{0.4\textwidth}
+                \includegraphics[scale = 0.2]{img/segment8}
+                \caption{K = 8}
+        \end{subfigure}
+		\quad
+        \begin{subfigure}[b]{0.4\textwidth}
+                \includegraphics[scale = 0.2]{img/segment10}
+                \caption{K = 10}
+        \end{subfigure}
+		\caption{Segmenting the ant image.}
+		\label{fig:segment_ant}
+\end{figure}
+
+This leave us with only one option; thresholding. Figure \ref{fig:thresh_ant} shows thresholding attems on image \emph{a} from Figure \ref{fig:contrast_ant}. The results of different thresholds shows us two things; firtly that image \emph{d} is a very good threshold result and secondly that we need a rather high threshold value to get this result. In contrast to segmentation, applying a threshold to our image is much faster, and usable for a steady camera stream.\\
+
+\begin{figure}
+        \centering
+        \begin{subfigure}[b]{0.4\textwidth}
+                \includegraphics[scale = 0.2]{img/thresh100}
+                \caption{T = 100}
+        \end{subfigure}
+		\quad
+        \begin{subfigure}[b]{0.4\textwidth}
+                \includegraphics[scale = 0.2]{img/thresh150}
+                \caption{T = 150}
+        \end{subfigure} \hfill \\ \mbox{}\\
+        \begin{subfigure}[b]{0.4\textwidth}
+                \includegraphics[scale = 0.2]{img/thresh200}
+                \caption{T = 200}
+        \end{subfigure}
+		\quad
+        \begin{subfigure}[b]{0.4\textwidth}
+                \includegraphics[scale = 0.2]{img/thresh240}
+                \caption{T = 240}
+        \end{subfigure}
+		\caption{Thresholding the ant image.}
+		\label{fig:thresh_ant}
+\end{figure}
+
+Now that we have a satistafactory binary image that clearly shows the position of our ant, the next step is to actually get the location of the ant within the image. For this purpose we will use a \textit{blob detection}. In short, blob detection is a computer vision technique encapsulating mathematical methods that are aimed at detecting regions in a digital image. These regions differ in properties such as brightness and color from its the regions surrounding it. So where segmentation seeks to partition an image, blob detection seek to find the partitions. All the pixels in a blob are considered share similar properties. 
+
+\newpage
+
+
+
+
 
 
