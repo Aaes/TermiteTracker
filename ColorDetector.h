@@ -25,5 +25,6 @@
 int ColorDetection(Mat img, Scalar colorMin, Scalar colorMax, double alpha, int beta, int result[]);
 Mat getThresholdImage();
 Mat getContrastedImage();
+KeyPoint getLargestBlob(vector<KeyPoint> input);
 
 #endif /* defined(__TermiteTracker__ColorDetector__) */

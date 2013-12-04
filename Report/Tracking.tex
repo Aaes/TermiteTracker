@@ -218,7 +218,7 @@ An example of how this applies to a real image is shown in Figure \ref{fig:erode
 		\label{fig:erodedilate}
 \end{figure}
 
-Unlike thresholding we cannot apply erosion or dilation to RGB images due to the nature of \textit{RGB} values. Imagine the clear colors, red (255,0,0), green (0,255,0) and blue(0,0,255) - how can we argue which color is \textit{greater} or \textit{smaller} than the other? We cannot. We can with grayscale and binary images since we can safely say that the pixel value 150 is smaller than 255, and 0 is smaller than 1. We cannot say that for color images. \\
+Unlike thresholding we cannot apply erosion or dilation to RGB images due to the nature of \textit{RGB} values. Imagine the clear colors, red (255,0,0), green (0,255,0) and blue(0,0,255) - how can we argue which color is \textit{greater} or \textit{smaller} than the other? We cannot. We can with grayscale and binary images since we can safely say that the pixel value 150 is smaller than 255, and 0 is smaller than 1. We cannot for color images. \\
 
 \noindent \textbf{Contrast and Brightness} \par
 Where dilation and erosion sought to expand either dark or bright areas, contrast and brightness seek to increase the overall brightness or darkness of an image or the absolute difference between dark and bright pixels. To increase the absolute difference difference between two pixels, or \textit{increasing the contrast of the image}, each pixel in an image is multiplied with the same scalar, denoted $\alpha$. Since images are basically matrices this method is equal to \textit{scalar multiplication} shown in Equation \ref{eq:matrix_mul}.
@@ -279,7 +279,7 @@ To increase the brightness each pixel is added with a scalar, denoted $\beta$ in
 \end{figure}
 
 \noindent \textbf{Image Segmentation} \par
-Image segmentation is the processing of partitioning all the pixels in an image into \textit{S} segments (or superpixels). The goal is to simplify an or change the representation of an image such that it is easier to analyse. It is mostly used to locate objects that consist of a range of similar colors, that is combined into a single colored object after segmentation, thus making it easier to find. Image segmentation is therefore the process of assigning a label to a pixel, such that such that pixels with the same label share certain visual characteristics. The result of image segmentation is a set of segments that covers the entire image. Thresholding, as described earlier, is the simplest method of segmenting an image. \\
+Image segmentation is the processing of partitioning all the pixels in an image into \textit{S} segments (or superpixels). The goal is to simplify or change the representation of an image such that it is easier to analyse. It is mostly used to locate objects that consist of a range of similar colors, that is combined into a single colored object after segmentation, thus making it easier to find. Image segmentation is therefore the process of assigning a label to a pixel, such that such that pixels with the same label share certain visual characteristics. The result of image segmentation is a set of segments that covers the entire image. Thresholding, as described earlier, is the simplest method of segmenting an image. \\
 
 One of the most common algorithms to segment images is the \textit{k-means} algorithm. K-means is a \textit{clustering algorithm} often used in \textit{datamining} in the \textit{unsupervised learning} category. What k-means basically does it to take a set of unclassified data, and classify it. It does so by assigning all the data to \textit{K} different clusters, and iteratively assign data to the clusters it is most similar to after new \textit{centroids} have been assigned. The algorithm terminates when data no longers changes clusters or a number of iterations have completed. Even though more robust classification algorithms exists, \textit{k-means} is often used simply because each iteration is relatively fast. The algorithm works as follows:
 
@@ -354,19 +354,19 @@ Background substraction (also known as foreground detection) is a process often 
 \label{framework}
 The theory behind computer vision techniques is solid. However to track an ant in an image solid theory and implementation is not enough. We have to keep in mind that this will have to be done on several consecutive images, without delaying the entire process, allowing the ant to escape the camera. Therefore effeciency is a key aspect as well. Chosing an effecient framework to help us track ants is therefore of outmost importance. OpenCV provides such a framework.\\
 
-OpenCV is the shorthand for Open Computer Vision, and is an open source project started in 1999 and since maintained by Intel. It is written in C and C++ and runs on Linux, Windows and Mac OS X. OpenCV was designed from the beginning to be computationally efficient with a string focus on real-time applications. Another goal is to provide a simple-to-use computer vision infrastructure. Since its initial creation OpenCV has matured gradually, and along with it computer vision as well. Today OpenCV and computer vision is used in a broad context from web applications to survailance and aerial street maps.\\
+OpenCV is the shorthand for Open Computer Vision, and is an open source project started in 1999 and since maintained by Intel. It is written in C and C++ and runs on Linux, Windows and Mac OS X. OpenCV was designed from to beginning to be computationally efficient with a string focus on real-time applications. Another goal is to provide a simple-to-use computer vision infrastructure. Since its initial creation OpenCV has matured gradually, and along with it computer vision as well. Today OpenCV and computer vision is used in a broad context from web applications to survailance and aerial street maps.\\
 
 Other computer vision frameworks exists but come short on several parameters. As stated in the requirements, tracking had to be done in \texttt{C}/\texttt{C++} which leaves out frameworks for higher level languages such as PyCVF for Python, imageJ for Java and OpenClooVision for C\#. Furthermore several frameworks exist that extends OpenCV or creates a simpler abstraction layer such as SimpleCV and other frameworks offers a very limited amount of features such as VisionBlocks. As a result OpenCV was chosen to be the framework of choice, both because of maturity and effeciency, but also because of the amount of computer vision features offered to its users.
 
 \subsubsection{Realization} \mbox{}\par
-Having presented several computer vision techniques and the framework, this section will focus on applying these techniques in a real world scenario to find an actual ant within an image from a webcam. To be able to track the ant of interest and make it distinguishable from other ants, we will paint it with a color that is easier to detect than the ant itself. We want to track the ants on real ground material, and not just a static colored uniform background, and the ants available to us are either dark brown or black closely resembling the ground material found throughout Europe. It is therefore important to choose a color that is easy to detect on such material. For this reason we have chosen a white paint for testing purposes.\\
+Having presented several computer vision techniques and the framework used, this section will focus on applying these techniques in a real world scenario to find an actual ant within an image from a webcam. To be able to track the ant of interest and make it distinguishable from other ants, we will paint it with a color that is easier to detect than the ant itself. We want to track the ants on real ground material, and not just a static colored uniform background, and the ants available to us are either dark brown or black closely resembling the ground material found throughout Europe. It is therefore important to choose a color that is easy to detect on such material. For this reason we have chosen a white paint for testing purposes.\\
 
-The image in Figure \ref{fig:ant} will be used as a reference point when showing how a certain computer vision technique performs in tracking the ant. The overall goal of tracking the ant is to find an \emph{object} in the image, that we are completely sure is the ant. Ideally the best possible result of processing the image, is a binary image where we can easily see the object we know is the ant, and nothing else or very little beside this object. The approach to this problem is then to find a way to prepare this image for easy blob detection \todo{skriv at blob detection vil blive beskrevet senere i afsnittet - evt en kort intro til blob detection}.
+The image in Figure \ref{fig:ant} will be used as a reference point when showing how a certain computer vision technique performs in tracking the ant.
 
 \begin{figure}[ht!]
   \centering
     \includegraphics[scale=0.25]{img/ant.png}
-  \caption{An image of one of our ants running around in our petridish. Gives an idea of how the images from the webcam will look that we need to process.}
+  \caption{}
   \label{fig:ant}
 \end{figure}
 
@@ -426,7 +426,7 @@ Figure \ref{fig:segment_ant} shows examples of running image segmentation with d
 		\label{fig:segment_ant}
 \end{figure}
 
-This leave us with only one option; thresholding. Figure \ref{fig:thresh_ant} shows thresholding attems on image \emph{a} from Figure \ref{fig:contrast_ant}. The results of different thresholds shows us two things; firtly that image \emph{d} is a very good threshold result and secondly that we need a rather high threshold value to get this result. In contrast to segmentation, applying a threshold to our image is much faster, and usable for a steady camera stream.\\
+This leave us with only one option; thresholding. Figure \ref{fig:thresh_ant} shows thresholding attemps on a grayscale version of image \emph{a} from Figure \ref{fig:contrast_ant}. The results of different thresholds shows us two things; firstly that image \emph{d} is a very good threshold result and secondly that we need a rather high threshold value to get this result. In contrast to segmentation, applying a threshold to our image is much faster, and usable for a steady camera stream.\\
 
 \begin{figure}
         \centering
@@ -452,12 +452,33 @@ This leave us with only one option; thresholding. Figure \ref{fig:thresh_ant} sh
 		\label{fig:thresh_ant}
 \end{figure}
 
-Now that we have a satistafactory binary image that clearly shows the position of our ant, the next step is to actually get the location of the ant within the image. For this purpose we will use a \textit{blob detection}. In short, blob detection is a computer vision technique encapsulating mathematical methods that are aimed at detecting regions in a digital image. These regions differ in properties such as brightness and color from its the regions surrounding it. So where segmentation seeks to partition an image, blob detection seek to find the partitions. All the pixels in a blob are considered share similar properties. 
+Now that we have a satistafactory binary image that clearly shows the position of our ant, the next step is to actually get the location of the ant within the image. For this purpose we will use a \textit{blob detection}. In short, blob detection is a computer vision technique encapsulating mathematical methods that are aimed at detecting regions in a digital image. These regions differ in properties such as brightness and color from the regions surrounding it. So where segmentation seeks to partition an image, blob detection seek to find the partitions. All the pixels in a blob are considered to share similar properties.
 
-\newpage
+Considering the binary image \emph{d} from Figure \ref{fig:thresh_ant} clearly shows that we have to blobs available, that are rather large. This is of course ideal, but we might also have cases where we have smaller blobs caused by reflections on the ground or water. Therefore is is not enough to just use the first blob we find in an image - we should always use the largest blob available in the image, which hopefully, is our ant. The result of finding the largest blob in our binary image is shown in Figure \ref{fig:finalResult}.
 
+\begin{figure}
+    \captionsetup{justification=centering}
+        \centering
+        \begin{subfigure}[b]{0.45\textwidth}
+                \includegraphics[scale = 0.25]{img/threshblob}
+                \caption{\mbox{}\\Detected blob drawn on thresh image}
+        \end{subfigure}
+		\quad
+        \centering
+        \begin{subfigure}[b]{0.45\textwidth}
+                \includegraphics[scale = 0.25]{img/srcblob}
+                \caption{\mbox{}\\Detected blob drawn on original image}
+        \end{subfigure}
+		\caption{Final result of finding the ant in our image. The detected blob is drawn on on both the thresholded image and the original ant image.}
+		\label{fig:finalResult}
+\end{figure}
 
+Concluding this chapter we outline tho process of going from a raw image input to a successfully detected ant within an image, based on both the choices and experiments from this chapter. The process is as follows:
 
-
-
-
+\begin{enumerate}
+    \item Increase the contrast of the raw image with an alpha value of atleast 2.0.
+    \item Convert the contrasted image to grayscale.
+    \item Threshold the contrasted image with a threshold value of atleast 240.
+    \item Run blob detection on the thresholded image.
+    \item Output the largest blob from the blob detection on the original image.
+\end{enumerate}
