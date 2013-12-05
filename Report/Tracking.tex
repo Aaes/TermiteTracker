@@ -21,17 +21,20 @@ This chapter is divided into three subparts. First we will introduce the reader 
 
 \subsubsection{Theory} \mbox{}\par
 \todo{Rewrite chapter a bit - make it self contained. Keep writing WHY this is important and interesting to read and how it will help track ants.}
-This section will provide information about five common image processing techniques; thresholding, dilating and eroding, contrast, image segmentation and background filtering. The description of each technique will be backed up by examples. We will also use the \textit{ternary if} statement notation in this section which looks like the one shown in Equation \ref{eq:notation}.
+This section will provide information about five common image processing techniques; thresholding, dilating and eroding, contrast, image segmentation and background filtering. The description of each technique will be backed up by examples. The theory presented will form the basis of how we are going to track the real ants, and will give a better understanding of what is possible with each technique - and what is not possible.
+
+
+In this section we will use the \textit{ternary if} statement notation in this section which looks like the one shown in Equation \ref{eq:notation}.
 
 \begin{equation}
 value = {Boolean\mbox{-}Condition} ? {True\mbox{-}Evaluation}: {False\mbox{-}Evaluation}
 \label{eq:notation}
 \end{equation}
 
-It works just like you would expect from many programming languages. It is also known as an inline \textit{if-statement}. \\
+It works just like you would expect from many programming languages or mathematical expression. It is also known as an inline \textit{if-statement}. \\
 
 \noindent \textbf{Thresholding} \par
-Thresholding is an image processing technique used to make a final decision about each pixel in an image. Either a pixel value is one that we are interested in or it is not. This is usually done by assigning a specific pixel value to the pixel we want, and another to those that we do not want. In general we compare the \textit{i}th pixel of the source image, \textit{src}, to the threshold value, \textit{T}, and saves the result in a destination image, \textit{dst}. For instance, to create a binary image where we are interested in all pixels above the threshold \textit{T}, the equation would look like the one shown in Equation \ref{eq:binarythresholding},
+Thresholding is an image processing technique used to make a final decision about each pixel in an image. Thresholding is most commonly used to find objects in images, e.g. finding an ant in an image. During thresholding a decision is made based on the following; either a pixel value is one that we are interested in or it is not. This is usually done by assigning a specific pixel value to the pixel we want, and another to those that we do not want. In general we compare the \textit{i}th pixel of the source image, \textit{src}, to the threshold value, \textit{T}, and saves the result in a destination image, \textit{dst}. For instance, to create a binary image where we are interested in all pixels above the threshold \textit{T}, the equation would look like the one shown in Equation \ref{eq:binarythresholding},
 
 \begin{equation}
 dst_i = src_i \geq T ? 255: 0
@@ -154,7 +157,7 @@ We will use the definitions in Equations \ref{eq:thresholdlower} and \ref{eq:thr
 \label{eq:threshold_range}
 \end{equation}
 
-Using a range to specify a color instead will yield a much more satisfactory result as shown in Figure \ref{fig:green_final}. \\
+Using a range to specify a color instead will yield a much more satisfactory result as shown in Figure \ref{fig:green_final}. In summary, both grayscale thresholding, and color thresholding can be used to find ants of certain colors in an image.\\
 
 \begin{figure}
         \centering
@@ -178,7 +181,9 @@ Using a range to specify a color instead will yield a much more satisfactory res
 % Angiv at dilating finder local optima, og at eroding finder local minima.
 % Angiv at de her metoder bliver brugt EFTER thresholding for at "rense" billedet. \\
 
-The basic concepts of \textit{morphological transformations} are \textit{dilation} and \textit{erosion}. These concepts are mostly used to remove noice, isolating individual elements or joining disparate elements in an image. These transformations are applied to either grayscale or binary image, and are often used to clean up an image after thresholding to make analysing the image easier. The way both erosion and dilation are applied to an image is by defining a kernel, denoted \textit{B}, that will be applied to an image (or part of an image), denoted \textit{A}. The kernel can be any shape or size, however it is often a square where the sides are uneven, e.g. 3x3, 5x5, 7x7 and so on. A kernel has an \textit{anchorpoint}, which is the pixel in A that erosion or dilation are applied on, and the result is stored in the corresponding point in the destination image, \textit{dst(i.j)}. Figure \ref{fig:kernel_ed} shows an example of a kernel and its anchorpoint in the center. \\
+The basic concepts of \textit{morphological transformations} are \textit{dilation} and \textit{erosion}. These concepts are mostly used to remove noice, isolating individual elements or joining disparate elements in an image. Dilation and erosion are applied to either grayscale or binary image, and are often used to clean up an image after thresholding to make analysing the image easier. For example, when locating an ant, there might be many small light dots that make the ant hard to see, which can be much improved by using erosion or dilation depending on the image in question.\\
+
+The way both erosion and dilation are applied to an image is by defining a kernel, denoted \textit{B}, that will be applied to an image (or part of an image), denoted \textit{A}. The kernel can be any shape or size, however it is often a square where the sides are uneven, e.g. 3x3, 5x5, 7x7 and so on. A kernel has an \textit{anchorpoint}, which is the pixel in A that erosion or dilation are applied on, and the result is stored in the corresponding point in the destination image, \textit{dst(i.j)}. Figure \ref{fig:kernel_ed} shows an example of a kernel and its anchorpoint in the center. \\
 
 \begin{figure}[ht!]
   \centering
@@ -218,10 +223,12 @@ An example of how this applies to a real image is shown in Figure \ref{fig:erode
 		\label{fig:erodedilate}
 \end{figure}
 
-Unlike thresholding we cannot apply erosion or dilation to RGB images due to the nature of \textit{RGB} values. Imagine the clear colors, red (255,0,0), green (0,255,0) and blue(0,0,255) - how can we argue which color is \textit{greater} or \textit{smaller} than the other? We cannot. We can with grayscale and binary images since we can safely say that the pixel value 150 is smaller than 255, and 0 is smaller than 1. We cannot for color images. \\
+Unlike thresholding we cannot apply erosion or dilation to RGB images due to the nature of \textit{RGB} values. Imagine the clear colors, red (255,0,0), green (0,255,0) and blue(0,0,255) - how can we argue which color is \textit{greater} or \textit{smaller} than the other? We cannot. We can with grayscale and binary images since we can safely say that the pixel value 150 is smaller than 255, and 0 is smaller than 1. We cannot for color images. In summary, we have presented techniques to make ants much clearer in an image with a lot of noise, that might prevent us from properly finding an ant.\\
 
 \noindent \textbf{Contrast and Brightness} \par
-Where dilation and erosion sought to expand either dark or bright areas, contrast and brightness seek to increase the overall brightness or darkness of an image or the absolute difference between dark and bright pixels. To increase the absolute difference difference between two pixels, or \textit{increasing the contrast of the image}, each pixel in an image is multiplied with the same scalar, denoted $\alpha$. Since images are basically matrices this method is equal to \textit{scalar multiplication} shown in Equation \ref{eq:matrix_mul}.
+Where dilation and erosion sought to expand either dark or bright areas, contrast and brightness seek to increase the overall brightness or darkness of an image or the absolute difference between dark and bright pixels. This can make it easier to find an ant in an image where the image is either too bright, or too dark.\\
+
+To increase the absolute difference between two pixels, or \textit{increasing the contrast of the image}, each pixel in an image is multiplied with the same scalar, denoted $\alpha$. Since images are basically matrices this method is equal to \textit{scalar multiplication} shown in Equation \ref{eq:matrix_mul}.
 
 \begin{equation}
 \alpha \times 
@@ -240,7 +247,7 @@ Where dilation and erosion sought to expand either dark or bright areas, contras
  \label{eq:matrix_mul}
 \end{equation}
 
-To increase the brightness each pixel is added with a scalar, denoted $\beta$ instead. This way the absolute difference between each pixel is kept, however all pixels get darker or brighter depending on the scalar. Similar to contrast this operation is equal to \textit{scalar addition} as shown in Equation \ref{eq:matrix_add}. To make the pixels brighter a positive scalar is used, to make it darker a negative scalar is used. Figure \ref{fig:bright_contrast} shows the result of contrasting and increasing the brightness of an image. Contrast and brightness are used to make dark, bright and diffuse images easier to analyse. \\
+To increase the brightness each pixel is added with a scalar, denoted $\beta$ instead. This way the absolute difference between each pixel is kept, however all pixels get darker or brighter depending on the scalar. Similar to contrast this operation is equal to \textit{scalar addition} as shown in Equation \ref{eq:matrix_add}. To make the pixels brighter a positive scalar is used, to make it darker a negative scalar is used. Figure \ref{fig:bright_contrast} shows the result of contrasting and increasing the brightness of an image. Contrast and brightness are used to make dark, bright and diffuse images easier to analyse. In summary, contrast and brightness can help improve the image quality, making it much easier to find an ant, or distinguish it from other parts of the image.\\
 
 \begin{equation}
 \beta + 
@@ -279,7 +286,7 @@ To increase the brightness each pixel is added with a scalar, denoted $\beta$ in
 \end{figure}
 
 \noindent \textbf{Image Segmentation} \par
-Image segmentation is the processing of partitioning all the pixels in an image into \textit{S} segments (or superpixels). The goal is to simplify or change the representation of an image such that it is easier to analyse. It is mostly used to locate objects that consist of a range of similar colors, that is combined into a single colored object after segmentation, thus making it easier to find. Image segmentation is therefore the process of assigning a label to a pixel, such that such that pixels with the same label share certain visual characteristics. The result of image segmentation is a set of segments that covers the entire image. Thresholding, as described earlier, is the simplest method of segmenting an image. \\
+Image segmentation is the processing of partitioning all the pixels in an image into \textit{S} segments (or superpixels). The goal is to simplify or change the representation of an image such that it is easier to analyse. It is mostly used to locate objects that consist of a range of similar colors, that is combined into a single colored object after segmentation, thus making it easier to find. Image segmentation is therefore the process of assigning a label to a pixel, such that such that pixels with the same label share certain visual characteristics. The result of image segmentation is a set of segments that covers the entire image. Thresholding, as described earlier, is the simplest method of segmenting an image. This can be an important technique in finding the ant, should thresholding alone not be good enough as more elaborate algorithms can be used to find the ant in an image.\\
 
 One of the most common algorithms to segment images is the \textit{k-means} algorithm. K-means is a \textit{clustering algorithm} often used in \textit{datamining} in the \textit{unsupervised learning} category. What k-means basically does it to take a set of unclassified data, and classify it. It does so by assigning all the data to \textit{K} different clusters, and iteratively assign data to the clusters it is most similar to after new \textit{centroids} have been assigned. The algorithm terminates when data no longers changes clusters or a number of iterations have completed. Even though more robust classification algorithms exists, \textit{k-means} is often used simply because each iteration is relatively fast. The algorithm works as follows:
 
@@ -290,7 +297,7 @@ One of the most common algorithms to segment images is the \textit{k-means} algo
   \item If all clusters are unchanged between two iterations, the algorithm terminates.
 \end{enumerate}
 
-An example of using k-means to cluster an image is shown in Figure \ref{fig:segmentation}. \\
+An example of using k-means to cluster an image is shown in Figure \ref{fig:segmentation}. In summary, image segmentation provides a powerful way to easily simplify an image, possibly making ant detection much easier. \\
 
 \begin{figure}
         \centering
@@ -308,7 +315,7 @@ An example of using k-means to cluster an image is shown in Figure \ref{fig:segm
 \end{figure}
 
 \noindent \textbf{Background subtraction} \par
-Background substraction (also known as foreground detection) is a process often used to detect moving objects with a static camera. The idea is that the background remains roughly the same in every image in a video stream, while moving objects enter and leaves the stream shortly after, or become part of the background after some time have passed. The rationale is to have a background image (or reference point) and then substract the image with the new object in it. Computing the difference will result in an image with only the moving object in it, that can be used for analysis. The absolute difference is computed almost like a standard \textit{matrix substraction} as shown in Equation \ref{eq:matrix_sub}. An example of background subtraction is shown in Figure \ref{fig:background_filtering}\\
+Background substraction (also known as foreground detection) is a process often used to detect moving objects with a static camera. The idea is that the background remains roughly the same in every image in a video stream, while moving objects enter and leaves the stream shortly after, or become part of the background after some time have passed. The rationale is to have a background image (or reference point) and then substract the image with the new object in it. This technique can be useful for tracking a moving ant, assuming the background remains roughly the same in the test setup. Computing the difference between the foreground and background will result in an image with only the moving object in it, that can be used for analysis. The absolute difference is computed almost like a standard \textit{matrix substraction} as shown in Equation \ref{eq:matrix_sub}. An example of background subtraction is shown in Figure \ref{fig:background_filtering}.\\
 
 \begin{equation}
 \setlength{\arraycolsep}{5pt}
@@ -452,7 +459,7 @@ This leave us with only one option; thresholding. Figure \ref{fig:threshant} sho
 		\label{fig:threshant}
 \end{figure}
 
-Now that we have a satistafactory binary image that clearly shows the position of our ant, the next step is to actually get the location of the ant within the image. For this purpose we will use a \textit{blob detection}. In short, blob detection is a computer vision technique encapsulating mathematical methods that are aimed at detecting regions in a digital image. These regions differ in properties such as brightness and color from the regions surrounding it. So where segmentation seeks to partition an image, blob detection seek to find the partitions. All the pixels in a blob are considered to share similar properties.
+Now that we have a satistafactory binary image that clearly shows the position of our ant, the next step is to actually get the position of the ant within the image. For this purpose we will use a \textit{blob detection}. In short, blob detection is a computer vision technique encapsulating mathematical methods that are aimed at detecting regions in a digital image. These regions differ in properties such as brightness and color from the regions surrounding it. So where segmentation seeks to partition an image, blob detection seek to find the partitions. All the pixels in a blob are considered to share similar properties.
 
 Considering the binary image \emph{d} from Figure \ref{fig:threshant} clearly shows that we have to blobs available, that are rather large. This is of course ideal, but we might also have cases where we have smaller blobs caused by reflections on the ground or water. Therefore is is not enough to just use the first blob we find in an image - we should always use the largest blob available in the image, which hopefully, is our ant. The result of finding the largest blob in our binary image is shown in Figure \ref{fig:finalResult}.
 
