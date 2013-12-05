@@ -21,7 +21,53 @@ The plotter is a 45x45 table with a mechanical control panel on the side (see fi
 
 The control panel is divided into labeled regions with sets of controls to manipulate specific parts of the plotter. Specifically, there is a region with controls for adjusting the zero point of the X-axis, one for the Y-axis, one for power supply etc. Most important of these is the two buttons that is used to adjust the zero point (0,0), as the software produced in this project will send only positive X and Y coordinates. Thus, the zero point must be located outside the area of the arena in order for the plotter arm to reach any possible location of the ant. \\
 
-In order to connect the plotter to a PC, it provides an old-fashioned LPT parallel port interface. In this project, we use a printed circuit board (PCB) converting between LPT and USB. The board has a diode that will light up when signals arrive at the USB side of the board. The diode will give a constant blue light in case of an error, but will otherwise flash green. Together with a PC and an RS232 terminal like e.g. Termite from CompuPhase, this diode is useful for troubleshooting in case something is not working when running the TERMES software. 
+In order to connect the plotter to a PC, it provides an old-fashioned LPT parallel port interface. In this project, we use a printed circuit board (PCB) converting between LPT and USB. The board has a diode that will light up when signals arrive at the USB side of the board. The diode will give a constant blue light in case of an error, but will otherwise flash green. Together with a PC and an RS232 terminal like e.g. Termite from CompuPhase, this diode is useful for troubleshooting in case something is not working when running the TERMES software. \\ 
+
+\subsubsection{Cameras}
+To track the ants present in the petri dish, the plotter is equipped with two low resolution standard web cameras connected directly to the PC through USB. One of the cameras are strapped on a piece of hard plastic holding the lens face-down, thus monitoring most of the plotter table from a height of approximately 30 cm. This camera is referred to as the overhead camera and is supposed to provide the user with the big overview, as well as a canvas to draw statistical overlays on, like heatmaps etc. The second camera is mounted directly on the plotter arm and follows the ant as it moves around in the arena. We will refer to this camera as the mobile camera. \\
+
+Both cameras have a resolution of 640x480 pixels (less than 1 megapixel) as opposed to modern digital cameras with a resolution of more than 15 megapixels. Choosing relatively low resolution cameras has been a deliberate decision, as processing is done on a per-frame basis, meaning there is good reason to believe that a higher pixel density would increase processing time and thus prevent the camera from keeping up with the ant. On the other hand, the resolution should be high enough for the software to be able to identify the ant and/or the painted marker on its body. Fortunately, tests have shown that the mobile camera used in this project has been close to optimal with regards to image quality. \\
+
+Another performance indicator for the mobile camera is the amount of frames it is able to record per second (FPS). To be able to maintain a stable tracking process, it is a key property that the ant is present in any two consecutive frames recorded by the camera. If this property is not held, it means that the ant is ahead of the camera, and the plotter will need to initiate a special procedure to relocate the ant. The camera needs at least as many FPS as needed for this to hold. On the other hand, more frames means more processing, which is also not good, but as long as the image quality is modestly low, this should not be a problem. Special techniques have been used to improve processing time, which we will discuss in Section XX. The specific mobile camera that was used in this project has a suitable quality, but could use a higher FPS value. \\
+
+On a side note, it should be noted that the plotter is not new; the internal mechanics are sensitive and will some times cause the arm to do a fast wiggle. The effect of this is similar to taking a picture of a moving object with a DSLR camera whose shutter time is too large. The frame will be blurred and the pixels will "drag lines" that may introduce blobs similar to the one representing the ant. Thus, the plotter is in danger of being biased in a wrong direction and loose track of the ant. This problem is also likely to be reduced by using a camera with a larger FPS rate - or a newer plotter. \\
+
+\subsection{Communication with Plotter}
+In order to manipulate the plotter, a high level C++ API was developed offering instructions like "Go to coordinate (x, y)", "move 10 units to the left", where left is defined in terms of the camera view, etc. Since the coordinate system axes of the plotter and the mobile camera grows in different directions, such an API is very convenient to have in order to construct the logic that moves the camera when the ant leaves the center of the frame. \\
+
+In order to implement this API, we needed to know the hardware protocol of the plotter. This was, however only given informally. Basically, the plotter accepts commands in the pattern given in Equation \ref{eq:plotterformat}.
+
+\begin{center}
+  \begin{equation}
+  \label{eq:plotterformat}
+    0x01 +  xxxx +  yyyy
+  \end{equation}
+\end{center}
+
+In this format, \textit{xxxx} and \textit{yyyy} are two 4-digit hexadecimal numbers representing the X and Y part of the target coordinate. 0x01 indicates that we are sending something. Thus the plotter can receive coordinates between (0x0, 0x0) and (0xFFFF, 0xFFFF), however, any coordinate larger than (COORDINATES MISSING) lies outside the table area and will overflow and come back at zero. \\
+
+To transmit the coordinates through the USB connection, we use a light weight open source C library (INSERT REFERENCE). This library is implemented directly on top of the operating system specific calls for manipulating I/O resources (\texttt{WriteFile()} in Windows and \texttt{write()} in Unix), thus treating the plotter like it was manipulating a file descriptor. The library contains procedures for opening and closing the connection as well as transferring data. When sending commands in the format of Equation \ref{eq:plotterformat}, one should note that both the X and the Y part needs to be split in two parts of two hex-numbers each. Thus, the data passed to the library should be a 5-entry array of unsigned chars where the 0x01 part goes into the first entry. \\
+
+Using this library, we developed a high level plotter interface that takes coordinates in decimal format and converts them to appropriate arrays that are sent over the connection. Furthermore, we added functions for moving the camera relatively to its own position by remembering the last requested coordinate. We even experimented with a special procedure for moving the arm in a soft fashion, as an attempt to keep the camera steady during movements to avoid blurry frames as mentioned above. In order to move the plotter some number of units from A to B, instead of going all the way at once, this procedure would start by first taking a small step of 2 units, then 4, 6, 8 and so on until it reaches a maximum step length (and stop in the same way with decreasing steps). Perhaps unsurprisingly, this did not solve much as the plotter can only move with one speed and it will start and stop abruptly. Any step smaller than a few units though, will be completed too fast for the camera to blur the frames.
+
+\subsection{Moving the camera}
+Being able to move the plotter, the question remains of how to respond to changes in video frames. In the current version of the software, the plotter will stay centered above the ant. Conversely, this means that the ant should be found in the center of the frame - if this is not the case then it is either not in the frame at all (in which case manual interaction is needed) or it is somewhere along the inner edges, in which case we need to move the camera. To move the camera, the software locates the center of the frame along with the pixel coordinates of the ant, calculates the pixel difference in each direction, translates the distances to plotter units and moves the camera. Unless the distance is smaller than approximately 5 units, the camera will blur when it starts to move, so we skip 2 frames, trusting that the 3rd frame will be steady. The choice of skipping 2 frames is chosen by experimentation.\\
+
+In order to know many units we need to adjust the plotter in each direction when the camera has identified the ant, we need a way to convert a pixel distance to a unit distance. When doing this conversion, we need to consider that
+
+\begin{itemize}
+  \item The conversion depends on the height of the camera and should be adjusted whenever the height is changed
+  \item The true distance of 1 unit in millimeters is different on the X and Y axis of the plotter. Thus, we need separate conversions for each.
+  \item From the cameras point of view "right" points towards zero on the Y axis and down points towards zero on the X axis.
+\end{itemize}
+
+To make the conversion, we turned on the camera while sitting on the plotter. Next we layed out a sheet of graph paper under the camera and measured the true distance of one frame width (640 pixels) and one frame height (480 pixels). Next we measured the true distance of an arbitrary amount of units on the plotter. The rest is simple math. \\
+
+As the kind of ants tested in this project is highly energetic and moves very fast, the camera sometimes looses track of them. We have observed this to be due to mainly 3 things. Firstly, since we skip two frames for every frame we process, the camera will always be two frames behind real time. From the view of the camera, this makes the ants run even faster than they actually do and it will be harder for it to follow along. Secondly, it takes some time to process each frame in order to isolate the ant and find out how to react when it moves away from the center - the more time it takes, the longer will the camera stand still and allow the ant to run off. In this project we reduced the processing time from about 200ms per frame to approximately 60ms using techniques we will come back to in Section \ref{testing}. Finally, if the ant leaves the center, heads straight for one of the frame edges and then turns 180 degrees immediately after the camera begins to move, then both of the former problems are combined and will double their effects. \\
+
+This last event happens, though it is rare, but it motivates a discussion of which technique to choose for moving the camera. We chose to keep the ant locked in the center of the frame, but other options clearly exist. One strategy could be to adjust the camera when the ant gets closer than a certain distance to the frame edges. Another one could be to take a chance and assume that whenever the ant runs in a certain direction, it probably won't make any sharp turns right away (say, bigger than 90 degreees). Thus, one could give the camera a head start by moving it along a straight line, headed for the new location of the ant, but instead of stopping when the ant is back in place at the center of the frame, we could continue moving the camera so that the ant ends up on the opposite side of the center. Unless the assumption did not hold\footnote{To make such an assumption would propbably require a thorough analysis of ant behavior. Since the system we are building is intended to provide exactly that, this is slightly paradoxical but could potentially make the system able to improve itself!}, this should keep the ant in scope of the camera for a few extra frames. \\
+
+We experimented with the strategy of moving the camera when the ant reached the edges of the frame but speed combined with frequently changing directions rendered the technique infeasible to use. It is possible that this situation would change if one modified the plotter and increased the height of the camera so it would cover a bigger area on the table. In that way the ant would stay in scope of the camera for a longer duration. We chose not to consider this option as keeping the ant in the center of the frame seemed to be relatively stable in the current setup.
 
 %In order to establish a connection to the plotter for debugging purposes, use the connection parameters listed in table \ref{table:connparam}
 %
@@ -44,33 +90,6 @@ In order to connect the plotter to a PC, it provides an old-fashioned LPT parall
 %	\label{table:connparam}
 %\end{table}
 
-\subsubsection{Cameras}
-To track the ants present in the petri dish, the plotter is equipped with two low resolution standard web cameras connected directly to the PC through USB. One of the cameras are strapped on a piece of hard plastic holding the lens face-down, thus monitoring most of the plotter table from a height of approximately 30 cm. This camera is referred to as the overhead camera and is supposed to provide the user with the big overview, as well as a canvas to draw statistical overlays on, like heatmaps etc. The second camera is mounted directly on the plotter arm and follows the ant as it moves around in the arena. We will refer to this camera as the mobile camera. \\
-
-Both cameras have a resolution of 640x480 pixels (less than 1 megapixel) as opposed to modern digital cameras with a resolution of more than 15 megapixels. Choosing relatively low resolution cameras has been a deliberate decision, as processing is done on a per-frame basis, meaning there is good reason to believe that a higher pixel density would increase processing time and thus prevent the camera from keeping up with the ant. On the other hand, the resolution should be high enough for the software to be able to identify the ant and/or the painted marker on its body. Fortunately, tests have shown that the mobile camera used in this project has been close to optimal with regards to image quality. \\
-
-Another performance indicator for the mobile camera is the amount of frames it is able to record per second (FPS). To be able to maintain a stable tracking process, it is a key property that the ant is present in any two consecutive frames recorded by the camera. If this property is not held, it means that the ant is ahead of the camera, and the plotter will need to initiate a special procedure to relocate the ant. The camera needs at least as many FPS as needed for this to hold. On the other hand, more frames means more processing, which is also not good, but as long as the image quality is modestly low, this should not be a problem. Special techniques have been used to improve processing time, which we will discuss in Section XX. The specific mobile camera that was used in this project has a suitable quality, but could use a higher FPS value. \\
-
-On a side note, it should be noted that the plotter is not new; the internal mechanics are sensitive and will some times cause the arm to do a fast wiggle. The effect of this is similar to taking a picture of a moving object with a DSLR camera whose shutter time is too large. The frame will be blurred and the pixels will "drag lines" that may introduce blobs similar to the one representing the ant. Thus, the plotter is in danger of being biased in a wrong direction and loose track of the ant. This problem is also likely to be reduced by using a camera with a larger FPS rate - or a newer plotter. \\
-
-\subsection{Communication with Plotter}
-In order to manipulate the plotter, a high level C++ API was developed, offering instructions like "Go to coordinate (x, y)", "move 10 units to the left", where left is defined in terms of the camera view, etc. Since the coordinate system axes of the plotter and the mobile camera grows in different directions, such an API is very convenient to have in order to construct the logic that moves the camera when the ant leaves the center of the frame. \\
-
-In order to implement this API, we needed to know the hardware protocol of the plotter. This was, however only given informally. Basically, the plotter accepts commands in the pattern given in Equation \ref{eq:plotterformat}.
-
-\begin{center}
-  \begin{equation}
-  \label{eq:plotterformat}
-    0x01 +  xxxx +  yyyy
-  \end{equation}
-\end{center}
-
-In this format, \textit{xxxx} and \textit{yyyy} are two 4-digit hexadecimal numbers representing the X and Y part of the target coordinate. 0x01 indicates that we are sending something. Thus the plotter can receive coordinates between (0x0, 0x0) and (0xFFFF, 0xFFFF), however, any coordinate larger than (COORDINATES MISSING) lies outside the table area and will overflow and come back at zero. \\
-
-To transmit the coordinates through the USB connection, we use a light weight open source C library (INSERT REFERENCE). This library is implemented directly on top of the operating system specific calls for manipulating I/O resources (\texttt{WriteFile()} in Windows and \texttt{write()} in Unix), thus treating the plotter like it was manipulating a file descriptor. The library contains procedures for opening and closing the connection as well as transferring data. When sending commands in the format of Equation \ref{eq:plotterformat}, one should note that both the X and the Y part needs to be split in two parts of two hex-numbers each. Thus, the data passed to the library should be a 5-entry array of unsigned chars where the 0x01 part goes into the first entry. \\
-
-Using this library, we developed a high level plotter interface that takes coordinates in decimal format and converts them to appropriate arrays that are sent over the connection. Furthermore, we added functions for moving the camera relatively to its own position by remembering the last requested coordinate.
-
 %Hvilken plotter er det og hvilket udstyr sidder på den
 %Hvordan er den sat til computeren
 %hvad vil vi gerne have den til (nævn at det ville have været nice at have det cross platform)
@@ -82,8 +101,3 @@ Using this library, we developed a high level plotter interface that takes coord
 % *   0x01 + 2 bytes for x + 2 bytes for y (up to 10 bits) up to 0x03FF (y probably only up to 01F0)
 % *   0x02 in response = sucesss
 % *   0xFE in response = failure
- 
-\subsection{Moving the camera}
-Now that we know how to move the plotter, how do we move the camera when the ant moves?
-what about the volume of the movement sound?
-what about the speed of the movement?

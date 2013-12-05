@@ -9,23 +9,23 @@
 \contentsline {subsection}{\numberline {2.1}Handling ants}{6}{subsection.1.2.1}
 \contentsline {subsection}{\numberline {2.2}Tracking}{7}{subsection.1.2.2}
 \contentsline {subsubsection}{\numberline {2.2.1}Theory}{7}{subsubsection.1.2.2.1}
-\contentsline {subsubsection}{\numberline {2.2.2}Framework}{15}{subsubsection.1.2.2.2}
-\contentsline {subsubsection}{\numberline {2.2.3}Realization}{15}{subsubsection.1.2.2.3}
+\contentsline {subsubsection}{\numberline {2.2.2}Framework}{16}{subsubsection.1.2.2.2}
+\contentsline {subsubsection}{\numberline {2.2.3}Realization}{16}{subsubsection.1.2.2.3}
 \contentsline {section}{\numberline {3}Camera and Plotter Integration}{20}{section.1.3}
-\contentsline {subsection}{\numberline {3.1}Setup}{20}{subsection.1.3.1}
-\contentsline {subsubsection}{\numberline {3.1.1}Plotter}{20}{subsubsection.1.3.1.1}
+\contentsline {subsection}{\numberline {3.1}Setup}{21}{subsection.1.3.1}
+\contentsline {subsubsection}{\numberline {3.1.1}Plotter}{21}{subsubsection.1.3.1.1}
 \contentsline {subsubsection}{\numberline {3.1.2}Cameras}{21}{subsubsection.1.3.1.2}
 \contentsline {subsection}{\numberline {3.2}Communication with Plotter}{22}{subsection.1.3.2}
 \contentsline {subsection}{\numberline {3.3}Moving the camera}{23}{subsection.1.3.3}
-\contentsline {subsection}{\numberline {3.4}Graphical user interface}{23}{subsection.1.3.4}
-\contentsline {subsubsection}{\numberline {3.4.1}Statistics}{23}{subsubsection.1.3.4.1}
-\contentsline {section}{\numberline {4}Testing, evaluation and conclusion}{23}{section.1.4}
-\contentsline {subsection}{\numberline {4.1}Process}{23}{subsection.1.4.1}
-\contentsline {subsection}{\numberline {4.2}Reflection}{25}{subsection.1.4.2}
-\contentsline {subsection}{\numberline {4.3}Testing the tracking software with real ants}{25}{subsection.1.4.3}
-\contentsline {subsection}{\numberline {4.4}Threats to validity}{29}{subsection.1.4.4}
-\contentsline {subsubsection}{\numberline {4.4.1}Threats to internal validity}{29}{subsubsection.1.4.4.1}
-\contentsline {subsubsection}{\numberline {4.4.2}Threats to external validity}{30}{subsubsection.1.4.4.2}
-\contentsline {subsection}{\numberline {4.5}Related Work}{31}{subsection.1.4.5}
-\contentsline {subsection}{\numberline {4.6}Future Work}{32}{subsection.1.4.6}
-\contentsline {subsection}{\numberline {4.7}Conclusion}{32}{subsection.1.4.7}
+\contentsline {subsection}{\numberline {3.4}Graphical user interface}{25}{subsection.1.3.4}
+\contentsline {subsubsection}{\numberline {3.4.1}Statistics}{26}{subsubsection.1.3.4.1}
+\contentsline {section}{\numberline {4}Testing, evaluation and conclusion}{27}{section.1.4}
+\contentsline {subsection}{\numberline {4.1}Process}{27}{subsection.1.4.1}
+\contentsline {subsection}{\numberline {4.2}Reflection}{28}{subsection.1.4.2}
+\contentsline {subsection}{\numberline {4.3}Testing the tracking software with real ants}{28}{subsection.1.4.3}
+\contentsline {subsection}{\numberline {4.4}Threats to validity}{33}{subsection.1.4.4}
+\contentsline {subsubsection}{\numberline {4.4.1}Threats to internal validity}{33}{subsubsection.1.4.4.1}
+\contentsline {subsubsection}{\numberline {4.4.2}Threats to external validity}{33}{subsubsection.1.4.4.2}
+\contentsline {subsection}{\numberline {4.5}Related Work}{34}{subsection.1.4.5}
+\contentsline {subsection}{\numberline {4.6}Future Work}{35}{subsection.1.4.6}
+\contentsline {subsection}{\numberline {4.7}Conclusion}{36}{subsection.1.4.7}
