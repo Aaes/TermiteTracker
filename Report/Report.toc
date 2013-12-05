@@ -7,7 +7,7 @@
 \contentsline {subsubsection}{\numberline {2.0.1}Scope}{4}{subsubsection.1.2.0.1}
 \contentsline {subsubsection}{\numberline {2.0.2}Requirements}{5}{subsubsection.1.2.0.2}
 \contentsline {subsection}{\numberline {2.1}Handling ants}{6}{subsection.1.2.1}
-\contentsline {subsection}{\numberline {2.2}Tracking}{6}{subsection.1.2.2}
+\contentsline {subsection}{\numberline {2.2}Tracking}{7}{subsection.1.2.2}
 \contentsline {subsubsection}{\numberline {2.2.1}Theory}{7}{subsubsection.1.2.2.1}
 \contentsline {subsubsection}{\numberline {2.2.2}Framework}{15}{subsubsection.1.2.2.2}
 \contentsline {subsubsection}{\numberline {2.2.3}Realization}{15}{subsubsection.1.2.2.3}
@@ -28,5 +28,4 @@
 \contentsline {subsubsection}{\numberline {4.4.2}Threats to external validity}{30}{subsubsection.1.4.4.2}
 \contentsline {subsection}{\numberline {4.5}Related Work}{31}{subsection.1.4.5}
 \contentsline {subsection}{\numberline {4.6}Future Work}{32}{subsection.1.4.6}
-\contentsline {subsection}{\numberline {4.7}Conclusion}{33}{subsection.1.4.7}
-\contentsline {section}{\numberline {A}First Appendix}{33}{section.A.1}
+\contentsline {subsection}{\numberline {4.7}Conclusion}{32}{subsection.1.4.7}
