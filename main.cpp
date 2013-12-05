@@ -34,13 +34,17 @@ void trackVideo(){
         
         points.push_back(keypoint);
         
-        drawKeypoints(frame, points, blob, CV_RGB(255,0,0));
+        Mat thresh = getThresholdImage();
         
-        imshow("Green color detection", blob);
+        drawKeypoints(frame, points, blob, CV_RGB(255,0,0));
+        drawKeypoints(thresh, points, thresh, CV_RGB(255,0,0));
+        
+        imshow("Ant detection", blob);
+        imshow("Thresh", thresh);
         
         frame = cvQueryFrame(video);
         
-        waitKey(1);
+        waitKey(1000);
     }
     
 }

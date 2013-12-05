@@ -426,7 +426,7 @@ Figure \ref{fig:segment_ant} shows examples of running image segmentation with d
 		\label{fig:segment_ant}
 \end{figure}
 
-This leave us with only one option; thresholding. Figure \ref{fig:thresh_ant} shows thresholding attemps on a grayscale version of image \emph{a} from Figure \ref{fig:contrast_ant}. The results of different thresholds shows us two things; firstly that image \emph{d} is a very good threshold result and secondly that we need a rather high threshold value to get this result. In contrast to segmentation, applying a threshold to our image is much faster, and usable for a steady camera stream.\\
+This leave us with only one option; thresholding. Figure \ref{fig:threshant} shows thresholding attemps on a grayscale version of image \emph{a} from Figure \ref{fig:contrast_ant}. The results of different thresholds shows us two things; firstly that image \emph{d} is a very good threshold result and secondly that we need a rather high threshold value to get this result. In contrast to segmentation, applying a threshold to our image is much faster, and usable for a steady camera stream.\\
 
 \begin{figure}
         \centering
@@ -449,12 +449,12 @@ This leave us with only one option; thresholding. Figure \ref{fig:thresh_ant} sh
                 \caption{T = 240}
         \end{subfigure}
 		\caption{Thresholding the ant image.}
-		\label{fig:thresh_ant}
+		\label{fig:threshant}
 \end{figure}
 
 Now that we have a satistafactory binary image that clearly shows the position of our ant, the next step is to actually get the location of the ant within the image. For this purpose we will use a \textit{blob detection}. In short, blob detection is a computer vision technique encapsulating mathematical methods that are aimed at detecting regions in a digital image. These regions differ in properties such as brightness and color from the regions surrounding it. So where segmentation seeks to partition an image, blob detection seek to find the partitions. All the pixels in a blob are considered to share similar properties.
 
-Considering the binary image \emph{d} from Figure \ref{fig:thresh_ant} clearly shows that we have to blobs available, that are rather large. This is of course ideal, but we might also have cases where we have smaller blobs caused by reflections on the ground or water. Therefore is is not enough to just use the first blob we find in an image - we should always use the largest blob available in the image, which hopefully, is our ant. The result of finding the largest blob in our binary image is shown in Figure \ref{fig:finalResult}.
+Considering the binary image \emph{d} from Figure \ref{fig:threshant} clearly shows that we have to blobs available, that are rather large. This is of course ideal, but we might also have cases where we have smaller blobs caused by reflections on the ground or water. Therefore is is not enough to just use the first blob we find in an image - we should always use the largest blob available in the image, which hopefully, is our ant. The result of finding the largest blob in our binary image is shown in Figure \ref{fig:finalResult}.
 
 \begin{figure}
     \captionsetup{justification=centering}

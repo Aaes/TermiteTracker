@@ -56,7 +56,10 @@ int ColorDetection(Mat img, Scalar colorMin, Scalar colorMax, double alpha, int 
     //imshow("contrast", imgH);
     
     //Threshold based on color ranges (Blue/Green/Red scalars)
-    inRange(imgH, colorMin, colorMax, imgThresh); //BGR range
+    //inRange(imgH, colorMin, colorMax, imgThresh); //BGR range
+    Mat gray;
+    cvtColor(imgH, gray, CV_BGR2GRAY);
+    threshold(gray, imgThresh, 235.0, 255, 0);
     
     //Set SimpleBlobDetector parameters
     SimpleBlobDetector::Params params;
