@@ -1,9 +1,50 @@
 %!TEX root = Report.tex
 
-\subsection{Handling ants}
+\subsection{Experimentation with ants}
 \label{ants}
 
-During this project we had to paint the ants and we want to give some friendly advice to anyone who wants to do any projects involving ants. If you put them 2-4 minutes in the freezer they become very docile and much easier to paint without harming the ants. When they are taken out they act completely normal after 2-3 minutes. \\
+During this project we had to decide whether to paint the ants or not, and if so what color. Figure \ref{fig:antcoloring} shows four examples of ants, with both their natural color, shown in image \emph{a}, and painted versions shown in image \emph{b}(red), \emph{c}(green) and \emph{d}(white). The images are caught using the webcam from the plotter. We can see from this image that coloring an ant is preferred to not painting an ant, and furthermore painting it white gives the best contrast compared to the background. Furthermore we suggest putting the ant to be painted in a freezer for 2-4 minutes as this will put it in a sedated state, making it much easier to paint. This will not kill the ant and after a couple of minutes it will act normal again.\\
 
-The ants also had a tendency to crawl up the sides of the petri dish. We were recommended to try putting teflon tape (should be really slippery) on the sides without any luck. We were also recommended to try mineral oil but we were unable to get any. Our solution was to place a small petri dish in a bigger petri dish and fill the gap with water. The ants would quickly discover that there was water surronding them which prevented them from escaping the small petri dish. However this solution also proved somewhat unsuccesful. After discovering that it was completely surronded by water the ant would try a daring swim through the "moat". While this solution was not the optimal setup it was sufficient for our purposes. As long as we watched the ant and saved it from drowning when it attempted to swim we were able to track its movement.
- 
+\begin{figure}
+        \centering
+        \begin{subfigure}[b]{0.35\textwidth}
+                \includegraphics[scale = 0.5]{img/natural_ant}
+                \caption{}
+        \end{subfigure}
+		\quad
+        \begin{subfigure}[b]{0.35\textwidth}
+                \includegraphics[scale = 0.5]{img/red_ant}
+                \caption{}
+        \end{subfigure} \hfill \\ \mbox{}\\
+        \begin{subfigure}[b]{0.35\textwidth}
+                \includegraphics[scale = 0.5]{img/green_ant}
+                \caption{}
+        \end{subfigure}
+		\quad
+        \begin{subfigure}[b]{0.35\textwidth}
+                \includegraphics[scale = 0.5]{img/white_ant}
+                \caption{}
+        \end{subfigure}
+        \caption{Coloring ants in different colors}
+		\label{fig:antcoloring}
+\end{figure}
+
+A second problem were to contain the ants within our petri dish. The ants had no problem climbing the sides of of our petri dish and escape. We therefore tried several different things to contain them. We were adviced to try teflon tape on the sides of the petri dish, as they should not be able to climb the slippery surface of that tape. This did not prove successful however so we tried other types of slippery tape versions like silicone and vax tapes. See the different types of tape in Figure \ref{fig:tape}. Unfortunately none of them were able to solve our problem. We were also suggested to try and use mineral oil, however we were unable to get a hold of any such oil. We tried with oil for cooking instead such as sunflower oil and olive oil, however they did not have the desired effect.\\
+
+\begin{figure}[ht!]
+  \centering
+    \includegraphics[scale=0.25]{img/tape}
+  \caption{Different types of slippery tapes used}
+  \label{fig:tape}
+\end{figure}
+
+We followed up by trying to use natural ant repellents such as kitchen salt, however our tests did not prove fruitfull. The ants traversed the repellent like it was not there.\\
+
+Our solution was to eleminate all sides altogether and create an "island" instead. We filled the petri dish with ground until it was completely full, and placed it within a much larger petri dish full of water. The hope was that the ants would not dare move into water, and thereby stay in the petri dish during our tests. The setup can be seen in Figure \ref{fig:petridish}. This solution proved much more successful, as the ant did not move into the water once it was detected. However after some time it realised that it was completely surrounded by water, and would try and swim away from our artificial island. But it would take a long time for the ant to try this, giving us enough time to test our software before we had to safe the ant from drowning.\\
+
+\begin{figure}[ht!]
+  \centering
+    \includegraphics[scale=0.25]{img/petridish}
+  \caption{}
+  \label{fig:petridish}
+\end{figure}
