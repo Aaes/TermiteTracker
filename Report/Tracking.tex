@@ -2,7 +2,7 @@
 
 \subsection{Tracking}
 \label{tracking}
-As mentioned in the project proposal the project was divided into three parts. The first part of the project was to be able to track termites. Since african termites are hard to come by and transport we settled for giant ants (Camponotus Ligniperdus), which are the largest ants found in Denmark \cite{fogn}, instead. While these are not as big as the termites, they behave in a similar way and the solution should be able to easily adapt to the termites. In the first part we started by implementing the tracking on a video. We received a video from Harvard of a single ant running around in a petri dish with a white background. The ant itself was painted red and green to make tracking easier. This was the simplest setup we could think of and acted as a good starting point. By recommendation we decided to use the OpenCV \cite{opencv} framework to implement our tracking. We will return to this framework in Section \ref{framework} Framework. \\
+As mentioned in the project proposal the project was divided into three parts. The first part of the project was to be able to track termites. Since african termites are hard to come by and transport we settled for giant ants (Camponotus Ligniperdus), which are the largest ants found in Denmark \cite{fogn}, instead. While these are not as big as the termites, they behave in a similar way and the solution should be able to easily adapt to the termites. In the first part we started by implementing the tracking on a video. We received a video from Harvard University of a single ant running around in a petri dish with a white background. The ant itself was painted red and green to make tracking easier. This was the simplest setup we could think of and acted as a good starting point. By recommendation we decided to use the OpenCV \cite{opencv} framework to implement our tracking. We will return to this framework in Section \ref{framework} Framework. \\
 
 This chapter is divided into three subparts. First we will introduce the reader to different image processesing techniques, and their uses. Following this we will introduce the reader to a framework that supports these techniques, and finish off describing the implemented solution and design choices.
 
@@ -34,14 +34,14 @@ value = {Boolean\mbox{-}Condition} ? {True\mbox{-}Evaluation}: {False\mbox{-}Eva
 It works just like you would expect from many programming languages or mathematical expression. It is also known as an inline \textit{if-statement}. \\
 
 \noindent \textbf{Thresholding} \par
-Thresholding is an image processing technique used to make a final decision about each pixel in an image. Thresholding is most commonly used to find objects in images, e.g. finding an ant in an image. During thresholding a decision is made based on the following; either a pixel value is one that we are interested in or it is not. This is usually done by assigning a specific pixel value to the pixel we want, and another to those that we do not want. In general we compare the \textit{i}th pixel of the source image, \textit{src}, to the threshold value, \textit{T}, and saves the result in a destination image, \textit{dst}. For instance, to create a binary image where we are interested in all pixels above the threshold \textit{T}, the equation would look like the one shown in Equation \ref{eq:binarythresholding},
+Thresholding is an image processing technique used to make a final decision about each pixel in an image. Thresholding is most commonly used to find objects in images, e.g. finding an ant in an image. During thresholding a decision is made based on the following; either a pixel value is one that we are interested in or it is not. This is usually done by assigning a specific pixel value to the pixel we want, and another to those that we do not want. In general we compare the \textit{ith} pixel of the source image, \textit{src}, to the threshold value, \textit{T}, and saves the result in a destination image, \textit{dst}. For instance, to create a binary image where we are interested in all pixels above the threshold \textit{T}, the equation would look like the one shown in Equation \ref{eq:binarythresholding},
 
 \begin{equation}
 dst_i = src_i \geq T ? 255: 0
 \label{eq:binarythresholding}
 \end{equation}
 
-Most threshold operations are applied on grayscale images, where all pixel values range between 0 (black) and 255 (white). Sometimes these values are normalized to range between 0 and 1 instead. However for the rest of this report we will assume that grayscale images use the former convention. Soon we will argue how thresholding can be expanded to also cover thresholding an RGB image. Figure \ref{fig:threshold_example} show an example of applying threshold to a grayscale image.
+Most threshold operations are applied on grayscale images, where all pixel values range between 0 (black) and 255 (white). Sometimes these values are normalized to range between 0 and 1 instead. However for the rest of this report we will assume that grayscale images use the former convention. \todo{slet denne sætning?}Soon we will argue how thresholding can be expanded to also cover thresholding an RGB image. Figure \ref{fig:threshold_example} show an example of applying threshold to a grayscale image.
 
 \begin{figure}
         \centering
@@ -58,7 +58,7 @@ Most threshold operations are applied on grayscale images, where all pixel value
 		\label{fig:threshold_example}
 \end{figure}
 
-Now what happens if what you are interested in is a color? To use standard thresholding we first need to convert it to a grayscale image. However doing so might result in an image that have lost important information as can be seen in figure \ref{fig:RGB2GRAY}. Unless you want to find the red color, you have no way of differentiating the blue and green color.
+Now what happens if what you are interested in is a color? To use standard thresholding we first need to convert \todo{the source img? src?}it to a grayscale image. However doing so might result in an image that have lost important information as can be seen in figure \ref{fig:RGB2GRAY}. Unless you want to find the red color, you have no way of differentiating the blue and green color.
 
 \begin{figure}
         \centering
@@ -94,7 +94,7 @@ To apply it to an RGB image we need to change Equation \ref{eq:binarythresholdin
 \label{eq:threshold_RGB}
 \end{equation}
 
-Trying it out makes it much easier to differentiate between colors. In Figure \ref{fig:RGB_Thresh} a threshold attemp using this method directly on the RGB image is shown.
+\todo{this i stedet for trying it out}Trying it out makes it much easier to differentiate between colors. In Figure \ref{fig:RGB_Thresh} a threshold attemp using this method directly on the RGB image is shown.
 
 \begin{figure}
         \centering
@@ -181,7 +181,7 @@ Using a range to specify a color instead will yield a much more satisfactory res
 % Angiv at dilating finder local optima, og at eroding finder local minima.
 % Angiv at de her metoder bliver brugt EFTER thresholding for at "rense" billedet. \\
 
-The basic concepts of \textit{morphological transformations} are \textit{dilation} and \textit{erosion}. These concepts are mostly used to remove noise, isolating individual elements or joining disparate elements in an image. Dilation and erosion are applied to either grayscale or binary image, and are often used to clean up an image after thresholding to make analysing the image easier. For example, when locating an ant, there might be many small light dots that make the ant hard to see, which can be much improved by using erosion or dilation depending on the image in question.\\
+The basic concepts of \textit{morphological transformations}\todo{ref?} are \textit{dilation} and \textit{erosion}. These concepts are mostly used to remove noise, isolating individual elements or joining disparate elements in an image. Dilation and erosion are applied to either grayscale or binary image, and are often used to clean up an image after thresholding to make analysing the image easier. For example, when locating an ant, there might be many small light dots that make the ant hard to see, which can be much improved by using erosion or dilation depending on the image in question.\\
 
 The way both erosion and dilation are applied to an image is by defining a kernel, denoted \textit{B}, that will be applied to an image (or part of an image), denoted \textit{A}. The kernel can be any shape or size, however it is often a square where the sides are uneven, e.g. 3x3, 5x5, 7x7 and so on. A kernel has an \textit{anchorpoint}, which is the pixel in A that erosion or dilation are applied on, and the result is stored in the corresponding point in the destination image, \textit{dst(i.j)}. Figure \ref{fig:kernel_ed} shows an example of a kernel and its anchorpoint in the center. \\
 
@@ -223,7 +223,7 @@ An example of how this applies to a real image is shown in Figure \ref{fig:erode
 		\label{fig:erodedilate}
 \end{figure}
 
-Unlike thresholding we cannot apply erosion or dilation to RGB images due to the nature of \textit{RGB} values. Imagine the clear colors, red (255,0,0), green (0,255,0) and blue(0,0,255) - how can we argue which color is \textit{greater} or \textit{smaller} than the other? We cannot. We can with grayscale and binary images since we can safely say that the pixel value 150 is smaller than 255, and 0 is smaller than 1. We cannot for color images. In summary, we have presented techniques to make ants much clearer in an image with a lot of noise, that might prevent us from properly finding an ant.\\
+Unlike thresholding we cannot apply erosion or dilation to RGB images due to the nature of \textit{RGB} values. Imagine the clear colors, red (255,0,0), green (0,255,0) and blue(0,0,255) - how can we argue which color is \textit{greater} or \textit{smaller} than the other? We cannot. We can with grayscale and binary images since we can safely say that the pixel value 150 is smaller than 255, and 0 is smaller than 1. \todo{har vi ikke sagt det for to sætninger siden}We cannot for color images. In summary, we have presented techniques to make ants much clearer in an image with a lot of noise, that might prevent us from properly finding an ant.\\
 
 \noindent \textbf{Contrast and Brightness} \par
 Where dilation and erosion sought to expand either dark or bright areas, contrast and brightness seek to increase the overall brightness or darkness of an image or the absolute difference between dark and bright pixels. This can make it easier to find an ant in an image where the image is either too bright, or too dark.\\
@@ -489,3 +489,5 @@ Concluding this chapter we outline tho process of going from a raw image input t
     \item Run blob detection on the thresholded image.
     \item Output the largest blob from the blob detection on the original image.
 \end{enumerate}
+
+\todo{del konklusion på hele afsnittet?}
