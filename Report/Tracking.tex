@@ -480,7 +480,7 @@ Considering the binary image \emph{d} from Figure \ref{fig:threshant} clearly sh
 		\label{fig:finalResult}
 \end{figure}
 
-Concluding this chapter we outline tho process of going from a raw image input to a successfully detected ant within an image, based on both the choices and experiments from this chapter. The process is as follows:
+Concluding this chapter we outline the process of going from a raw image input to a successfully detected ant within an image, based on both the choices and experiments from this chapter. The process is as follows:
 
 \begin{enumerate}
     \item Increase the contrast of the raw image with an alpha value of at least 2.0.
@@ -489,5 +489,15 @@ Concluding this chapter we outline tho process of going from a raw image input t
     \item Run blob detection on the thresholded image.
     \item Output the largest blob from the blob detection on the original image.
 \end{enumerate}
+
+\subsubsection{Optimising the realized solution on Windows} \mbox{}\par
+During development we observed a very strange behavior with the OpenCV code that implemented our realization described in the previous section. On OS X the processing of a single image took between 28 and 32 seconds which were satisfactory, however the same code performed much worse on our Windows test machine. This is strange when you also consider that the computer running OS X has much older and much slower hardware than the Windows machine. In comparison, processing the same image on Windows, with the same implementation would take between 200 and 300 ms sometimes taking close to 500ms for a single image. We ran several tests to try and find out why, and even when comparing the OpenCV installations themselves we found no difference in what features were enabled and disabled. We tried to see whether it was the machine itself, however we discovered the same behavior on a much stronger desktop machine running Windows as well where processing took between 160 and 220 ms. To solve the problem we tried two things:\\
+
+\begin{enumerate}
+    \item Compile the OpenCV source using CMake, instead of using the precompiled binaries available at the OpenCV download page.
+    \item Make use of the OpenCV CUDA GPU module that can be used to optimize image processing on computers with NVidia GPU's.
+\end{enumerate}
+
+After compiling the OpenCV source code on the machine where it should be used, we found no difference in performance at all. We therefore changed the implementation to use the enabled GPU module and moved some of the processing to the GPU. This greatly improved the performance. Processing time went down to a stable 27-30 ms on our test machine, allowing us to do processing in real time. We cannot say why Windows performs differently than OS X, however this is a satisfactory solution to the problem.\\
 
 \todo{del konklusion på hele afsnittet?}
