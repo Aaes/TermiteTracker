@@ -14,24 +14,24 @@
 %TODO: \\
 %fortæl om hvordan vi IKKE tester
 
-While the project lays the foundation for a fully useable field solution we have chosen to narrow our scope to the essential functionality. This means that the project was designed and tested in a controlled lab environment where factors such as lighting, wind etc. are constant. \\
+While the project lays the foundation for a fully useable field solution we have chosen to narrow our scope to the essential functionality. This means that the project was designed and tested in a controlled lab environment where factors such as lighting, wind etc. are kept as constant as possible. \\
 
 Because actual termites were out of our reach and that our councillor at Harvard recommended it, we did all of our testing with normal ants instead of termites. We are confident that only minor adjustments, mostly to the blob detection code, are necesarry to make the solution work with termites since the main difference is the size. \\
 
-Painting the ants in different colors can have some impact in the quality of the tracking. As a rule of thumb it is easier to track colors that contrast the background the most. In this project we chose to paint the ants white, red and bright green. We did not try any other colors because we found these to have a high degree of contrast which were sufficient.\\
+Painting the ants in different colors can have some impact in the quality of the tracking. As a rule of thumb it is easier to track colors that contrast the background the most. In this project we chose to paint the ants white, red and bright green\todo{indsæt billede eller ref til billede}. We did not try any other colors because we found these to have a high degree of contrast which were sufficient.\\
 
 % As the HP 7046a plotter was the only hardware available to us we have restricted the project to only include this type of plotter. One could potentially gain better results with a plotter with a finer granularity in coordinates and smoother movement. The cameras supplied with the plotter was also the only cameras available to us and we have therefore also restricted the project to only include these cameras. While one could use higher resolution cameras to obtain a better result, the weight of the camera is also important for the smoothness of the movement of the plotter and must be carefully considered.\\
 
-The project will not focus on changing the hardware provided by Harvard. The hardware had already been succesfully used in a controlled and very simple environment, and this project focus on improving the software to handle a more complex environment. However quality suggestions to how the hardware can be improved will be suggested if the current hardware is found to be too limited in a new test environment, or if it would improve the results of the developed software.\\
+The project will not focus on changing the hardware provided by Harvard. The hardware had already been succesfully used in a controlled and very simple environment, and this project focus on implementing the software to handle a more complex environment. However quality suggestions to how the hardware can be improved will be presented if the current hardware is found to be too limited in a new test environment, or if it would improve the results of the developed software.\\
 
-While it could be intereseting to track several ants we have chosen to focus on tracking a single ant in this project due to time restrictions. Tracking several ants can prove more difficult since one has to account for ants crossing each others paths and would require more time to implement.\\
+While it could be interesting to track several ants we have chosen to focus on tracking a single ant in this project due to time restrictions. Tracking several ants can prove more difficult since one has to account for ants crossing each others' paths and would require more time to implement.\\
 
 Our councillor at Harvard wanted the tracking and the interfacing with the tracking device to be implemented in C++ to make it easier for further developement. The graphical user interface was not restricted when choosing programming langauge and we ended up using C\# and Windows Forms to implement it.
 
 \subsubsection{Requirements} \mbox{}\par
 \label{requirements}
 
-To ensure the success of the project we compiled a list of the mandatory and optional requirements of the project. This helped us plan our development process and align the expectations between us, our councillor at ITU and our councillor at Harvard University. \\
+To ensure the success of the project we compiled a list of the mandatory and optional requirements of the project\todo{of the projec to gang lige efter hinanden}. This helped us plan our development process and align the expectations between us, our councillor at ITU and our councillor at Harvard University. \\
 
 \noindent \textbf{Mandatory requirements} \par
 The mandatory requirements of the project are listed below and must be fulfilled for the project to be considered a success.
@@ -39,7 +39,7 @@ The mandatory requirements of the project are listed below and must be fulfilled
 \begin{enumerate}
     \item Tracking of ants and/or termites using a low resolution camera implemented in C/C++.
     \item The ability to adjust the tracking parameteres before and during the tracking.
-    \item Moving the tracking hardware in corresponding to the tracking.
+    \item Moving the tracking hardware in correspondance to the tracking.
 	\item A graphical user interface containing two modes:
     \item - Calibration mode. Must contain a direct feed from the lower camera, a proccessed feed and sliders to adjust the processing.
     \item - Tracking mode. Must contain a direct feed from the lower camera, a direct feed from the overhead camera and statistics.
