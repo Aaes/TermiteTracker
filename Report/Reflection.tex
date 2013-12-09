@@ -1,6 +1,10 @@
 %!TEX root = Report.tex
 
 \subsection{Reflection}
+In this section we will discuss and reflect upon some issues that we believe have had a potential influence on the outcome of the project. These include a discussion of how the situation would have looked if we could have relaxed the requirement of using a mobile camera and how the project could have benefittet from using a different plotter. \\
 
-TODO
+Using a mobile camera is a requirement because users would potentially like to be able to stimulate the ant using a pheromon stick attached to the camera. However, excluding this requirement, we have no reason to believe after this project that it shouldn't be possible to reach the same goals using only the overhead camera. This would of course require an overhead camera with a suitable resolution and tests to verify that frames with the chosen resolution can be processed in a satisfactory amount of time. The relation between the resolution of the current cameras and processing times leads us to believe that it would indeed be possible to increase resolution without increasing the processing time to an unacceptable level. However, it of course requires testing to know exactly how much. \\
 
+On the positive side, using only an overhead camera would get rid of the mechanical "wiggles" that cause the frames to become blurry, remove sounds that might affect the behavior of the ant and remove shadows from the mobile camera on the plotter table. Furthermore, it will increase (but not remove) the upper bound we need to put on processing time per frame as there is no mobile camera to lose track of the ant between frames. With only an overhead camera, it would even be possible to do tracking based on   video files instead of a live camera input and thus eliminate all bounds on processing time (because all frames would be recorded beforehand). \\
+
+Reducing the sounds from the plotter is also something we could have achieved by exchaining the plotter for a different model. Choosing a different plotter would also open possibilities for choosing a better model that has smoother moving arms.

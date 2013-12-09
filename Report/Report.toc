@@ -6,26 +6,26 @@
 \contentsline {section}{\numberline {2}Vision based insect tracking}{4}{section.1.2}
 \contentsline {subsubsection}{\numberline {2.0.1}Scope}{4}{subsubsection.1.2.0.1}
 \contentsline {subsubsection}{\numberline {2.0.2}Requirements}{5}{subsubsection.1.2.0.2}
-\contentsline {subsection}{\numberline {2.1}Handling ants}{6}{subsection.1.2.1}
-\contentsline {subsection}{\numberline {2.2}Tracking}{7}{subsection.1.2.2}
-\contentsline {subsubsection}{\numberline {2.2.1}Theory}{7}{subsubsection.1.2.2.1}
-\contentsline {subsubsection}{\numberline {2.2.2}Framework}{16}{subsubsection.1.2.2.2}
-\contentsline {subsubsection}{\numberline {2.2.3}Realization}{16}{subsubsection.1.2.2.3}
-\contentsline {section}{\numberline {3}Camera and Plotter Integration}{20}{section.1.3}
-\contentsline {subsection}{\numberline {3.1}Setup}{20}{subsection.1.3.1}
-\contentsline {subsubsection}{\numberline {3.1.1}Plotter}{21}{subsubsection.1.3.1.1}
-\contentsline {subsubsection}{\numberline {3.1.2}Cameras}{21}{subsubsection.1.3.1.2}
-\contentsline {subsection}{\numberline {3.2}Communication with Plotter}{22}{subsection.1.3.2}
-\contentsline {subsection}{\numberline {3.3}Moving the camera}{23}{subsection.1.3.3}
-\contentsline {subsection}{\numberline {3.4}Graphical user interface}{25}{subsection.1.3.4}
-\contentsline {subsubsection}{\numberline {3.4.1}Statistics}{27}{subsubsection.1.3.4.1}
-\contentsline {section}{\numberline {4}Testing, evaluation and conclusion}{27}{section.1.4}
-\contentsline {subsection}{\numberline {4.1}Process}{27}{subsection.1.4.1}
-\contentsline {subsection}{\numberline {4.2}Reflection}{28}{subsection.1.4.2}
-\contentsline {subsection}{\numberline {4.3}Testing the tracking software with real ants}{28}{subsection.1.4.3}
-\contentsline {subsection}{\numberline {4.4}Threats to validity}{32}{subsection.1.4.4}
-\contentsline {subsubsection}{\numberline {4.4.1}Threats to internal validity}{32}{subsubsection.1.4.4.1}
-\contentsline {subsubsection}{\numberline {4.4.2}Threats to external validity}{33}{subsubsection.1.4.4.2}
-\contentsline {subsection}{\numberline {4.5}Related Work}{34}{subsection.1.4.5}
-\contentsline {subsection}{\numberline {4.6}Future Work}{35}{subsection.1.4.6}
-\contentsline {subsection}{\numberline {4.7}Conclusion}{36}{subsection.1.4.7}
+\contentsline {subsection}{\numberline {2.1}Experimentation with ants}{6}{subsection.1.2.1}
+\contentsline {subsection}{\numberline {2.2}Tracking}{8}{subsection.1.2.2}
+\contentsline {subsubsection}{\numberline {2.2.1}Theory}{9}{subsubsection.1.2.2.1}
+\contentsline {subsubsection}{\numberline {2.2.2}Framework}{18}{subsubsection.1.2.2.2}
+\contentsline {subsubsection}{\numberline {2.2.3}Realization}{18}{subsubsection.1.2.2.3}
+\contentsline {section}{\numberline {3}Camera and Plotter Integration}{22}{section.1.3}
+\contentsline {subsection}{\numberline {3.1}Setup}{22}{subsection.1.3.1}
+\contentsline {subsubsection}{\numberline {3.1.1}Plotter}{23}{subsubsection.1.3.1.1}
+\contentsline {subsubsection}{\numberline {3.1.2}Cameras}{23}{subsubsection.1.3.1.2}
+\contentsline {subsection}{\numberline {3.2}Communication with Plotter}{24}{subsection.1.3.2}
+\contentsline {subsection}{\numberline {3.3}Moving the camera}{25}{subsection.1.3.3}
+\contentsline {subsection}{\numberline {3.4}Graphical user interface}{27}{subsection.1.3.4}
+\contentsline {subsubsection}{\numberline {3.4.1}Statistics}{29}{subsubsection.1.3.4.1}
+\contentsline {section}{\numberline {4}Testing, evaluation and conclusion}{29}{section.1.4}
+\contentsline {subsection}{\numberline {4.1}Process}{29}{subsection.1.4.1}
+\contentsline {subsection}{\numberline {4.2}Reflection}{30}{subsection.1.4.2}
+\contentsline {subsection}{\numberline {4.3}Testing the tracking software with real ants}{31}{subsection.1.4.3}
+\contentsline {subsection}{\numberline {4.4}Threats to validity}{35}{subsection.1.4.4}
+\contentsline {subsubsection}{\numberline {4.4.1}Threats to internal validity}{35}{subsubsection.1.4.4.1}
+\contentsline {subsubsection}{\numberline {4.4.2}Threats to external validity}{36}{subsubsection.1.4.4.2}
+\contentsline {subsection}{\numberline {4.5}Related Work}{37}{subsection.1.4.5}
+\contentsline {subsection}{\numberline {4.6}Future Work}{37}{subsection.1.4.6}
+\contentsline {subsection}{\numberline {4.7}Conclusion}{38}{subsection.1.4.7}
