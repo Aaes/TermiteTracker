@@ -1,13 +1,14 @@
 %!TEX root = Report.tex
 
 \section{Camera and Plotter Integration}
-The second part of the project interacting with our tracking device and conform the tracking code to work with the device. We received a Hewlett-Packard 7046a XY-plotter by mail from our councillor at Harvard. Additionally we received a small ant farm, containing one queen and seven worker ants (no soldier ants), via mail and we bought some brushes and acryllic paint for the ants. The ants did not proliferate during the project. While we discussed using infrared paint or fluorescend paint, both these ideas were discarded because both types of paint contains compounds that the termites and ants really like which makes them eat the painted ant. Along with the plotter we also received a small circuit board that plugged into the serial port of the plotter and had a USB cabel for us to communicate with it. Lastly the package contained a collection of petri dishes for us to use. \\
 
-In Section \ref{tracking}, we introduced the theory behind tracking of objects in images. In this section, we describe how the PC, plotter and cameras cooperate, how we get our hands on a frame to process and how we use the techniques from Section \ref{tracking} to turn an ordinary camera into a tracking device.
+%We received a Hewlett-Packard 7046a XY-plotter by mail from our councillor at Harvard. Additionally we received a small ant farm, containing one queen and seven worker ants %(no soldier ants), via mail and we bought some brushes and acryllic paint for the ants. The ants did not proliferate during the project. While we discussed using infrared paint or %fluorescend paint, both these ideas were discarded because both types of paint contains compounds that the termites and ants really like which makes them eat the painted %ant. Along with the plotter we also received a small circuit board that plugged into the serial port of the plotter and had a USB cabel for us to communicate with it. Lastly the %package contained a collection of petri dishes for us to use. \\
+
+In Section \ref{tracking}, we introduced the theory behind tracking of objects in images. In this section, we describe how the PC, plotter and cameras cooperate, how we get our hands on a frame to process and how we use the techniques from Section \ref{tracking} to turn a plotter, two standard web cameras and a PC into a tracking device.
 
 \subsection{Setup}
 
-The system as a whole contains 4 components
+The system as a whole contains four components
 
 \begin{itemize}
   \item Hewlett Packard 7046A X-Y Recorder (An XY Plotter)
@@ -17,7 +18,7 @@ The system as a whole contains 4 components
 \end{itemize}
 
 \subsubsection{Plotter}
-The plotter is a 45x45 table with a mechanical control panel on the side (see fig. XX). The plotter has a movable arm, moving along the X axis, consisting of a 30x3 cm of metal stretching all the way across the table. On this, a piece of plastic is attached, able to move up and down the arm along the Y axis. Together, these units cover the entire area of the plotter table. \\
+The plotter is a 45x45 table with a mechanical control panel on the side (see Fig. XX in section YY). The plotter has a movable arm, moving along the X axis, consisting of a 30x3 cm of metal stretching all the way across the table. On this, a piece of plastic is attached, able to move up and down the arm along the Y axis. Together, these units cover the entire area of the plotter table. \\
 
 The control panel is divided into labeled regions with sets of controls to manipulate specific parts of the plotter. Specifically, there is a region with controls for adjusting the zero point of the X-axis, one for the Y-axis, one for power supply etc. Most important of these is the two buttons that is used to adjust the zero point (0,0), as the software produced in this project will send only positive X and Y coordinates. Thus, the zero point must be located outside the area of the arena in order for the plotter arm to reach any possible location of the ant. \\
 
@@ -33,7 +34,7 @@ Another performance indicator for the mobile camera is the amount of frames it i
 On a side note, it should be noted that the plotter is not new; the internal mechanics are sensitive and will some times cause the arm to do a fast wiggle. The effect of this is similar to taking a picture of a moving object with a DSLR camera whose shutter time is too large. The frame will be blurred and the pixels will "drag lines" that may introduce blobs similar to the one representing the ant. Thus, the plotter is in danger of being biased in a wrong direction and loose track of the ant. This problem is also likely to be reduced by using a camera with a larger FPS rate - or a newer plotter. \\
 
 \subsection{Communication with Plotter}
-In order to manipulate the plotter, a high level C++ API was developed offering instructions like "Go to coordinate (x, y)", "move 10 units to the left", where left is defined in terms of the camera view, etc. Since the coordinate system axes of the plotter and the mobile camera grows in different directions, such an API is very convenient to have in order to construct the logic that moves the camera when the ant leaves the center of the frame. \\
+In order to manipulate the plotter, we made a high level C++ API offering instructions like "Go to coordinate (x, y)", "move 10 units to the left", where left is relative to the camera view, etc. Since the coordinate system axes of the plotter and the mobile camera grows in different directions, such an API is very convenient to have in order to construct the logic that moves the camera when the ant leaves the center of the frame. \\
 
 In order to implement this API, we needed to know the hardware protocol of the plotter. This was, however only given informally. Basically, the plotter accepts commands in the pattern given in Equation \ref{eq:plotterformat}.
 
