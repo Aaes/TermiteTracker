@@ -181,7 +181,7 @@ Using a range to specify a color instead will yield a much more satisfactory res
 % Angiv at dilating finder local optima, og at eroding finder local minima.
 % Angiv at de her metoder bliver brugt EFTER thresholding for at "rense" billedet. \\
 
-The basic concepts of \textit{morphological transformations} are \textit{dilation} and \textit{erosion}. These concepts are mostly used to remove noice, isolating individual elements or joining disparate elements in an image. Dilation and erosion are applied to either grayscale or binary image, and are often used to clean up an image after thresholding to make analysing the image easier. For example, when locating an ant, there might be many small light dots that make the ant hard to see, which can be much improved by using erosion or dilation depending on the image in question.\\
+The basic concepts of \textit{morphological transformations} are \textit{dilation} and \textit{erosion}. These concepts are mostly used to remove noise, isolating individual elements or joining disparate elements in an image. Dilation and erosion are applied to either grayscale or binary image, and are often used to clean up an image after thresholding to make analysing the image easier. For example, when locating an ant, there might be many small light dots that make the ant hard to see, which can be much improved by using erosion or dilation depending on the image in question.\\
 
 The way both erosion and dilation are applied to an image is by defining a kernel, denoted \textit{B}, that will be applied to an image (or part of an image), denoted \textit{A}. The kernel can be any shape or size, however it is often a square where the sides are uneven, e.g. 3x3, 5x5, 7x7 and so on. A kernel has an \textit{anchorpoint}, which is the pixel in A that erosion or dilation are applied on, and the result is stored in the corresponding point in the destination image, \textit{dst(i.j)}. Figure \ref{fig:kernel_ed} shows an example of a kernel and its anchorpoint in the center. \\
 
@@ -483,9 +483,9 @@ Considering the binary image \emph{d} from Figure \ref{fig:threshant} clearly sh
 Concluding this chapter we outline tho process of going from a raw image input to a successfully detected ant within an image, based on both the choices and experiments from this chapter. The process is as follows:
 
 \begin{enumerate}
-    \item Increase the contrast of the raw image with an alpha value of atleast 2.0.
+    \item Increase the contrast of the raw image with an alpha value of at least 2.0.
     \item Convert the contrasted image to grayscale.
-    \item Threshold the contrasted image with a threshold value of atleast 240.
+    \item Threshold the contrasted image with a threshold value of at least 240.
     \item Run blob detection on the thresholded image.
     \item Output the largest blob from the blob detection on the original image.
 \end{enumerate}
