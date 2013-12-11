@@ -57,6 +57,8 @@ The second statistic is a heatmap. The heatmap is visualized as a 2D array of re
 
 The three performance indicators that we provide are located also in the lower statistics panel to the right. These indicate the overall performance of the system in terms of frame processing time, image processing time and average image processing time in milliseconds. The first time indicates how long time is spent on each frame including image processing and book keeping (incrementing counters, indexing into arrays, updating statistics etc.). Image processing time covers time spent exclusively on image processing. This includes thresholding, blob extraction, up- and downloading the frames to the GPU etc. Average image processing is simply an average of time spent on image processing of frames. We believe these last statistics are useful especially for trouble shooting if tracking is unstable due to external factors like other software running simultaneously on the host computer or the like.
 
+In order to be able to keep the results gathered from tracking, the program saves all statistics in a log file which is placed next to the programs executable file when the user stops the tracking in the GUI.
+
 %What statistics do we extract?
 %How do the users do this?
 %How are they produced?
