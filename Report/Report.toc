@@ -3,11 +3,11 @@
 \contentsline {author}{Nikolaj Aaes \and Niklas Schalck Johansson \and Hildur Uffe Flemberg\unskip \ \ignorespaces {\tt \{niaa, nsjo, hufl\}@itu.dk}}{1}{chapter.1}
 \contentsline {section}{\numberline {1}Introduction}{3}{section.1.1}
 \contentsline {subsection}{\numberline {1.1}Project Proposal}{4}{subsection.1.1.1}
-\contentsline {section}{\numberline {2}Vision based insect tracking}{4}{section.1.2}
+\contentsline {section}{\numberline {2}Vision Based Insect Tracking}{4}{section.1.2}
 \contentsline {subsubsection}{\numberline {2.0.1}Scope}{4}{subsubsection.1.2.0.1}
 \contentsline {subsubsection}{\numberline {2.0.2}Requirements}{5}{subsubsection.1.2.0.2}
-\contentsline {subsection}{\numberline {2.1}Experimentation with ants}{7}{subsection.1.2.1}
-\contentsline {subsection}{\numberline {2.2}Tracking}{8}{subsection.1.2.2}
+\contentsline {subsection}{\numberline {2.1}Experimentation with ants}{6}{subsection.1.2.1}
+\contentsline {subsection}{\numberline {2.2}Tracking}{9}{subsection.1.2.2}
 \contentsline {subsubsection}{\numberline {2.2.1}Theory}{9}{subsubsection.1.2.2.1}
 \contentsline {subsubsection}{\numberline {2.2.2}Framework}{18}{subsubsection.1.2.2.2}
 \contentsline {subsubsection}{\numberline {2.2.3}Realization}{18}{subsubsection.1.2.2.3}
@@ -20,14 +20,14 @@
 \contentsline {subsection}{\numberline {3.3}Moving the camera}{26}{subsection.1.3.3}
 \contentsline {subsection}{\numberline {3.4}Graphical user interface}{27}{subsection.1.3.4}
 \contentsline {subsubsection}{\numberline {3.4.1}Statistics}{29}{subsubsection.1.3.4.1}
-\contentsline {section}{\numberline {4}Testing and evaluation}{29}{section.1.4}
-\contentsline {subsection}{\numberline {4.1}Process}{29}{subsection.1.4.1}
+\contentsline {section}{\numberline {4}Testing and evaluation}{30}{section.1.4}
+\contentsline {subsection}{\numberline {4.1}Process}{30}{subsection.1.4.1}
 \contentsline {subsection}{\numberline {4.2}Reflection}{31}{subsection.1.4.2}
-\contentsline {subsection}{\numberline {4.3}Testing the tracking software with real ants}{31}{subsection.1.4.3}
-\contentsline {subsection}{\numberline {4.4}Threats to validity}{36}{subsection.1.4.4}
-\contentsline {subsubsection}{\numberline {4.4.1}Threats to internal validity}{36}{subsubsection.1.4.4.1}
+\contentsline {subsection}{\numberline {4.3}Testing the tracking software with real ants}{32}{subsection.1.4.3}
+\contentsline {subsection}{\numberline {4.4}Threats to validity}{37}{subsection.1.4.4}
+\contentsline {subsubsection}{\numberline {4.4.1}Threats to internal validity}{37}{subsubsection.1.4.4.1}
 \contentsline {subsubsection}{\numberline {4.4.2}Threats to external validity}{37}{subsubsection.1.4.4.2}
 \contentsline {section}{\numberline {5}Conclusion}{38}{section.1.5}
 \contentsline {subsection}{\numberline {5.1}Related Work}{38}{subsection.1.5.1}
-\contentsline {subsection}{\numberline {5.2}Future Work}{38}{subsection.1.5.2}
-\contentsline {subsection}{\numberline {5.3}Project Conclusion}{39}{subsection.1.5.3}
+\contentsline {subsection}{\numberline {5.2}Future Work}{39}{subsection.1.5.2}
+\contentsline {subsection}{\numberline {5.3}Project Conclusion}{40}{subsection.1.5.3}
