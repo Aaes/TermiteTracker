@@ -406,9 +406,9 @@ It is evident from the image in Figure \ref{fig:ant}, that the overall image is 
 
 It is clear from Figure \ref{fig:contrast_ant} that image \emph{c} and \emph{d} does not provide the best result. Even though the image is indeed brightened, differentiating between the ant and the background has not become much easier. Whether image \emph{a} or \emph{b} provides the best result comes down to what we want the most - that the object we look for is as close to clear white as possible, or that it is the most distinguishable object in the image. In general, it is better for colors to be distinguishable than trying to make them match a specific color intensity. The result of image \emph{a} is therefore preferable. \\
 
-Now that we have improved the overall quality of the image, the next task is to isolate the ant in the improved image. For this task we have three techniques available; \emph{thresholding}, \emph{image segmentation} and \emph{background subtraction}. Background subtraction requires that the background in any 2 compared frames are close to equal. Since the mobile camera is moving during tracking, this technique is not optimal. This leaves us with image segmentation and thresholding.\\
+Now that we have improved the overall quality of the image, the next task is to isolate the ant in the improved image. For this task we have three techniques available; \emph{thresholding}, \emph{image segmentation} and \emph{background subtraction}. Background subtraction requires that the background in any two compared frames are close to equal. Since the mobile camera is moving during tracking, this technique is not optimal. This leaves us with image segmentation and thresholding.\\
 
-Figure \ref{fig:segment_ant} shows examples of running image segmentation with different numbers of segments, \textit{K}, defined on image \emph{a} from Figure \ref{fig:contrast_ant}. It is clear from these tests that a certain number of segments are neccessary for a satisfactory result. $K=8$ and $K=10$ clearly gives the best results, however it comes at a cost; segmenting these images simply takes too much time. Even with only óne segmentation attemp for each image, it takes around one second or more to produce a result. Considering this needs to be done \emph{multiple} times within a second when using a camera, this solution is simply not feasible or possible for tracking. An ant can easily move out of a frame without the camera ever knowing, simply because it is too slow or the ant is too fast.\\
+Figure \ref{fig:segment_ant} shows examples of running image segmentation with different numbers of segments, \textit{K}, defined on image \emph{a} from Figure \ref{fig:contrast_ant}. It is clear from these tests that a certain number of segments are neccessary to give a satisfactory result. $K=8$ and $K=10$ clearly gives the best results, however it comes at a cost; segmenting these images simply takes too much time for the camera to keep up with the ant. Even with only one segmentation attemp for each image, it takes around one second or more to produce a result. Considering this needs to be done \emph{multiple} times within a second when using a live camera feed, this solution is simply not feasible or possible for tracking. An ant can easily move out of a frame, simply because it is too slow or the ant is too fast.\\
 
 \begin{figure}
         \centering
@@ -434,7 +434,7 @@ Figure \ref{fig:segment_ant} shows examples of running image segmentation with d
 		\label{fig:segment_ant}
 \end{figure}
 
-This leave us with only one option; thresholding. Figure \ref{fig:threshant} shows thresholding attemps on a grayscale version of image \emph{a} from Figure \ref{fig:contrast_ant}. The results of different thresholds shows us two things; firstly that image \emph{d} is a very good threshold result and secondly that we need a rather high threshold value to get this result. In contrast to segmentation, applying a threshold to our image is much faster, and usable for a steady camera stream.\\
+This leave us with only one option; thresholding. Figure \ref{fig:threshant} shows thresholding attemps on a grayscale version of image \emph{a} from Figure \ref{fig:contrast_ant}. The results of different thresholds shows two things; firstly that image \emph{d} is a good threshold result and secondly that we need a rather high threshold value to get it. In contrast to segmentation, applying a threshold to our image is much faster and is usable with a mobile camera.\\
 
 \begin{figure}
         \centering
@@ -460,16 +460,16 @@ This leave us with only one option; thresholding. Figure \ref{fig:threshant} sho
 		\label{fig:threshant}
 \end{figure}
 
-Now that we have a satistafactory binary image that clearly shows the position of our ant, the next step is to actually get the position of the ant within the image. For this purpose we will use a \textit{blob detection}. In short, blob detection is a computer vision technique encapsulating mathematical methods that are aimed at detecting regions in a digital image. These regions differ in properties such as brightness and color from the regions surrounding it. So where segmentation seeks to partition an image, blob detection seek to find the partitions. All the pixels in a blob are considered to share similar properties.
+Now that we have a satisfactory binary image that clearly shows the position of the ant, the next step is to actually get the position of the ant within the image. For this purpose we use \textit{blob detection}. In short, blob detection is a computer vision technique encapsulating mathematical methods that are aimed at detecting regions in a digital image. These regions can differ in properties such as brightness and color from the regions surrounding it. Where segmentation seeks to partition an image, blob detection seek to extract the partitions. All the pixels in a blob are considered to share similar properties. \\
 
-Considering the binary image \emph{d} from Figure \ref{fig:threshant} clearly shows that we have to blobs available, that are rather large. This is of course ideal, but we might also have cases where we have smaller blobs caused by reflections on the ground or water. Therefore is is not enough to just use the first blob we find in an image - we should always use the largest blob available in the image, which hopefully, is our ant. The result of finding the largest blob in our binary image is shown in Figure \ref{fig:finalResult}.
+The binary image \emph{d} from Figure \ref{fig:threshant} clearly shows that we have two blobs available, that are rather large. This is of course ideal, but we might also have cases where we have smaller blobs caused by reflections of the dirt or water. Therefore it is not enough to extract all blobs from the image and use the first one - we should always use the largest blob available in the image, which hopefully, is our ant. The result of finding the largest blob in our binary image is shown in Figure \ref{fig:finalResult}.
 
 \begin{figure}
     \captionsetup{justification=centering}
         \centering
         \begin{subfigure}[b]{0.45\textwidth}
                 \includegraphics[scale = 0.25]{img/threshblob}
-                \caption{\mbox{}\\Detected blob drawn on thresh image}
+                \caption{\mbox{}\\Detected blob drawn on binary image}
         \end{subfigure}
 		\quad
         \centering
@@ -477,26 +477,28 @@ Considering the binary image \emph{d} from Figure \ref{fig:threshant} clearly sh
                 \includegraphics[scale = 0.25]{img/srcblob}
                 \caption{\mbox{}\\Detected blob drawn on original image}
         \end{subfigure}
-		\caption{Final result of finding the ant in our image. The detected blob is drawn on on both the thresholded image and the original ant image.}
+		\caption{Final result of finding the ant in our image. The detected blob is found on both the thresholded image and the original ant image.}
 		\label{fig:finalResult}
 \end{figure}
 
-Concluding this chapter we outline the process of going from a raw image input to a successfully detected ant within an image, based on both the choices and experiments from this chapter. The process is as follows:
+Concluding this chapter we summarize the process of going from a raw image input to a successfully detected ant, based on both the choices and experiments from this chapter. The process is as follows:
 
 \begin{enumerate}
-    \item Increase the contrast of the raw image with an alpha value of at least 2.0.
+    \item Increase the contrast of the raw image with an \alpha value of at least 2.0.
     \item Convert the contrasted image to grayscale.
-    \item Threshold the contrasted image with a threshold value of at least 240.
+    \item Threshold the grayscale image with a threshold value of at least 240.
     \item Run blob detection on the thresholded image.
     \item Output the largest blob from the blob detection on the original image.
 \end{enumerate}
 
-\subsubsection{Optimising the realized solution on Windows} \mbox{}\par
-During development we observed a very strange behavior with the OpenCV code that implemented our realization described in the previous section. On OS X the processing of a single image took between 28 and 32 seconds which were satisfactory, however the same code performed much worse on our Windows test machine. This is strange when you also consider that the computer running OS X has much older and much slower hardware than the Windows machine. In comparison, processing the same image on Windows, with the same implementation would take between 200 and 300 ms sometimes taking close to 500ms for a single image. We ran several tests to try and find out why, and even when comparing the OpenCV installations themselves we found no difference in what features were enabled and disabled. We tried to see whether it was the machine itself, however we discovered the same behavior on a much stronger desktop machine running Windows as well where processing took between 160 and 220 ms. To solve the problem we tried two things:\\
+\subsubsection{Optimizing the Realized Solution on Windows} \mbox{}\par
+During development we observed strange behavior with the OpenCV implementation. On OS X processing a single image took between 28 and 32 ms, however the same code performed much worse on our Windows test machine. This is strange considering that the computer running OS X has much older and much slower hardware than the Windows machine. In comparison, processing the same image on Windows, with the same implementation took between 200 and 300 ms and sometimes close to 500 ms for a single image. We ran several tests to find out why, and even when comparing the OpenCV installations we found no difference in what features were enabled and disabled. We also tested the implementation on another Windows machine with more powerful hardware, but the behavior was the same. To solve the problem we tried two things:\\
+
+\todo{Reference til CMake}
 
 \begin{enumerate}
     \item Compile the OpenCV source using CMake, instead of using the precompiled binaries available at the OpenCV download page.
-    \item Make use of the OpenCV CUDA GPU module that can be used to optimize image processing on computers with NVidia GPU's.
+    \item Use the OpenCV CUDA Graphical Processing Unit (GPU) module that can be used to optimize image processing on computers with NVidia GPU's.
 \end{enumerate}
 
 After compiling the OpenCV source code on the machine where it should be used, we found no difference in performance at all. We therefore changed the implementation to use the enabled GPU module and moved some of the processing to the GPU. This greatly improved the performance. Processing time went down to a stable 27-30 ms on our test machine, allowing us to do processing in real time. We cannot say why Windows performs differently than OS X, however this is a satisfactory solution to the problem.\\
