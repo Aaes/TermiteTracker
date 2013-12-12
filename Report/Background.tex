@@ -14,55 +14,63 @@
 %TODO: \\
 %fortæl om hvordan vi IKKE tester
 
-While the project lays the foundation for a fully useable field solution we have chosen to narrow our scope to the essential functionality. This means that the project was designed and tested in a controlled lab environment where factors such as lighting, wind etc. are kept as constant as possible. \\
+While the project lays the foundation for a fully usable solution we have chosen to narrow our scope to the essential functionality. This means that the project was designed and tested in a controlled environment where factors such as lighting, wind etc. are kept as stable as possible. \\
 
-Because actual termites were out of our reach and that our councillor at Harvard recommended it, we did all of our testing with normal ants instead of termites. We are confident that only minor adjustments, mostly to the blob detection code, are necesarry to make the solution work with termites since the main difference is the size. \\
+Because we did not have access to termites, our counselor at Harvard University suggesting using ants instead. Minor adjustments, mostly to the blob detection code, should make the solution capable of tracking termites instead of ants since the main difference is the size. \\
 
-Painting the ants in different colors can have some impact in the quality of the tracking. As a rule of thumb it is easier to track colors that contrast the background the most. In this project we chose to paint the ants white, red and bright green\todo{indsæt billede eller ref til billede}. We did not try any other colors because we found these to have a high degree of contrast which were sufficient.\\
+We intent to experiment with colors that have a high degree of contrast with the background. Once a suitable color is found, we will not continue to investigate other possible colors.\\
+
+% Painting the ants in different colors can have some impact in the quality of the tracking. As a rule of thumb it is easier to track colors that contrast the background the most. In this project we chose to paint the ants white, red and bright green\todo{indsæt billede eller ref til billede}. We did not try any other colors because we found these to have a high degree of contrast which were sufficient.\\
 
 % As the HP 7046a plotter was the only hardware available to us we have restricted the project to only include this type of plotter. One could potentially gain better results with a plotter with a finer granularity in coordinates and smoother movement. The cameras supplied with the plotter was also the only cameras available to us and we have therefore also restricted the project to only include these cameras. While one could use higher resolution cameras to obtain a better result, the weight of the camera is also important for the smoothness of the movement of the plotter and must be carefully considered.\\
 
-The project will not focus on changing the hardware provided by Harvard University. The hardware had already been succesfully used in a controlled and very simple environment, and this project focus on implementing the software to handle a more complex environment. However quality suggestions to how the hardware can be improved will be presented if the current hardware is found to be too limited in a new test environment, or if it would improve the results of the developed software.\\
+The project will not focus on changing the hardware provided by Harvard University. The hardware had already been succesfully used in a controlled and simple environment, and this project focus on implementing the software to handle a more complex environment. However if the current hardware is found to be too limited in our test environment, and if aquirering new hardware would improve the results of the developed software we will document any shortcomming and improvement suggestions.\\
 
 While it could be interesting to track several ants with several cameras, we focus on tracking a single ant with a single camera. We do this because tracking several ants would require a significant modification of the hardware. Even if the optimal hardware was available before project start, controlling several cameras would be a substantial extension of the project as making sure that all cameras track one ant optimally without colliding and shadowing each others views requires special techniques. Thus tracking several ants would require more time than we have available. \\
 
-Our councillor at Harvard wanted the tracking and interfacing with the tracking device to be implemented in C++ to make it easier for further developement. The graphical user interface was not restricted when choosing programming langauge and we ended up using C\# and Windows Forms to implement it.
+Our counselor at Harvard University wanted the tracking and interfacing with the tracking device to be implemented in C++ to make further developement easier. The graphical user interface (GUI) was not restricted to a certain programming langauge and so we ended up using C\# and Windows Forms. The minimum requirement for supported platforms are Windows.
 
 \subsubsection{Requirements} \mbox{}\par
 \label{requirements}
 
-To ensure the success of the project we compiled a list of the mandatory and optional requirements of the project\todo{of the projec to gang lige efter hinanden}. This helped us plan our development process and align the expectations between us, our councillor at ITU and our councillor at Harvard University. \\
+To ensure the success of the project we compiled a list of the mandatory and optional requirements. This helped us plan our development process and align the expectations between us, our counselor at ITU and our counselor at Harvard University. \\
 
 \noindent \textbf{Mandatory requirements} \par
 The mandatory requirements of the project are listed below and must be fulfilled for the project to be considered a success.
 
 \begin{enumerate}
-    \item Tracking of ants and/or termites using a low resolution camera implemented in C/C++.
-    \item The ability to adjust the tracking parameteres before and during the tracking.
-    \item Moving the tracking hardware in correspondance to the tracking.
-	\item A graphical user interface containing two modes:
-    \item - Calibration mode. Must contain a direct feed from the lower camera, a proccessed feed and sliders to adjust the processing.
-    \item - Tracking mode. Must contain a direct feed from the lower camera, a direct feed from the overhead camera and statistics.
-    \item The ability to collect the following statistics:
-    \item - The route of the ant/termite over time. 
-    \item - Heatmap of where in the petri dish the ant stay.
-    \item The ability to save the collected statistics.
+    \item Tracking of ants using a low resolution camera implemented in C/C++.
+    \item Ability to adjust tracking parameters before and during tracking.
+    \item Moving the camera in correspondance to the tracking.
+	\item A GUI containing two modes:
+    \begin{itemize}
+        \item Calibration mode. Must contain a direct feed from the mobile camera, a proccessed feed and sliders to adjust the processing.
+        \item Tracking mode. Must contain a direct feed from the mobile camera, a direct feed from the overhead camera and statistics.
+    \end{itemize}
+    \item Ability to collect the following statistics:
+    \begin{itemize}
+        \item Route of the ant over time.
+        \item Heatmap of where in the petri dish the ant tend to be.
+    \end{itemize}
+    \item Ability to save the collected statistics.
 \end{enumerate}
 
 \noindent \textbf{Optional requirements} \par
-The optional requirements are the so called "nice-to-have requirements". They are not mandatory for the project but features that could be desirable to implement if the time and resources permits it.
+The optional requirements are the so called "nice-to-have requirements". They are not mandatory for the project but features that could be desirable to implement if time and resources permit it.
 
 \begin{enumerate}
-	\item An additional third mode in the graphical user interface Bias mode: adds the ability to select a certain point which the plotter will try to lure the termites towards using food or pheromones.
-    \item The ability to choose certain areas which should be avoided during the tracking.
+	\item An additional third mode in the GUI; bias mode. Bias mode adds the ability to select a certain point which the plotter will try to lure the ants towards using food or pheromones.
+    \item Ability to choose certain areas which should be avoided during tracking.
     \item Collection of these additional statistics:
-    \item - Average speed of the ant/termite.
-    \item - The amount of ants/termites meet during the tracking. A way to adjust what defines a meeting.
-    \item - The amount of time between each meeting. A way to adjust when a meeting starts and ends.
-    \item - The duration of each meeting.
-    \item - The area of the petri dish covered by the ant/termite. A way to adjust how much area is covered by an ant/termite when stationary (also known as "headsize").
-    \item - How much area is covered over time.
-    \item - Mean free path (the amount of time between each "stay").
+    \begin{enumerate}
+        \item Average speed of the ant.
+        \item Amount of ants, the marked ant, meet during tracking. A way to adjust what defines a meeting.
+        \item Amount of time between each meeting. A way to adjust when a meeting starts and ends.
+        \item Duration of each meeting.
+        \item Area of the petri dish explored by the ant. A way to adjust the size of the area an ant will explore at any given time, also known as \emph{headsize}.
+        \item How much area is explored over time.
+        \item Amount of time between each "stay".
+    \end{enumerate}
 \end{enumerate}
 
-Now that we have established the background, scope and goals for the project we continue with describing the central parts of the project. First we describe how to find the ant/termite in an image, then how we interacted with the plotter and then how we created the graphical user interface.
+Now that we have established the background, scope and goals for the project we continue with describing the central parts of the project. First we describe how to find the ant in an image, second, how we interacted with the plotter and third, how we created the GUI.

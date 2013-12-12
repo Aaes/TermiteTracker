@@ -43,9 +43,23 @@ When thresholding is in place, tracking is started by choosing "Start" under "Tr
 \end{figure}
 
 \subsubsection{Statistics} \mbox{}\par
+One of the requirements to the GUI is that it is able to present relevant statistics to the user in a natural way. Clearly, there are many types of statistics that are interesting to show and we cannot provide them all. Since one of the main contributions of this project is the GUI part, we chose to focus on the statistics that have a somewhat graphical presentation. We decided to implement the following statistics:
+
+\begin{itemize}
+  \item{The route of the ant (a list of steps)}
+  \item{A heatmap}
+  \item{Performance indicators}
+\end{itemize}
+
+Since of the purpose of the software is to enable the user to track ants, it seems natural to provide a graphical view of the route. In the current version, when tracking is enabled, the user can choose to display the last X steps of the ant where X can be adjusted from the drop down menu in the statistics panel. The options in the list are prefixed to range from 0 to 1000 steps. Whenever a number greater than 0 is chosen, the steps appear as small circles on the overhead frame. Since the tracking device should be modifiable in order to function in several physical settings, the color of the background can change - therefore, we provide an option for changing the colors of the steps. \\	
+
+The second statistic is a heatmap. The heatmap is visualized as a 2D array of rectangles also drawed on top the overhead frame. While the route statistic provides location information, the heatmap relates this information with time. When tracking is started, the program will capture the location of the ant, find the encapsulating rectangle and keep incrementing the darkness of the color in that rectangle until the ant enters a neighbour rectangle. After few minutes of tracking, the color intensities of the heatmap will reveal the preferred location of the ant during those minutes. \\
+
+The three performance indicators that we provide are located also in the lower statistics panel to the right. These indicate the overall performance of the system in terms of frame processing time, image processing time and average image processing time in milliseconds. The first time indicates how long time is spent on each frame including image processing and book keeping (incrementing counters, indexing into arrays, updating statistics etc.). Image processing time covers time spent exclusively on image processing. This includes thresholding, blob extraction, up- and downloading the frames to the GPU etc. Average image processing is simply an average of time spent on image processing of frames. We believe these last statistics are useful especially for trouble shooting if tracking is unstable due to external factors like other software running simultaneously on the host computer or the like.
+
+In order to be able to keep the results gathered from tracking, the program saves all statistics in a log file which is placed next to the programs executable file when the user stops the tracking in the GUI.
+
 %What statistics do we extract?
 %How do the users do this?
 %How are they produced?
 %Can they be improved (future work)?
-
-TODO

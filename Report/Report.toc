@@ -3,10 +3,10 @@
 \contentsline {author}{Nikolaj Aaes \and Niklas Schalck Johansson \and Hildur Uffe Flemberg\unskip \ \ignorespaces {\tt \{niaa, nsjo, hufl\}@itu.dk}}{1}{chapter.1}
 \contentsline {section}{\numberline {1}Introduction}{3}{section.1.1}
 \contentsline {subsection}{\numberline {1.1}Project Proposal}{4}{subsection.1.1.1}
-\contentsline {section}{\numberline {2}Vision based insect tracking}{4}{section.1.2}
+\contentsline {section}{\numberline {2}Vision Based Insect Tracking}{4}{section.1.2}
 \contentsline {subsubsection}{\numberline {2.0.1}Scope}{4}{subsubsection.1.2.0.1}
 \contentsline {subsubsection}{\numberline {2.0.2}Requirements}{5}{subsubsection.1.2.0.2}
-\contentsline {subsection}{\numberline {2.1}Experimentation with ants}{7}{subsection.1.2.1}
+\contentsline {subsection}{\numberline {2.1}Experimentation with ants}{6}{subsection.1.2.1}
 \contentsline {subsection}{\numberline {2.2}Tracking}{8}{subsection.1.2.2}
 \contentsline {subsubsection}{\numberline {2.2.1}Theory}{9}{subsubsection.1.2.2.1}
 \contentsline {subsubsection}{\numberline {2.2.2}Framework}{18}{subsubsection.1.2.2.2}
