@@ -4,18 +4,20 @@
 
 \todo{Insert screenshot of GUI}
 
-In order to use the system to track ants, we need a user interface. The requirements for the user interface are the following
+In order to use the system to track ants, we needed a user interface. The requirements for the user interface are the following:
 
 \begin{itemize}
-  \item{It should be able to show the camera feed from both the mobile and the overhead camera}
-  \item{It should be able to calibrate the system before initiating the tracking procedure}
-  \item{It should provide a way to gather statistics during the process of tracking}
-  \item{It should provide a set of controls to manipulate the plotter manually}
+  \item{It should be able to show the camera feed from both the mobile and the overhead camera}.
+  \item{It should be able to calibrate the system before initiating the tracking procedure}.
+  \item{It should provide a way to gather statistics during the process of tracking}.
+  \item{It should provide a set of controls to manipulate the plotter manually}.
 \end{itemize}
 
-We chose to implement the GUI in Windows Forms using C\# as Visual Studio provides a convenient way of dragging and dropping of UI controls. Furthermore, it was a requirement that all software would run at least on Windows but preferably on ther platforms as well. We experimented with a Swing GUI in Java, however we experienced some problems with calling into unmanaged C++ code on OSX using Java Native Interface (JNI) so we chose to switch to C\# in order to save time. \\
+\todo{Indsæt reference til JNI}
 
-Furthermore, it is easy to integrate unmanaged code with .NET as no libraries like JNI are needed. All C++ logic is published as a DLL with an interface represented in the GUI code as a list of static methods qualified with the "extern" keyword and called using P/Invoke. The GUI is shown in Fig. \ref{fig:gui}. \\
+We chose to implement the GUI in Windows Forms using C\# because it was a requirement that all software would run at least on Windows but preferably on other platforms as well. We experimented with a Swing GUI in Java, however we experienced problems with calling into C++ code on Windows using Java Native Interface (JNI) so we chose to switch to C\# in order to save time. \\
+
+Furthermore, it is easy to integrate C++ code with .NET as no libraries like JNI are needed. All C++ logic is published as a DLL with an interface represented in the GUI. The GUI is shown in Figure \ref{fig:gui}. \\
 
 As seen from the figure, the GUI consists of a horizontal menu bar in the top, a video feed for the mobile camera on the left and a video feed for the overhead camera on the right. In the bottom, a panel is placed to display various statistics about the tracking process and the current performance of the system such as processing time, etc. \\
 
