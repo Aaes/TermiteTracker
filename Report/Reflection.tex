@@ -7,7 +7,6 @@ Using a mobile camera is a requirement because users would potentially like to b
 
 On the positive side, using only an overhead camera would get rid of the mechanical wiggles that cause the frames to become blurry, remove sounds that might affect the behavior of the ant and remove shadows from the mobile camera on the plotter table. Furthermore, it will increase (but not remove) the upper bound we need to put on processing time per frame as there is no mobile camera to lose track of the ant between frames. With only an overhead camera, it would even be possible to do tracking based on   video files instead of a live camera input and thus eliminate all bounds on processing time (because all frames could be recorded beforehand). \\
 
+Ignoring reflections from the water could be a useful addition to the software. Whenever a blob would be detected, we could convert its pixel position to a camera coordinate, and based on this, measure the distance to the center of the petri dish. If the distance is greater than the radius of the petri dish the blob must be a reflection from the water and can be safely ignored. A corner case where this would fail is if the ant is close to the edge, causing the reflection to merge with the ant and create a single blob where ant and reflection is indistinguishable.\\
+
 Reducing the sounds from the plotter is also something we could have achieved by exchanging the plotter for a different model. Choosing a different plotter would also open possibilities for choosing a better model that has smoother moving arms.
-
-
-\todo{Sige noget om at vi kan bruge koordinater til at frasortere genskin fra vand}
