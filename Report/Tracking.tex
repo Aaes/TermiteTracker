@@ -495,8 +495,6 @@ Concluding this chapter we summarize the process of going from a raw image input
 \label{sec:optimizing}
 During development we observed strange behavior with the OpenCV implementation. On OS X processing a single image took between 28 and 32 ms, however the same code performed much worse on our Windows test machine. This is strange considering that the computer running OS X has much older and much slower hardware than the Windows machine. In comparison, processing the same image on Windows, with the same implementation took between 200 and 300 ms and sometimes close to 500 ms for a single image. We ran several tests to find out why, and even when comparing the OpenCV installations we found no difference in what features were enabled and disabled. We also tested the implementation on another Windows machine with more powerful hardware, but the behavior was the same. To solve the problem we tried two things:\\
 
-\todo{Reference til CMake og CUDA}
-
 \begin{enumerate}
     \item Compile the OpenCV source using CMake \cite{cmake}, instead of using the precompiled binaries available at the OpenCV download page.
     \item Use the OpenCV CUDA \cite{cuda} Graphical Processing Unit (GPU) module that can be used to optimize image processing on computers with NVidia GPU's.
@@ -504,4 +502,4 @@ During development we observed strange behavior with the OpenCV implementation. 
 
 After compiling the OpenCV source code on the machine where it should be used, we found no difference in performance at all. We therefore changed the implementation to use the enabled GPU module and moved some of the processing to the GPU. This greatly improved the performance. Processing time went down to a stable 27-30 ms on our test machine, allowing us to do processing in real time. We cannot say why Windows performs differently than OS X, however this is a satisfactory solution to the problem.\\
 
-\todo{del konklusion på hele afsnittet?}
+In conclusion we were able to use OpenCV to locate an ant in a frame using thresholding, contrasting and blob detection. The processing time of this were optimized using the OpenCV CUDA GPU module and enabled us to use this method in realtime when tracking an ant. 
