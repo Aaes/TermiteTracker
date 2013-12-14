@@ -136,6 +136,16 @@ During our test, the XY-plotter would stutter from time to time, making loud noi
 
 Another observation is that the unpainted parts of the ant were almost never visible in the images (at least not to the human eye) and completely disappeared in blurry images, where the white color would still be visible. It is worth noting that this would really complicate tracking of \emph{multiple ants} in the same frame if the others are not painted. If they were painted, this would also complicate the solution as the software would need to account for multiple colors at the same time.\\
 
-\todo{Insert numbers}
+We conducted five independent tracking tests, with a length of 5 minutes each. For the five different tests we measured how long we were unable to track the ant. The result of these tests is shown in the following:
+
+\begin{description}
+    \item[Test 1: 00:40 minutes out of 05:00 minutes]
+    \item[Test 2: 01:41 minutes out of 05:00 minutes]
+    \item[Test 3: 02:54 minutes out of 05:00 minutes]
+    \item[Test 4: 01:10 minutes out of 05:00 minutes]
+    \item[Test 5: 01:22 minutes out of 05:00 minutes]
+\end{description}
+
+On average we were unable to track the ant for 01:34 minutes out of 05:00 minutes or 31.13\% of the time..
 
 In conclusion, we argue that the software itself works as intended, with only a few situations where it causes the tracking to fail. The failures can mostly be credited to a poor test setup, test environment, hardware difficulties and the animals themselves moving much faster than anticipated.\\
