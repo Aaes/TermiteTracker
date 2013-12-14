@@ -37,6 +37,7 @@ It should be noted that the plotter is not new; the internal mechanics are sensi
 \subsection{Communication with Plotter}
 In order to manipulate the plotter, we made a high level C++ API offering instructions like "Go to coordinate (x, y)", "move 10 units to the left" etc. Since the coordinate system axes of the plotter and the mobile camera grows in different directions, such an API is convenient to have in order to construct the logic that moves the camera when the ant leaves the center of the frame. \\
 
+\newpage
 In order to implement this API, we needed to know the hardware protocol of the plotter. The plotter accepts commands in the pattern given in Equation \ref{eq:plotterformat}.
 
 \begin{center}

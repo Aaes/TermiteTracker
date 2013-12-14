@@ -8,13 +8,6 @@
   \label{fig:gui_heat}
 \end{figure}
 
-\begin{figure}[ht!]
-  \centering
-    \includegraphics[scale=0.35]{img/GUI_calib}
-  \caption{GUI in calibration mode.}
-  \label{fig:gui_thresh}
-\end{figure}
-
 In order to use the system to track ants, we needed a user interface. The requirements for the user interface are the following:
 
 \begin{itemize}
@@ -25,6 +18,13 @@ In order to use the system to track ants, we needed a user interface. The requir
 \end{itemize}
 
 We chose to implement the GUI in Windows Forms using C\# because it was a requirement that all software would run at least on Windows but preferably on other platforms as well. We experimented with a Swing GUI in Java, however we experienced problems with calling into C++ code on Windows using Java Native Interface (JNI) \cite{jni} so we chose to switch to C\# in order to save time. \\
+
+\begin{figure}[ht!]
+  \centering
+    \includegraphics[scale=0.35]{img/GUI_calib}
+  \caption{GUI in calibration mode.}
+  \label{fig:gui_thresh}
+\end{figure}
 
 Furthermore, it is easy to integrate C++ code with .NET as no libraries like JNI are needed. All C++ logic is published as a DLL with an interface represented in the GUI. The GUI is shown in Figure \ref{fig:gui_heat} and Figure \ref{fig:gui_thresh}. \\
 
@@ -60,6 +60,7 @@ When thresholding is in place, tracking is started by choosing \texttt{Start} un
 %     \label{fig:gui}
 % \end{figure}
 
+\newpage
 \subsubsection{Statistics} \mbox{}\par
 One of the requirements to the GUI is that it is able to present relevant statistics to the user in a natural way. We chose to focus on the statistics that have a somewhat graphical presentation, we decided to implement the following statistics:
 

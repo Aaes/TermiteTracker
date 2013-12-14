@@ -35,7 +35,7 @@ value = {Boolean\mbox{-}Condition} ? {True\mbox{-}Evaluation}: {False\mbox{-}Eva
 It works just like you would expect from many programming languages or mathematical expression. It is also known as an inline \textit{if-statement}. \\
 
 \noindent \textbf{Thresholding} \par
-Thresholding is an image processing technique used to make a final decision about each pixel in an image. Thresholding is most commonly used to find objects in images, e.g. finding an ant in an image\cite{theory1}. During thresholding a decision is made based on the following; either a pixel value is one that we are interested in or it is not. This is usually done by assigning a specific pixel value to the pixel we want, and another to those that we do not want. In general we compare the \textit{ith} pixel of the source image, \textit{src}, to the threshold value, \textit{T}, and saves the result in a destination image, \textit{dst}\cite{theory1}. For instance, to create a binary image where we are interested in all pixels above the threshold \textit{T}, the equation would look like the one shown in Equation \ref{eq:binarythresholding},
+Thresholding is an image processing technique used to make a final decision about each pixel in an image. Thresholding is most commonly used to find objects in images, e.g. finding an ant in an image \cite{theory1}. During thresholding a decision is made based on the following; either a pixel value is one that we are interested in or it is not. This is usually done by assigning a specific pixel value to the pixel we want, and another to those that we do not want. In general we compare the \textit{ith} pixel of the source image, \textit{src}, to the threshold value, \textit{T}, and saves the result in a destination image, \textit{dst} \cite{theory1}. For instance, to create a binary image where we are interested in all pixels above the threshold \textit{T}, the equation would look like the one shown in Equation \ref{eq:binarythresholding},
 
 \begin{equation}
 dst_i = src_i \geq T ? 255: 0
@@ -182,9 +182,9 @@ Using a range to specify a color instead will yield a much more satisfactory res
 % Angiv at dilating finder local optima, og at eroding finder local minima.
 % Angiv at de her metoder bliver brugt EFTER thresholding for at "rense" billedet. \\
 
-When locating an ant, there might be many small bright dots that make the ant hard to see. This can be improved by using erosion or dilation, which are the basic concepts of \textit{morphological transformations}\cite{theory1}, depending on the image in question. These concepts are mostly used to remove noise, isolating individual elements or joining disparate elements in an image\cite{theory1}. Dilation and erosion are applied to either grayscale or binary images, and are often used to clean up after thresholding to make it easier to analyze.\\
+When locating an ant, there might be many small bright dots that make the ant hard to see. This can be improved by using erosion or dilation, which are the basic concepts of \textit{morphological transformations} \cite{theory1}, depending on the image in question. These concepts are mostly used to remove noise, isolating individual elements or joining disparate elements in an image \cite{theory1}. Dilation and erosion are applied to either grayscale or binary images, and are often used to clean up after thresholding to make it easier to analyze.\\
 
-The way both erosion and dilation are applied to an image is by defining a kernel, denoted \textit{B}, that will be applied to an image (or part of an image), denoted \textit{A}. The kernel can be any shape or size, however it is often a square where the sides are uneven, e.g. 3x3, 5x5, 7x7 and so on\cite{theory1}. A kernel has an \textit{anchorpoint}, which is the pixel in \emph{A} that erosion or dilation is applied to, and the result is stored in the corresponding point in the destination image, \textit{dst(i,j)}. Figure \ref{fig:kernel_ed} shows an example of a kernel and its anchorpoint in the center. \\
+The way both erosion and dilation are applied to an image is by defining a kernel, denoted \textit{B}, that will be applied to an image (or part of an image), denoted \textit{A}. The kernel can be any shape or size, however it is often a square where the sides are uneven, e.g. 3x3, 5x5, 7x7 and so on \cite{theory1}. A kernel has an \textit{anchorpoint}, which is the pixel in \emph{A} that erosion or dilation is applied to, and the result is stored in the corresponding point in the destination image, \textit{dst(i,j)}. Figure \ref{fig:kernel_ed} shows an example of a kernel and its anchorpoint in the center. \\
 
 \begin{figure}[ht!]
   \centering
@@ -193,7 +193,7 @@ The way both erosion and dilation are applied to an image is by defining a kerne
   \label{fig:kernel_ed}
 \end{figure}
 
-When transforming an image using dilation, whenever the kernel is applied to a new anchorpoint, the \textit{local maximum} is used\cite{theory1}. When eroding an image the \textit{local minimum} is used\cite{theory1}. Naturally, compared to the original image, bright areas are expanded when dilating, and dark areas are expanded when eroding. However one cannot say that e.g. eroding removes noise and dilating does not. It depends on the image which the transformation is applied to. Figure \ref{fig:sample_kernel} shows an example of pixels used to determine the outcome of the anchorpoint in the destination image. \\
+When transforming an image using dilation, whenever the kernel is applied to a new anchorpoint, the \textit{local maximum} is used \cite{theory1}. When eroding an image the \textit{local minimum} is used \cite{theory1}. Naturally, compared to the original image, bright areas are expanded when dilating, and dark areas are expanded when eroding. However one cannot say that e.g. eroding removes noise and dilating does not. It depends on the image which the transformation is applied to. Figure \ref{fig:sample_kernel} shows an example of pixels used to determine the outcome of the anchorpoint in the destination image. \\
 
 \begin{figure}[ht!]
   \centering
@@ -287,9 +287,9 @@ To increase the brightness, a scalar is added to each pixel, denoted $\beta$. Th
 \end{figure}
 
 \noindent \textbf{Image Segmentation} \par
-Image segmentation is the process of partitioning all the pixels in an image into \textit{S} segments (or superpixels). The goal is to simplify or change the representation of an image such that it is easier to analyze. It is mostly used to locate objects that consist of a range of similar colors, that is combined into a single colored object after segmentation, thus making it easier to find\cite{theory1}. Image segmentation is therefore the process of assigning a label to a pixel, such that pixels with the same label share certain visual characteristics. The result of image segmentation is a set of segments that covers the entire image. Thresholding, as described earlier, is the simplest method of segmenting an image. This can be an important technique in finding the ant, should thresholding alone not be enough.\\
+Image segmentation is the process of partitioning all the pixels in an image into \textit{S} segments (or superpixels). The goal is to simplify or change the representation of an image such that it is easier to analyze. It is mostly used to locate objects that consist of a range of similar colors, that is combined into a single colored object after segmentation, thus making it easier to find \cite{theory1}. Image segmentation is therefore the process of assigning a label to a pixel, such that pixels with the same label share certain visual characteristics. The result of image segmentation is a set of segments that covers the entire image. Thresholding, as described earlier, is the simplest method of segmenting an image. This can be an important technique in finding the ant, should thresholding alone not be enough.\\
 
-One of the most common algorithms to segment images is the \textit{k-means} algorithm\cite{theory2}. K-means is a \textit{clustering algorithm} often used in \textit{datamining}. K-means takes a set of unclassified data, and classifies it. It does so by assigning all the data to \textit{K} different clusters, and iteratively assign each element to the cluster it is most similar to after new \textit{centroids} have been assigned or created. The algorithm terminates when data no longer changes clusters or a predefined number of iterations have completed. Even though more robust classification algorithms exists, \textit{k-means} is often used simply because each iteration is relatively fast. The algorithm works as follows:
+One of the most common algorithms to segment images is the \textit{k-means} algorithm \cite{theory2}. K-means is a \textit{clustering algorithm} often used in \textit{datamining}. K-means takes a set of unclassified data, and classifies it. It does so by assigning all the data to \textit{K} different clusters, and iteratively assign each element to the cluster it is most similar to after new \textit{centroids} have been assigned or created. The algorithm terminates when data no longer changes clusters or a predefined number of iterations have completed. Even though more robust classification algorithms exists, \textit{k-means} is often used simply because each iteration is relatively fast. The algorithm works as follows:
 
 \begin{enumerate}
   \item Randomly select \textit{k} objects in the dataset \textit{D}, which initially represents the centroid for each cluster.
@@ -316,7 +316,7 @@ An example of using k-means to cluster an image is shown in Figure \ref{fig:segm
 \end{figure}
 
 \noindent \textbf{Background subtraction} \par
-Background substraction (also known as foreground detection) is a process often used to detect moving objects with a static camera\cite{theory1}. The idea is that the background remains roughly the same in every image in a video stream, while moving objects enter and leave the stream shortly after, or become part of the background after some time have passed. The rationale is to have a background image (or reference point) and then substract the image with the new object in it. This technique can be useful for tracking a moving ant, assuming the background remains roughly the same in the test setup. Computing the difference between the foreground and background will result in an image with only the moving object in it, that can be used for analysis. The absolute difference is computed almost like a standard \textit{matrix substraction} as shown in Equation \ref{eq:matrix_sub}. An example of background subtraction is shown in Figure \ref{fig:background_filtering}.\\
+Background substraction (also known as foreground detection) is a process often used to detect moving objects with a static camera \cite{theory1}. The idea is that the background remains roughly the same in every image in a video stream, while moving objects enter and leave the stream shortly after, or become part of the background after some time have passed. The rationale is to have a background image (or reference point) and then substract the image with the new object in it. This technique can be useful for tracking a moving ant, assuming the background remains roughly the same in the test setup. Computing the difference between the foreground and background will result in an image with only the moving object in it, that can be used for analysis. The absolute difference is computed almost like a standard \textit{matrix substraction} as shown in Equation \ref{eq:matrix_sub}. An example of background subtraction is shown in Figure \ref{fig:background_filtering}.\\
 
 \begin{equation}
 \setlength{\arraycolsep}{5pt}
@@ -355,8 +355,6 @@ Background substraction (also known as foreground detection) is a process often 
 		\caption{Example of detecting a new object on a static background. In this example all differences greater than zero is set to 255.}
 		\label{fig:background_filtering}
 \end{figure}
-
-\newpage
 
 \subsubsection{Computer Vision Framework} \mbox{}\par
 \label{framework}
@@ -437,6 +435,7 @@ Figure \ref{fig:segment_ant} shows examples of running image segmentation with d
 This leave us with only one option; thresholding. Figure \ref{fig:threshant} shows thresholding attemps on a grayscale version of image \emph{a} from Figure \ref{fig:contrast_ant}. The results of different thresholds shows two things; firstly that image \emph{d} is a good threshold result and secondly that we need a rather high threshold value to get it. In contrast to segmentation, applying a threshold to our image is much faster and is usable with a mobile camera.\\
 
 \begin{figure}
+    \vspace{-2em}
         \centering
         \begin{subfigure}[b]{0.4\textwidth}
                 \includegraphics[scale = 0.2]{img/thresh100}
@@ -458,6 +457,7 @@ This leave us with only one option; thresholding. Figure \ref{fig:threshant} sho
         \end{subfigure}
 		\caption{Thresholding the ant image.}
 		\label{fig:threshant}
+        \vspace{-2em}
 \end{figure}
 
 Now that we have a satisfactory binary image that clearly shows the position of the ant, the next step is to actually get the position of the ant within the image. For this purpose we use \textit{blob detection}. In short, blob detection is a computer vision technique encapsulating mathematical methods that are aimed at detecting regions in a digital image. These regions can differ in properties such as brightness and color from the regions surrounding it. Where segmentation seeks to partition an image, blob detection seek to extract the partitions. All the pixels in a blob are considered to share similar properties. \\
@@ -479,6 +479,7 @@ The binary image \emph{d} from Figure \ref{fig:threshant} clearly shows that we 
         \end{subfigure}
 		\caption{Final result of finding the ant in our image. The detected blob is found on both the thresholded image and the original ant image.}
 		\label{fig:finalResult}
+        \vspace{-2em}
 \end{figure}
 
 Concluding this chapter we summarize the process of going from a raw image input to a successfully detected ant, based on both the choices and experiments from this chapter. The process is as follows:
