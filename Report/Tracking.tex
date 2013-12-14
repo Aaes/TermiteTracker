@@ -498,8 +498,8 @@ During development we observed strange behavior with the OpenCV implementation. 
 \todo{Reference til CMake og CUDA}
 
 \begin{enumerate}
-    \item Compile the OpenCV source using CMake, instead of using the precompiled binaries available at the OpenCV download page.
-    \item Use the OpenCV CUDA Graphical Processing Unit (GPU) module that can be used to optimize image processing on computers with NVidia GPU's.
+    \item Compile the OpenCV source using CMake \cite{cmake}, instead of using the precompiled binaries available at the OpenCV download page.
+    \item Use the OpenCV CUDA \cite{cuda} Graphical Processing Unit (GPU) module that can be used to optimize image processing on computers with NVidia GPU's.
 \end{enumerate}
 
 After compiling the OpenCV source code on the machine where it should be used, we found no difference in performance at all. We therefore changed the implementation to use the enabled GPU module and moved some of the processing to the GPU. This greatly improved the performance. Processing time went down to a stable 27-30 ms on our test machine, allowing us to do processing in real time. We cannot say why Windows performs differently than OS X, however this is a satisfactory solution to the problem.\\
