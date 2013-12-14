@@ -1,8 +1,20 @@
 %!TEX root = Report.tex
 
 \subsection{Graphical user interface}
+\begin{figure}[ht!]
+  \centering
+    \includegraphics[scale=0.25]{img/HeatmapGUI}
+  \caption{GUI in tracking mode with heatmap statistic.}
+  \label{fig:gui_heat}
+\end{figure}
 
-\todo{Insert screenshot of GUI}
+\subsection{Graphical user interface}
+\begin{figure}[ht!]
+  \centering
+    \includegraphics[scale=0.25]{img/HeatmapGUI}
+  \caption{GUI in tracking mode with heatmap statistic.}
+  \label{fig:gui_thresh}
+\end{figure}
 
 In order to use the system to track ants, we needed a user interface. The requirements for the user interface are the following:
 
@@ -17,7 +29,7 @@ In order to use the system to track ants, we needed a user interface. The requir
 
 We chose to implement the GUI in Windows Forms using C\# because it was a requirement that all software would run at least on Windows but preferably on other platforms as well. We experimented with a Swing GUI in Java, however we experienced problems with calling into C++ code on Windows using Java Native Interface (JNI) so we chose to switch to C\# in order to save time. \\
 
-Furthermore, it is easy to integrate C++ code with .NET as no libraries like JNI are needed. All C++ logic is published as a DLL with an interface represented in the GUI. The GUI is shown in Figure \ref{fig:gui}. \\
+Furthermore, it is easy to integrate C++ code with .NET as no libraries like JNI are needed. All C++ logic is published as a DLL with an interface represented in the GUI. The GUI is shown in Figure \ref{fig:gui_heat}. \\
 
 As seen from the figure, the GUI consists of a horizontal menu bar in the top, a video feed for the mobile camera on the left and a video feed for the overhead camera on the right. In the bottom, a panel is placed to display various statistics about the tracking process and the current performance of the system such as processing time, etc. \\
 
