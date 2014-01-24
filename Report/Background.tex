@@ -16,7 +16,7 @@
 
 While the project lays the foundation for a fully usable solution we have chosen to narrow our scope to the essential functionality. This means that the project was designed and tested in a controlled environment where factors such as lighting, wind etc. are kept as stable as possible. \\
 
-Because we did not have access to termites, our counselor at Harvard University suggesting using ants instead. Minor adjustments, mostly to the blob detection code, should make the solution capable of tracking termites instead of ants since the main difference is the size. \\
+Because we did not have access to termites, our counselor at Harvard University suggested using ants instead. Minor adjustments, mostly to the blob detection code, should make the solution capable of tracking termites instead of ants since the main difference is the size. \\
 
 We intent to experiment with colors that have a high degree of contrast with the background. Once a suitable color is found, we will not continue to investigate other possible colors.\\
 
@@ -24,11 +24,11 @@ We intent to experiment with colors that have a high degree of contrast with the
 
 % As the HP 7046a plotter was the only hardware available to us we have restricted the project to only include this type of plotter. One could potentially gain better results with a plotter with a finer granularity in coordinates and smoother movement. The cameras supplied with the plotter was also the only cameras available to us and we have therefore also restricted the project to only include these cameras. While one could use higher resolution cameras to obtain a better result, the weight of the camera is also important for the smoothness of the movement of the plotter and must be carefully considered.\\
 
-The project will not focus on changing the hardware provided by Harvard University. The hardware had already been succesfully used in a controlled and simple environment, and this project focus on implementing the software to handle a more complex environment. However if the current hardware is found to be too limited in our test environment, and if aquirering new hardware would improve the results of the developed software we will document any shortcomming and improvement suggestions.\\
+The project will not focus on changing the hardware provided by Harvard University. The hardware had already been succesfully used in a controlled and simple environment, and this project focuses on implementing the software to handle a more complex environment. However if the current hardware is found to be too limited in our test environment, and if acquiring new hardware would improve the results of the developed software we will document any shortcoming and improvement suggestions.\\
 
 While it could be interesting to track several ants with several cameras, we focus on tracking a single ant with a single camera. We do this because tracking several ants would require a significant modification of the hardware. Even if the optimal hardware was available before project start, controlling several cameras would be a substantial extension of the project as making sure that all cameras track one ant optimally without colliding and shadowing each others views requires special techniques. Thus tracking several ants would require more time than we have available. \\
 
-Our counselor at Harvard University wanted the tracking and interfacing with the tracking device to be implemented in C++ to make further developement easier. The graphical user interface (GUI) was not restricted to a certain programming langauge and so we ended up using C\# and Windows Forms. The minimum requirement for supported platforms are Windows.
+Our counselor at Harvard University wanted the tracking and interfacing with the tracking device to be implemented in C++ to make further development easier. The graphical user interface (GUI) was not restricted to a certain programming langauge and so we ended up using C\# and Windows Forms. The minimum requirement for supported platforms are Windows.
 
 \subsubsection{Requirements} \mbox{}\par
 \label{requirements}
@@ -50,7 +50,7 @@ The mandatory requirements of the project are listed below and must be fulfilled
     \item Ability to collect the following statistics:
     \begin{itemize}
         \item Route of the ant over time.
-        \item Heatmap of where in the petri dish the ant tend to be.
+        \item Heatmap of where in the petri dish the ant tends to be.
     \end{itemize}
     \item Ability to save the collected statistics.
 \end{enumerate}

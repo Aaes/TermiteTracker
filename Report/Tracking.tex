@@ -4,7 +4,7 @@
 \label{tracking}
 As mentioned in the project proposal the project was divided into three parts. The first part of the project was to be able to track termites. Since African termites are hard to come by and transport we settled for giant ants (Camponotus Ligniperdus), which are the largest ants found in Denmark \cite{fogn}, instead. While these are not as big as the termites, they behave in a similar way and the solution should be easily adaptable to termites. In the first part we started by implementing the tracking on a video. We received a video from Harvard University of a single ant capturing the entire petri dish with a white background. The ant itself was painted red and green. This was the simplest setup we could think of and acted as a good starting point. By recommendation we decided to use the OpenCV \cite{opencv} framework. We will return to this framework in Section \ref{framework}.\\
 
-This chapter is divided into three subparts. First we will different image processesing techniques, and their use. Following this we will discuss the OpenCV framework, and finish off describing the implemented solution and design choices.
+This chapter is divided into three subparts. First we will describe different image processesing techniques, and their use. Following this we will discuss the OpenCV framework, and finish off describing the implemented solution and design choices.
 
 % Gå ud fra at dette afsnit ikke har noget video input fra et kamera. Integration med kameraet kommer senere.
 % 
@@ -32,10 +32,10 @@ value = {Boolean\mbox{-}Condition} ? {True\mbox{-}Evaluation}: {False\mbox{-}Eva
 \label{eq:notation}
 \end{equation}
 
-It works just like you would expect from many programming languages or mathematical expression. It is also known as an inline \textit{if-statement}. \\
+It works just like you would expect from many programming languages or mathematical expressions. It is also known as an inline \textit{if-statement}. \\
 
 \noindent \textbf{Thresholding} \par
-Thresholding is an image processing technique used to make a final decision about each pixel in an image. Thresholding is most commonly used to find objects in images, e.g. finding an ant in an image \cite{theory1}. During thresholding a decision is made based on the following; either a pixel value is one that we are interested in or it is not. This is usually done by assigning a specific pixel value to the pixel we want, and another to those that we do not want. In general we compare the \textit{ith} pixel of the source image, \textit{src}, to the threshold value, \textit{T}, and saves the result in a destination image, \textit{dst} \cite{theory1}. For instance, to create a binary image where we are interested in all pixels above the threshold \textit{T}, the equation would look like the one shown in Equation \ref{eq:binarythresholding},
+Thresholding is an image processing technique used to make a final decision about each pixel in an image. Thresholding is most commonly used to find objects in images, e.g. finding an ant in an image \cite{theory1}. During thresholding a decision is made based on the following; either a pixel value is one that we are interested in or it is not. This is usually done by assigning a specific pixel value to the pixel we want, and another to those that we do not want. In general we compare the \textit{ith} pixel of the source image, \textit{src}, to the threshold value, \textit{T}, and save the result in a destination image, \textit{dst} \cite{theory1}. For instance, to create a binary image where we are interested in all pixels above the threshold \textit{T}, the equation would look like the one shown in Equation \ref{eq:binarythresholding},
 
 \begin{equation}
 dst_i = src_i \geq T ? 255: 0
@@ -59,7 +59,7 @@ Most threshold operations are applied on grayscale images, where all pixel value
 		\label{fig:threshold_example}
 \end{figure}
 
-Now what happens if we you are interested in a color? To use standard thresholding we first need to convert \emph{src} to a grayscale image. However doing so might result in an image that have lost important information as can be seen in Figure \ref{fig:RGB2GRAY}. As shown, you have no way of differentiating the blue and green color.
+Now what happens if we are interested in a color? To use standard thresholding we first need to convert \emph{src} to a grayscale image. However doing so might result in an image that has lost important information as can be seen in Figure \ref{fig:RGB2GRAY}. As shown, you have no way of differentiating the blue and green color.
 
 \begin{figure}
         \centering
@@ -182,7 +182,7 @@ Using a range to specify a color instead will yield a much more satisfactory res
 % Angiv at dilating finder local optima, og at eroding finder local minima.
 % Angiv at de her metoder bliver brugt EFTER thresholding for at "rense" billedet. \\
 
-When locating an ant, there might be many small bright dots that make the ant hard to see. This can be improved by using erosion or dilation, which are the basic concepts of \textit{morphological transformations} \cite{theory1}, depending on the image in question. These concepts are mostly used to remove noise, isolating individual elements or joining disparate elements in an image \cite{theory1}. Dilation and erosion are applied to either grayscale or binary images, and are often used to clean up after thresholding to make it easier to analyze.\\
+When locating an ant, there might be many small bright dots that make the ant hard to see. This can be improved by using erosion or dilation, which are the basic concepts of \textit{morphological transformations} \cite{theory1}, depending on the image in question. These concepts are mostly used to remove noise, isolating individual elements or joining disparate elements in an image \cite{theory1}. Dilation and erosion are applied to either grayscale or binary images, and are often used to clean up after thresholding to make the them easier to analyze.\\
 
 The way both erosion and dilation are applied to an image is by defining a kernel, denoted \textit{B}, that will be applied to an image (or part of an image), denoted \textit{A}. The kernel can be any shape or size, however it is often a square where the sides are uneven, e.g. 3x3, 5x5, 7x7 and so on \cite{theory1}. A kernel has an \textit{anchorpoint}, which is the pixel in \emph{A} that erosion or dilation is applied to, and the result is stored in the corresponding point in the destination image, \textit{dst(i,j)}. Figure \ref{fig:kernel_ed} shows an example of a kernel and its anchorpoint in the center. \\
 
@@ -202,7 +202,7 @@ When transforming an image using dilation, whenever the kernel is applied to a n
   \label{fig:sample_kernel}
 \end{figure}
 
-An example of how this applies to a real image is shown in Figure \ref{fig:erodedilate}. It is clear from this example how erosion and dilation affects an image.\\
+An example of how this applies to a real image is shown in Figure \ref{fig:erodedilate}. It is clear from this example how erosion and dilation affect an image.\\
 
 \begin{figure}[!ht]
         \centering
@@ -224,12 +224,12 @@ An example of how this applies to a real image is shown in Figure \ref{fig:erode
 		\label{fig:erodedilate}
 \end{figure}
 
-Unlike thresholding we cannot apply erosion or dilation to RGB images due to the nature of RGB values. Imagine the clear colors, red (255,0,0), green (0,255,0) and blue(0,0,255) - in this case we cannot argue which color is \textit{greater} or \textit{smaller} than the other? We can with grayscale and binary images since we can safely say that the pixel value 150 is smaller than 255, and 0 is smaller than 1. In summary, we have presented techniques to make ants much clearer in an image with a lot of noise, that might prevent us from properly finding an ant.\\
+Unlike thresholding we cannot apply erosion or dilation to RGB images due to the nature of RGB values. Imagine the clear colors, red (255,0,0), green (0,255,0) and blue(0,0,255) - in this case we cannot argue which color is \textit{greater} or \textit{smaller} than the other. We can with grayscale and binary images since we can safely say that the pixel value 150 is smaller than 255, and 0 is smaller than 1. In summary, we have presented techniques to make ants much clearer in an image with a lot of noise, that might prevent us from properly finding an ant.\\
 
 \noindent \textbf{Contrast and Brightness} \par
 Where dilation and erosion sought to expand either dark or bright areas, contrast and brightness seek to change the overall brightness or darkness of an image or the absolute difference between dark and bright pixels. This can make it easier to find an ant in an image where the image is either too bright, or too dark.\\
 
-To increase the absolute difference between two pixels, or \textit{increasing the contrast of the image}, each pixel in an image is multiplied with the same scalar, denoted $\alpha$. Since images are matrices this method is equal to \textit{scalar multiplication} shown in Equation \ref{eq:matrix_mul}.
+To increase the absolute difference between two pixels, or increase the \textit{contrast} of the image, each pixel in an image is multiplied with the same scalar, denoted $\alpha$. Since images are matrices this method is equal to \textit{scalar multiplication} shown in Equation \ref{eq:matrix_mul}.
 
 \begin{equation}
 \alpha \times 
@@ -248,7 +248,7 @@ To increase the absolute difference between two pixels, or \textit{increasing th
  \label{eq:matrix_mul}
 \end{equation}
 
-To increase the brightness, a scalar is added to each pixel, denoted $\beta$. This way the absolute difference between each pixel is kept, however all pixels get darker or brighter depending on the scalar. Similar to contrast this operation is equal to \textit{scalar addition} as shown in Equation \ref{eq:matrix_add}. To make the pixels brighter a positive scalar is added, to make it darker a negative scalar is added. Figure \ref{fig:bright_contrast} shows the result of contrasting and increasing the brightness of an image. Contrast and brightness are used to make dark, bright and diffuse images easier to analyse. In summary, contrast and brightness can help improve the image quality, making it much easier to find an ant, or distinguish it from other parts of the image.\\
+To increase the brightness, a scalar is added to each pixel, denoted $\beta$. This way the absolute difference between each pixel is kept, however all pixels get darker or brighter depending on the scalar. Similar to contrast this operation is equal to \textit{scalar addition} as shown in Equation \ref{eq:matrix_add}. To make the pixels brighter a positive scalar is added, to make it darker a negative scalar is added. Figure \ref{fig:bright_contrast} shows the result of contrasting and increasing the brightness of an image. Contrast and brightness are used to make dark, bright and diffuse images easier to analyze. In summary, contrast and brightness can help improve the image quality, making it much easier to find an ant, or distinguish it from other parts of the image.\\
 
 \begin{equation}
 \beta + 
@@ -289,7 +289,7 @@ To increase the brightness, a scalar is added to each pixel, denoted $\beta$. Th
 \noindent \textbf{Image Segmentation} \par
 Image segmentation is the process of partitioning all the pixels in an image into \textit{S} segments (or superpixels). The goal is to simplify or change the representation of an image such that it is easier to analyze. It is mostly used to locate objects that consist of a range of similar colors, that is combined into a single colored object after segmentation, thus making it easier to find \cite{theory1}. Image segmentation is therefore the process of assigning a label to a pixel, such that pixels with the same label share certain visual characteristics. The result of image segmentation is a set of segments that covers the entire image. Thresholding, as described earlier, is the simplest method of segmenting an image. This can be an important technique in finding the ant, should thresholding alone not be enough.\\
 
-One of the most common algorithms to segment images is the \textit{k-means} algorithm \cite{theory2}. K-means is a \textit{clustering algorithm} often used in \textit{datamining}. K-means takes a set of unclassified data, and classifies it. It does so by assigning all the data to \textit{K} different clusters, and iteratively assign each element to the cluster it is most similar to after new \textit{centroids} have been assigned or created. The algorithm terminates when data no longer changes clusters or a predefined number of iterations have completed. Even though more robust classification algorithms exists, \textit{k-means} is often used simply because each iteration is relatively fast. The algorithm works as follows:
+One of the most common algorithms to segment images is the \textit{k-means} algorithm \cite{theory2}. K-means is a \textit{clustering algorithm} often used in \textit{datamining}. K-means takes a set of unclassified data, and classifies it. It does so by assigning all the data to \textit{K} different clusters, and iteratively assign each element to the cluster it is most similar to after new \textit{centroids} have been assigned or created. The algorithm terminates when data no longer changes clusters or a predefined number of iterations have completed. Even though more robust classification algorithms exist, \textit{k-means} is often used simply because each iteration is relatively fast. The algorithm works as follows:
 
 \begin{enumerate}
   \item Randomly select \textit{k} objects in the dataset \textit{D}, which initially represents the centroid for each cluster.
@@ -316,7 +316,7 @@ An example of using k-means to cluster an image is shown in Figure \ref{fig:segm
 \end{figure}
 
 \noindent \textbf{Background subtraction} \par
-Background substraction (also known as foreground detection) is a process often used to detect moving objects with a static camera \cite{theory1}. The idea is that the background remains roughly the same in every image in a video stream, while moving objects enter and leave the stream shortly after, or become part of the background after some time have passed. The rationale is to have a background image (or reference point) and then substract the image with the new object in it. This technique can be useful for tracking a moving ant, assuming the background remains roughly the same in the test setup. Computing the difference between the foreground and background will result in an image with only the moving object in it, that can be used for analysis. The absolute difference is computed almost like a standard \textit{matrix substraction} as shown in Equation \ref{eq:matrix_sub}. An example of background subtraction is shown in Figure \ref{fig:background_filtering}.\\
+Background subtraction (also known as foreground detection) is a process often used to detect moving objects with a static camera \cite{theory1}. The idea is that the background remains roughly the same in every image in a video stream, while moving objects enter and leave the stream shortly after, or become part of the background after some time have passed. The rationale is to have a background image (or reference point) and then subtract the image with the new object in it. This technique can be useful for tracking a moving ant, assuming the background remains roughly the same in the test setup. Computing the difference between the foreground and background will result in an image with only the moving object in it, that can be used for analysis. The absolute difference is computed almost like a standard \textit{matrix subtraction} as shown in Equation \ref{eq:matrix_sub}. An example of background subtraction is shown in Figure \ref{fig:background_filtering}.\\
 
 \begin{equation}
 \setlength{\arraycolsep}{5pt}
@@ -362,10 +362,10 @@ The theory behind computer vision techniques is solid. However to track an ant i
 
 OpenCV is short for Open Computer Vision, and is an open source project started in 1999 and since maintained by Intel. It is written in C and C++ and runs on Linux, Windows and Mac OS X. OpenCV was designed from the beginning to be computationally efficient with a strong focus on real-time applications. Another goal is to provide a simple-to-use computer vision infrastructure. Since its initial creation, OpenCV has matured gradually, and along with it computer vision as well. Today, OpenCV and computer vision is used in a broad context from web applications to surveillance and aerial street maps.\\
 
-Other computer vision frameworks exist but are limited on several parameters. As stated in the requirements, tracking had to be done in C/C++ which rules out frameworks for higher level languages such as PyCVF for Python, imageJ for Java and OpenClooVision for C\#. Furthermore several frameworks exist that extends OpenCV or creates a simpler abstraction layer such as SimpleCV and other frameworks offers a very limited amount of features such as VisionBlocks. As a result OpenCV was chosen to be the framework of choice, both because of maturity and effeciency, but also because of the amount of computer vision features offered to its users.
+Other computer vision frameworks exist but are limited on several parameters. As stated in the requirements, tracking had to be done in C/C++ which rules out frameworks for higher level languages such as PyCVF for Python, imageJ for Java and OpenClooVision for C\#. Furthermore several frameworks exist that extends OpenCV or creates a simpler abstraction layer such as SimpleCV and other frameworks offer a very limited amount of features such as VisionBlocks. As a result OpenCV was chosen to be the framework of choice, both because of maturity and efficiency, but also because of the amount of computer vision features offered to its users.
 
 \subsubsection{Realization} \mbox{}\par
-Having presented several computer vision techniques and the framework used, this section will focus on applying these techniques in a real world scenario to find an ant within an image from a webcam. To be able to track the ant of interest and make it distinguishable from other ants, we will paint it with a color that is easier to detect than the ant itself. We want to track the ants on real dirt, and not just a opaque background, and the ant available are either dark brown or black (as seen in image \emph{a} in Figure \ref{fig:antcoloring}) closely resembling dirt in their native environment. It is therefore important to choose a color that is easy to detect on such material. For this reason we have chosen white paint.\\
+Having presented several computer vision techniques and the framework used, this section will focus on applying these techniques in a real world scenario to find an ant within an image from a webcam. To be able to track the ant of interest and make it distinguishable from other ants, we will paint it with a color that is easier to detect than the ant itself. We want to track the ants on real dirt, and not just an opaque background, and the ant available are either dark brown or black (as seen in image \emph{a} in Figure \ref{fig:antcoloring}) closely resembling dirt in their native environment. It is therefore important to choose a color that is easy to detect on such material. For this reason we have chosen white paint.\\
 
 The image in Figure \ref{fig:ant} will be used as a reference point when showing how a certain computer vision technique performs in locating the ant.
 
@@ -406,7 +406,7 @@ It is clear from Figure \ref{fig:contrast_ant} that image \emph{c} and \emph{d} 
 
 Now that we have improved the overall quality of the image, the next task is to isolate the ant in the improved image. For this task we have three techniques available; \emph{thresholding}, \emph{image segmentation} and \emph{background subtraction}. Background subtraction requires that the background in any two compared frames are close to equal. Since the mobile camera is moving during tracking, this technique is not optimal. This leaves us with image segmentation and thresholding.\\
 
-Figure \ref{fig:segment_ant} shows examples of running image segmentation with different numbers of segments, \textit{K}, defined on image \emph{a} from Figure \ref{fig:contrast_ant}. It is clear from these tests that a certain number of segments are neccessary to give a satisfactory result. $K=8$ and $K=10$ clearly gives the best results, however it comes at a cost; segmenting these images simply takes too much time for the camera to keep up with the ant. Even with only one segmentation attemp for each image, it takes around one second or more to produce a result. Considering this needs to be done \emph{multiple} times within a second when using a live camera feed, this solution is simply not feasible or possible for tracking. An ant can easily move out of a frame, simply because it is too slow or the ant is too fast.\\
+Figure \ref{fig:segment_ant} shows examples of running image segmentation with different numbers of segments, \textit{K}, defined on image \emph{a} from Figure \ref{fig:contrast_ant}. It is clear from these tests that a certain number of segments are neccessary to give a satisfactory result. $K=8$ and $K=10$ clearly gives the best results, however it comes at a cost; segmenting these images simply takes too much time for the camera to keep up with the ant. Even with only one segmentation attempt for each image, it takes around one second or more to produce a result. Considering this needs to be done \emph{multiple} times within a second when using a live camera feed, this solution is simply not feasible or possible for tracking. An ant can easily move out of a frame, simply because it is too slow or the ant is too fast.\\
 
 \begin{figure}
         \centering
@@ -432,7 +432,7 @@ Figure \ref{fig:segment_ant} shows examples of running image segmentation with d
 		\label{fig:segment_ant}
 \end{figure}
 
-This leave us with only one option; thresholding. Figure \ref{fig:threshant} shows thresholding attemps on a grayscale version of image \emph{a} from Figure \ref{fig:contrast_ant}. The results of different thresholds shows two things; firstly that image \emph{d} is a good threshold result and secondly that we need a rather high threshold value to get it. In contrast to segmentation, applying a threshold to our image is much faster and is usable with a mobile camera.\\
+This leaves us with only one option; thresholding. Figure \ref{fig:threshant} shows thresholding attempts on a grayscale version of image \emph{a} from Figure \ref{fig:contrast_ant}. The results of different thresholds shows two things; firstly that image \emph{d} is a good threshold result and secondly that we need a rather high threshold value to get it. In contrast to segmentation, applying a threshold to our image is much faster and is usable with a mobile camera.\\
 
 \begin{figure}
     \vspace{-2em}
