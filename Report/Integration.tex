@@ -55,7 +55,7 @@ Using this library, we developed a high level plotter interface that takes coord
 
 We were succesfully able to implement an interface for communication with the plotter, exposing commands to move the camera in a relative and aboslute manner. We were however not able to make the acceleration and deceleration of the camera any smoother than initially.
 
-\subsection{Moving the camera}
+\subsection{Moving the Camera}
 Being able to move the plotter, the question remains of how to respond to changes in video frames. In the current version of the software, the plotter will stay centered above the ant. Conversely, this means that the ant should be found in the center of the frame - if this is not the case then it is either not in the frame at all (in which case manual interaction is needed) or it is somewhere along the edges, in which case we need to move the camera. To move the camera, the software locates the center of the frame along with the pixel coordinates of the ant, calculates the pixel difference in each direction, translates the distances to plotter units, adds the result to the current position of the plotter and issues a new \texttt{goto} command to move the camera. Unless the distance is smaller than approximately five units, the camera will blur when it starts to move, so we skip two frames, trusting that the third frame will be steady. The choice of skipping two frames is chosen by experimentation.\\
 
 In order to know how many units we need to adjust the plotter in each direction when the camera has identified the ant, we need a way to convert a pixel distance to a unit distance. When doing this conversion, we need to consider that:

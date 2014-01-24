@@ -315,7 +315,7 @@ An example of using k-means to cluster an image is shown in Figure \ref{fig:segm
 		\label{fig:segmentation}
 \end{figure}
 
-\noindent \textbf{Background subtraction} \par
+\noindent \textbf{Background Subtraction} \par
 Background subtraction (also known as foreground detection) is a process often used to detect moving objects with a static camera \cite{theory1}. The idea is that the background remains roughly the same in every image in a video stream, while moving objects enter and leave the stream shortly after, or become part of the background after some time have passed. The rationale is to have a background image (or reference point) and then subtract the image with the new object in it. This technique can be useful for tracking a moving ant, assuming the background remains roughly the same in the test setup. Computing the difference between the foreground and background will result in an image with only the moving object in it, that can be used for analysis. The absolute difference is computed almost like a standard \textit{matrix subtraction} as shown in Equation \ref{eq:matrix_sub}. An example of background subtraction is shown in Figure \ref{fig:background_filtering}.\\
 
 \begin{equation}
