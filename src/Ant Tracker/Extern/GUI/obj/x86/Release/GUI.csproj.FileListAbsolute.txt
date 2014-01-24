@@ -1,0 +1,10 @@
+C:\Users\hfl.DELEGATE\Desktop\New folder\C++ Test\Extern\GUI\bin\Release\GUI.exe
+C:\Users\hfl.DELEGATE\Desktop\New folder\C++ Test\Extern\GUI\bin\Release\GUI.pdb
+C:\Users\hfl.DELEGATE\Desktop\New folder\C++ Test\Extern\GUI\obj\x86\Release\GUI.Form1.resources
+C:\Users\hfl.DELEGATE\Desktop\New folder\C++ Test\Extern\GUI\obj\x86\Release\GUI.PlotterFrame.resources
+C:\Users\hfl.DELEGATE\Desktop\New folder\C++ Test\Extern\GUI\obj\x86\Release\GUI.Properties.Resources.resources
+C:\Users\hfl.DELEGATE\Desktop\New folder\C++ Test\Extern\GUI\obj\x86\Release\GUI.csproj.GenerateResource.Cache
+C:\Users\hfl.DELEGATE\Desktop\New folder\C++ Test\Extern\GUI\obj\x86\Release\GUI.exe
+C:\Users\hfl.DELEGATE\Desktop\New folder\C++ Test\Extern\GUI\obj\x86\Release\GUI.pdb
+C:\Users\hfl.DELEGATE\Desktop\New folder\Ant Tracker\Extern\GUI\obj\x86\Release\GUI.exe
+C:\Users\hfl.DELEGATE\Desktop\New folder\Ant Tracker\Extern\GUI\obj\x86\Release\GUI.pdb

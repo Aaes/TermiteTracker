@@ -1,0 +1,31 @@
+C:\Users\hufb\Desktop\C++ Test\Extern\GUI\bin\Debug\GUI.exe
+C:\Users\hufb\Desktop\C++ Test\Extern\GUI\bin\Debug\GUI.pdb
+C:\Users\hufb\Desktop\C++ Test\Extern\GUI\obj\x86\Debug\GUI.Form1.resources
+C:\Users\hufb\Desktop\C++ Test\Extern\GUI\obj\x86\Debug\GUI.Properties.Resources.resources
+C:\Users\hufb\Desktop\C++ Test\Extern\GUI\obj\x86\Debug\GUI.csproj.GenerateResource.Cache
+C:\Users\hufb\Desktop\C++ Test\Extern\GUI\obj\x86\Debug\GUI.exe
+C:\Users\hufb\Desktop\C++ Test\Extern\GUI\obj\x86\Debug\GUI.pdb
+C:\Users\hufb\Desktop\Private\C++ Test\Extern\GUI\bin\Debug\GUI.exe
+C:\Users\hufb\Desktop\Private\C++ Test\Extern\GUI\bin\Debug\GUI.pdb
+C:\Users\hufb\Desktop\Private\C++ Test\Extern\GUI\obj\x86\Debug\GUI.Form1.resources
+C:\Users\hufb\Desktop\Private\C++ Test\Extern\GUI\obj\x86\Debug\GUI.Properties.Resources.resources
+C:\Users\hufb\Desktop\Private\C++ Test\Extern\GUI\obj\x86\Debug\GUI.csproj.GenerateResource.Cache
+C:\Users\hufb\Desktop\Private\C++ Test\Extern\GUI\obj\x86\Debug\GUI.exe
+C:\Users\hufb\Desktop\Private\C++ Test\Extern\GUI\obj\x86\Debug\GUI.pdb
+C:\Users\hfl.DELEGATE\Desktop\C++ Test\Extern\GUI\bin\Debug\GUI.exe
+C:\Users\hfl.DELEGATE\Desktop\C++ Test\Extern\GUI\bin\Debug\GUI.pdb
+C:\Users\hfl.DELEGATE\Desktop\C++ Test\Extern\GUI\obj\x86\Debug\GUI.Form1.resources
+C:\Users\hfl.DELEGATE\Desktop\C++ Test\Extern\GUI\obj\x86\Debug\GUI.Properties.Resources.resources
+C:\Users\hfl.DELEGATE\Desktop\C++ Test\Extern\GUI\obj\x86\Debug\GUI.csproj.GenerateResource.Cache
+C:\Users\hfl.DELEGATE\Desktop\C++ Test\Extern\GUI\obj\x86\Debug\GUI.exe
+C:\Users\hfl.DELEGATE\Desktop\C++ Test\Extern\GUI\obj\x86\Debug\GUI.pdb
+C:\Users\hfl.DELEGATE\Desktop\C++ Test\Extern\GUI\obj\x86\Debug\GUI.PlotterFrame.resources
+C:\Users\hufb\Desktop\Private\C++ Test\Extern\GUI\obj\x86\Debug\GUI.PlotterFrame.resources
+C:\Users\hfl.DELEGATE\Desktop\New folder\C++ Test\Extern\GUI\bin\Debug\GUI.exe
+C:\Users\hfl.DELEGATE\Desktop\New folder\C++ Test\Extern\GUI\bin\Debug\GUI.pdb
+C:\Users\hfl.DELEGATE\Desktop\New folder\C++ Test\Extern\GUI\obj\x86\Debug\GUI.Form1.resources
+C:\Users\hfl.DELEGATE\Desktop\New folder\C++ Test\Extern\GUI\obj\x86\Debug\GUI.PlotterFrame.resources
+C:\Users\hfl.DELEGATE\Desktop\New folder\C++ Test\Extern\GUI\obj\x86\Debug\GUI.Properties.Resources.resources
+C:\Users\hfl.DELEGATE\Desktop\New folder\C++ Test\Extern\GUI\obj\x86\Debug\GUI.csproj.GenerateResource.Cache
+C:\Users\hfl.DELEGATE\Desktop\New folder\C++ Test\Extern\GUI\obj\x86\Debug\GUI.exe
+C:\Users\hfl.DELEGATE\Desktop\New folder\C++ Test\Extern\GUI\obj\x86\Debug\GUI.pdb
